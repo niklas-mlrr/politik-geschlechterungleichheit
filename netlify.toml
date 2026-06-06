@@ -1,0 +1,10 @@
+# Netlify-Build-Konfiguration für das statische Astro-Projekt.
+# Source = dieses GitHub-Repo. Netlify baut bei jedem Push auf main neu.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 5 braucht eine aktuelle Node-Version (Netlify-Default ist sonst evtl. zu alt).
+  NODE_VERSION = "22"
