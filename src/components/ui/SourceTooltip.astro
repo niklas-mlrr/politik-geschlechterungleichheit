@@ -1,0 +1,62 @@
+---
+// SourceTooltip – Inline-Quellenverweis [n] mit Tooltip beim Hover/Fokus.
+// Erhält den Lesefluss (Konzept: Quelle direkt am Verweis).
+// JS-frei: nutzt natives Hover/Focus + CSS. Der Link führt zusätzlich zur Quellen-Sektion.
+import { getSource } from '../../data/sources';
+
+interface Props {
+  id: number; // Quellen-ID aus sources.ts
+}
+const { id } = Astro.props;
+const source = getSource(id);
+const text = source ? source.kurz : 'Quelle';
+---
+
+<span class="src">
+  <a class="src-ref" href={`#quelle-${id}`} aria-describedby={`src-tip-${id}`}>[{id}]</a>
+  <span class="src-tip" id={`src-tip-${id}`} role="tooltip">{text}</span>
+</span>
+
+<style>
+  .src {
+    position: relative;
+    white-space: nowrap;
+  }
+  .src-ref {
+    font-size: 0.8em;
+    vertical-align: super;
+    color: var(--color-clay);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0 0.1em;
+  }
+  .src-ref:hover {
+    text-decoration: underline;
+  }
+  .src-tip {
+    position: absolute;
+    left: 50%;
+    bottom: 130%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: max-content;
+    max-width: 18rem;
+    background: var(--color-ink);
+    color: var(--color-sand);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--color-ink) 30%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease;
+    white-space: normal;
+    text-align: left;
+  }
+  .src:hover .src-tip,
+  .src-ref:focus-visible + .src-tip {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>

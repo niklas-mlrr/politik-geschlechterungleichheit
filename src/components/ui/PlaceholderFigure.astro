@@ -1,0 +1,48 @@
+---
+// PlaceholderFigure – gestalteter Bild-Platzhalter mit festem Seitenverhältnis.
+// Steht für später einzusetzende Fotos (keine echten Bilder im Gerüst).
+interface Props {
+  /** z. B. "16/9", "4/3", "1/1". */
+  ratio?: string;
+  label?: string;
+  class?: string;
+}
+const { ratio = '4/3', label = 'Bild', class: className = '' } = Astro.props;
+---
+
+<figure class:list={['ph-figure', className]} style={`aspect-ratio:${ratio};`}>
+  <span class="ph-icon" aria-hidden="true">
+    <svg viewBox="0 0 48 48" width="40" height="40" fill="none">
+      <rect x="6" y="9" width="36" height="30" rx="3" stroke="currentColor" stroke-width="2" />
+      <circle cx="17" cy="20" r="3.5" stroke="currentColor" stroke-width="2" />
+      <path d="M9 35l10-9 7 6 6-5 7 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+    </svg>
+  </span>
+  <figcaption class="ph-label">{label}</figcaption>
+</figure>
+
+<style>
+  .ph-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    width: 100%;
+    border-radius: 0.9rem;
+    background: repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--color-ocker) 16%, var(--color-card)),
+      color-mix(in srgb, var(--color-ocker) 16%, var(--color-card)) 12px,
+      var(--color-card) 12px,
+      var(--color-card) 24px
+    );
+    border: 1px dashed color-mix(in srgb, var(--color-ink) 22%, transparent);
+    color: var(--color-subtext);
+  }
+  .ph-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+</style>

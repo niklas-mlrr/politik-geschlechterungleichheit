@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Self-hosted Web-Fonts (Phase 0 Entscheidung) */
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/playfair-display/900.css";
+@import "@fontsource-variable/source-sans-3";
+
+/*
+  Warm Humanist – gedämpfte Palette (siehe CLAUDE.md)
+  Tokens als @theme -> erzeugen Tailwind-Utilities:
+    bg-sand, text-ink, text-subtext, bg-clay, text-ocker, bg-sage, bg-card, bg-ocean
+    font-display, font-sans
+*/
+@theme {
+  /* Flächen & Text */
+  --color-sand: #f1e8da; /* Seitenhintergrund */
+  --color-ink: #3b2f26; /* Haupttext */
+  --color-subtext: #8a7a66; /* gedämpfter Text */
+  --color-card: #e8dac6; /* Card-Oberfläche */
+  --color-ocean: #e3ddcf; /* Karten-Hintergrund (Wasser) */
+
+  /* Akzente */
+  --color-clay: #ae6a52; /* Terrakotta, Primär-Akzent */
+  --color-ocker: #cba46f; /* Sekundär */
+  --color-sage: #5c7a6b; /* Salbei-Grün, Akzent 2 */
+
+  /* Choropleth-Skala (diverging): niedrige -> hohe Gleichstellung */
+  --color-gap-low: #a8473b; /* Brick: wenig Gleichstellung */
+  --color-gap-mid: #cd9a63; /* Ocker: Mitte */
+  --color-gap-high: #4f7a66; /* Grün: viel Gleichstellung */
+
+  /* Typografie */
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Source Sans 3 Variable", "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+
+  /* Sektions-Rhythmus */
+  --spacing-section: 7rem;
+}
+
+/* ------- Basis ------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-sand);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  /* Anker-Sprünge unter dem fixierten Header abfangen */
+  :target {
+    scroll-margin-top: 6rem;
+  }
+
+  /* Sichtbarer Fokus für Tastatur-Navigation (a11y) */
+  :focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* Bewegung reduzieren, wenn vom System gewünscht */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

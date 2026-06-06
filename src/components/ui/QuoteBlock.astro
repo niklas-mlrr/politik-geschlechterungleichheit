@@ -1,0 +1,75 @@
+---
+// QuoteBlock – großes, ruhiges Zitat (Sketch S.0 / S.2).
+// Variante "hero" = besonders groß für vollflächige Zitat-Sektionen.
+interface Props {
+  text: string;
+  author?: string;
+  role?: string;
+  variant?: 'default' | 'hero';
+}
+const { text, author, role, variant = 'default' } = Astro.props;
+---
+
+<figure class:list={['quote', `quote-${variant}`]}>
+  <blockquote class="quote-text">
+    <span class="quote-mark" aria-hidden="true">&ldquo;</span>{text}
+  </blockquote>
+  {
+    (author || role) && (
+      <figcaption class="quote-cite">
+        {author && <span class="quote-author">{author}</span>}
+        {role && <span class="quote-role">{role}</span>}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .quote {
+    margin: 0;
+    border-left: 3px solid var(--color-clay);
+    padding-left: 1.5rem;
+  }
+  .quote-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .quote-default .quote-text {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+  }
+  .quote-hero {
+    border-left: none;
+    padding-left: 0;
+    text-align: center;
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+  .quote-hero .quote-text {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+  }
+  .quote-mark {
+    color: var(--color-ocker);
+    margin-right: 0.1em;
+  }
+  .quote-cite {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .quote-hero .quote-cite {
+    align-items: center;
+  }
+  .quote-author {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .quote-role {
+    font-size: 0.9rem;
+    color: var(--color-subtext);
+  }
+</style>

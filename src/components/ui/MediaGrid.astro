@@ -1,0 +1,30 @@
+---
+// MediaGrid – Wechsel-Raster aus Info-Boxen und Bildern (Sketch S.3).
+// Reiner Layout-Wrapper: Kinder werden in ein responsives 2er-Raster gelegt.
+interface Props {
+  /** Spalten auf großen Bildschirmen (Standard 2). */
+  columns?: 2 | 3;
+  class?: string;
+}
+const { columns = 2, class: className = '' } = Astro.props;
+---
+
+<div class:list={['media-grid', `cols-${columns}`, className]}>
+  <slot />
+</div>
+
+<style>
+  .media-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 48rem) {
+    .media-grid.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .media-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+// Definition – Begriff Geschlechterungleichheit, mit aufklappbaren Themenbereichen.
+import Section from '../ui/Section.astro';
+import AccordionBox from '../ui/AccordionBox.astro';
+import { definition } from '../../data/placeholder';
+---
+
+<Section
+  id="definition"
+  eyebrow="Begriff"
+  title="Was bedeutet Geschlechterungleichheit?"
+  intro={definition.intro}
+>
+  <div class="definition-bereiche">
+    {
+      definition.bereiche.map((bereich, i) => (
+        <AccordionBox title={bereich.titel} open={i === 0}>
+          <p>{bereich.text}</p>
+        </AccordionBox>
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .definition-bereiche {
+    max-width: 52rem;
+  }
+  .definition-bereiche p {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--color-subtext);
+  }
+</style>

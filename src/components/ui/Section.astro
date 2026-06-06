@@ -1,0 +1,89 @@
+---
+// Section – einheitlicher Sektions-Wrapper mit Eyebrow, Titel und optionalem Intro.
+// Sorgt für konsistenten vertikalen Rhythmus und korrektes Anker-Scrolling.
+interface Props {
+  id: string;
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+  /** Hintergrund-Variante: "sand" (Standard) oder "card" für abgesetzte Sektionen. */
+  surface?: 'sand' | 'card';
+  /** Wenn true, wird der Inhalt über die Standard-Breite hinaus voll ausgespielt. */
+  wide?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  eyebrow,
+  title,
+  intro,
+  surface = 'sand',
+  wide = false,
+  class: className = '',
+} = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={['section', `surface-${surface}`, className]}
+  aria-labelledby={title ? `${id}-title` : undefined}
+>
+  <div class:list={['section-inner', { wide }]}>
+    {
+      (eyebrow || title || intro) && (
+        <header class="section-head">
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          {title && (
+            <h2 id={`${id}-title`} class="section-title">
+              {title}
+            </h2>
+          )}
+          {intro && <p class="section-intro">{intro}</p>}
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding-block: var(--spacing-section, 7rem);
+  }
+  .surface-card {
+    background: color-mix(in srgb, var(--color-card) 55%, var(--color-sand));
+  }
+
+  .section-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding-inline: 1.25rem;
+  }
+  .section-inner.wide {
+    max-width: 90rem;
+  }
+
+  .section-head {
+    max-width: 46rem;
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-clay);
+    margin: 0 0 0.6rem;
+  }
+  .section-title {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin: 0;
+  }
+  .section-intro {
+    margin: 1rem 0 0;
+    font-size: 1.15rem;
+    color: var(--color-subtext);
+  }
+</style>

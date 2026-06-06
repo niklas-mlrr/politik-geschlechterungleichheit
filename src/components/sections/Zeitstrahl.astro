@@ -1,0 +1,186 @@
+---
+// Zeitstrahl – zeitliche Entwicklung der Gleichstellung (Sketch S.4).
+// Statischer, gestalteter horizontaler Zeitstrahl mit Knoten je Ereignis.
+// Auf Mobil bricht der Strahl vertikal um. Die spätere Klick-Interaktivität
+// (Filtern, Detailansicht) wird mit einem DataPlaceholder angedeutet.
+import Section from '../ui/Section.astro';
+import DataPlaceholder from '../ui/DataPlaceholder.astro';
+import { zeitstrahl } from '../../data/placeholder';
+---
+
+<Section
+  id="zeitstrahl"
+  wide
+  eyebrow="Zeitliche Entwicklung"
+  title="Wichtige Schritte"
+  intro={zeitstrahl.intro}
+>
+  <ol class="timeline" role="list">
+    {
+      zeitstrahl.ereignisse.map((e, i) => (
+        <li class:list={['tl-item', i % 2 === 0 ? 'is-above' : 'is-below']}>
+          <span class="tl-node" aria-hidden="true" />
+          <div class="tl-card">
+            <p class="tl-jahr">{e.jahr}</p>
+            <h3 class="tl-titel">{e.titel}</h3>
+            <p class="tl-ort">
+              <svg
+                class="tl-pin"
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"
+                  fill="currentColor"
+                />
+                <circle cx="12" cy="9" r="2.5" fill="var(--color-card)" />
+              </svg>
+              <span>{e.ort}</span>
+            </p>
+            <p class="tl-text">{e.text}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="timeline-island">
+    <DataPlaceholder
+      island="timeline"
+      label="Interaktiver Zeitstrahl folgt"
+      ratio="4/1"
+      hint="Später anklickbar: Ereignisse auswählen und Details einblenden."
+    />
+  </div>
+</Section>
+
+<style>
+  /* Horizontaler Zeitstrahl ab Tablet-Breite. */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .tl-item {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  /* Vertikale Linie (mobil) */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: color-mix(in srgb, var(--color-ocker) 60%, transparent);
+  }
+
+  .tl-node {
+    position: absolute;
+    left: calc(0.5rem - 5px);
+    top: 0.55rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-clay);
+    border: 2px solid var(--color-sand);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-clay) 35%, transparent);
+  }
+
+  .tl-card {
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-radius: 0.9rem;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--color-ink) 8%, transparent);
+  }
+
+  .tl-jahr {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-clay);
+    margin: 0;
+  }
+  .tl-titel {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.2rem 0 0;
+  }
+  .tl-ort {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 0.35rem 0 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-sage);
+  }
+  .tl-pin {
+    color: var(--color-clay);
+  }
+  .tl-text {
+    margin: 0.6rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-subtext);
+  }
+
+  .timeline-island {
+    margin-top: 2.5rem;
+  }
+
+  /* Ab Tablet: horizontaler Strahl mit abwechselnd oben/unten platzierten Karten. */
+  @media (min-width: 48rem) {
+    .timeline {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      gap: 0;
+      padding-block: 1rem;
+      align-items: center;
+    }
+    .timeline::before {
+      left: 0;
+      right: 0;
+      top: 50%;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+    }
+    .tl-item {
+      padding-left: 0;
+      min-height: 16rem;
+      display: grid;
+      grid-template-rows: 1fr auto 1fr;
+      justify-items: center;
+      padding-inline: 0.6rem;
+    }
+    .tl-node {
+      position: static;
+      grid-row: 2;
+      left: auto;
+      top: auto;
+    }
+    .tl-card {
+      width: 100%;
+      max-width: 15rem;
+    }
+    .is-above .tl-card {
+      grid-row: 1;
+      align-self: end;
+      margin-bottom: 0.9rem;
+    }
+    .is-below .tl-card {
+      grid-row: 3;
+      align-self: start;
+      margin-top: 0.9rem;
+    }
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+// Komposition der gesamten Seite – roter Faden (Scrollytelling).
+// Reihenfolge entspricht der Argumentation aus dem Konzept (Craft) + Nav in Base.astro.
+import Base from '../layouts/Base.astro';
+
+import Hero from '../components/sections/Hero.astro';
+import Definition from '../components/sections/Definition.astro';
+import WorldMap from '../components/sections/WorldMap.astro';
+import Vorbilder from '../components/sections/Vorbilder.astro';
+import Schlusslichter from '../components/sections/Schlusslichter.astro';
+import Ursachen from '../components/sections/Ursachen.astro';
+import DatenCharts from '../components/sections/DatenCharts.astro';
+import Zeitstrahl from '../components/sections/Zeitstrahl.astro';
+import Rueckschritte from '../components/sections/Rueckschritte.astro';
+import Stimmen from '../components/sections/Stimmen.astro';
+import Quellen from '../components/sections/Quellen.astro';
+---
+
+<Base>
+  <Hero />
+  <Definition />
+  <WorldMap />
+  <Vorbilder />
+  <Schlusslichter />
+  <Ursachen />
+  <DatenCharts />
+  <Zeitstrahl />
+  <Rueckschritte />
+  <Stimmen />
+  <Quellen />
+</Base>

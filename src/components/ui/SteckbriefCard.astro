@@ -1,0 +1,102 @@
+---
+// SteckbriefCard – Personen-/Länder-Karte nach Sketch S.1:
+// Portrait-Platzhalter, Ort mit Pin, Name, Rolle und Stichpunkt-Zeilen.
+interface Props {
+  name: string;
+  ort: string;
+  rolle?: string;
+  zeilen?: string[];
+}
+const { name, ort, rolle, zeilen = [] } = Astro.props;
+---
+
+<article class="steckbrief">
+  <div class="sb-head">
+    <span class="sb-portrait" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="34" height="34" fill="none">
+        <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="2.2" />
+        <path d="M10 40c2-8 8-12 14-12s12 4 14 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      </svg>
+    </span>
+    <div class="sb-meta">
+      <h3 class="sb-name">{name}</h3>
+      {rolle && <p class="sb-rolle">{rolle}</p>}
+      <p class="sb-ort">
+        <svg class="sb-pin" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path
+            d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"
+            fill="currentColor"
+          />
+          <circle cx="12" cy="9" r="2.5" fill="var(--color-card)" />
+        </svg>
+        <span>{ort}</span>
+      </p>
+    </div>
+  </div>
+
+  {
+    zeilen.length > 0 && (
+      <ul class="sb-zeilen">
+        {zeilen.map((z) => (
+          <li>{z}</li>
+        ))}
+      </ul>
+    )
+  }
+  <slot />
+</article>
+
+<style>
+  .steckbrief {
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--color-ink) 8%, transparent);
+  }
+  .sb-head {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .sb-portrait {
+    flex-shrink: 0;
+    width: 3.25rem;
+    height: 3.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-ocker) 30%, var(--color-sand));
+    color: var(--color-clay);
+  }
+  .sb-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .sb-rolle {
+    margin: 0.15rem 0 0;
+    font-size: 0.9rem;
+    color: var(--color-subtext);
+  }
+  .sb-ort {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0.4rem 0 0;
+    font-size: 0.9rem;
+    color: var(--color-sage);
+    font-weight: 600;
+  }
+  .sb-pin {
+    color: var(--color-clay);
+  }
+  .sb-zeilen {
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--color-ink);
+  }
+  .sb-zeilen li {
+    margin-top: 0.4rem;
+  }
+</style>

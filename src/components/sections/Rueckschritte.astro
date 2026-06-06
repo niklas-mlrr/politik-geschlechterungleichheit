@@ -1,0 +1,46 @@
+---
+// Rückschritte – aktuelle negative Entwicklungen, ruhig als Kartenliste.
+import Section from '../ui/Section.astro';
+import MediaGrid from '../ui/MediaGrid.astro';
+import { rueckschritte } from '../../data/placeholder';
+---
+
+<Section
+  id="rueckschritte"
+  surface="card"
+  eyebrow="Rückschritte"
+  title="Wo es rückwärts geht"
+  intro={rueckschritte.intro}
+>
+  <MediaGrid columns={2}>
+    {
+      rueckschritte.punkte.map((p) => (
+        <article class="rueck-karte">
+          <h3 class="rueck-titel">{p.titel}</h3>
+          <p class="rueck-text">{p.text}</p>
+        </article>
+      ))
+    }
+  </MediaGrid>
+</Section>
+
+<style>
+  .rueck-karte {
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-left: 3px solid var(--color-clay);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+  .rueck-titel {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+  }
+  .rueck-text {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--color-subtext);
+  }
+</style>

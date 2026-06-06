@@ -1,0 +1,65 @@
+---
+// Vorbilder – Länder, die beim Schließen des Gender Gap vorangehen.
+// Zeigt Ranking-Karten und einen Beispiel-Steckbrief / Portrait-Platzhalter (Sketch S.1),
+// um zu zeigen, wie spätere Personen-Porträts aussehen.
+import Section from '../ui/Section.astro';
+import CountryCard from '../ui/CountryCard.astro';
+import SteckbriefCard from '../ui/SteckbriefCard.astro';
+import MediaGrid from '../ui/MediaGrid.astro';
+import PlaceholderFigure from '../ui/PlaceholderFigure.astro';
+import { vorbilder } from '../../data/placeholder';
+---
+
+<Section
+  id="vorbilder"
+  surface="card"
+  eyebrow="Vorbilder"
+  title="Wer vorangeht"
+  intro={vorbilder.intro}
+>
+  <MediaGrid columns={2}>
+    {vorbilder.laender.map((l) => <CountryCard {...l} />)}
+  </MediaGrid>
+
+  <div class="vorbilder-portrait">
+    <h3 class="vorbilder-sub">Hinter den Zahlen stehen Menschen</h3>
+    <p class="vorbilder-sub-intro">
+      So sehen die Personen-Porträts später aus – ein Gesicht, ein Ort, eine
+      kurze Geschichte zu jedem Land.
+    </p>
+    <MediaGrid columns={2}>
+      <SteckbriefCard
+        name="Platzhalter Person"
+        ort="Island"
+        rolle="Rolle / Kontext"
+        zeilen={[
+          'Platzhalter. Kurzbiografie folgt aus der Recherche.',
+          'Platzhalter. Bezug zur Gleichstellung folgt.',
+          'Platzhalter. Zitat oder Wirkung folgt.',
+        ]}
+      />
+      <PlaceholderFigure
+        ratio="4/3"
+        label="Karte mit Portrait + Ort-Pin (folgt)"
+      />
+    </MediaGrid>
+  </div>
+</Section>
+
+<style>
+  .vorbilder-portrait {
+    margin-top: 3rem;
+  }
+  .vorbilder-sub {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .vorbilder-sub-intro {
+    margin: 0.5rem 0 1.5rem;
+    max-width: 46rem;
+    line-height: 1.65;
+    color: var(--color-subtext);
+  }
+</style>

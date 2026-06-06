@@ -1,0 +1,84 @@
+---
+// AccordionBox – aufklappbare Box auf Basis von nativem <details>/<summary>.
+// Braucht KEIN JavaScript (funktioniert auch ohne JS, a11y inklusive).
+interface Props {
+  title: string;
+  /** Beim ersten Element optional offen starten. */
+  open?: boolean;
+}
+const { title, open = false } = Astro.props;
+---
+
+<details class="accordion" open={open}>
+  <summary class="accordion-summary">
+    <span class="accordion-title">{title}</span>
+    <span class="accordion-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="accordion-body">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .accordion {
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    border-radius: 0.9rem;
+    background: var(--color-card);
+    overflow: hidden;
+  }
+  .accordion + :global(.accordion) {
+    margin-top: 0.75rem;
+  }
+
+  .accordion-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion-icon {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+  .accordion-icon::before,
+  .accordion-icon::after {
+    content: '';
+    position: absolute;
+    background: var(--color-clay);
+    transition: transform 0.2s ease;
+  }
+  .accordion-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+  .accordion-icon::after {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+  .accordion[open] .accordion-icon::after {
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  .accordion-body {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--color-ink);
+  }
+</style>

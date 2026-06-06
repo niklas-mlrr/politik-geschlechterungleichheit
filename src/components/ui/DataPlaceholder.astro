@@ -1,0 +1,85 @@
+---
+// DataPlaceholder – gestalteter Container für später nachzurüstende JS-Inseln
+// (Leaflet-Karte, Chart.js-Diagramme, interaktiver Zeitstrahl).
+// Das data-island-Attribut ist der spätere Andock-Punkt für das Client-Skript.
+interface Props {
+  island: 'map' | 'chart' | 'timeline';
+  label: string;
+  /** Seitenverhältnis des Platzhalters, z. B. "16/9", "2/1". */
+  ratio?: string;
+  /** Hinweistext, was hier später erscheint. */
+  hint?: string;
+  class?: string;
+}
+const {
+  island,
+  label,
+  ratio = '16/9',
+  hint = 'Interaktives Element folgt im nächsten Ausbauschritt.',
+  class: className = '',
+} = Astro.props;
+
+const icons: Record<Props['island'], string> = {
+  map: 'M9 3 3 5v16l6-2 6 2 6-2V3l-6 2-6-2Zm0 0v16m6-14v16',
+  chart: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
+  timeline: 'M3 12h18M7 12a2 2 0 1 0 .001-.001M17 12a2 2 0 1 0 .001-.001',
+};
+---
+
+<div
+  class:list={['data-ph', className]}
+  data-island={island}
+  role="img"
+  aria-label={label}
+  style={`aspect-ratio:${ratio};`}
+>
+  <div class="dp-inner">
+    <span class="dp-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d={icons[island]} stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+    <p class="dp-label">{label}</p>
+    <p class="dp-hint">{hint}</p>
+  </div>
+  <slot />
+</div>
+
+<style>
+  .data-ph {
+    position: relative;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    border-radius: 1rem;
+    background:
+      radial-gradient(
+        circle at 30% 30%,
+        color-mix(in srgb, var(--color-ocean) 70%, var(--color-card)),
+        var(--color-ocean)
+      );
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    overflow: hidden;
+  }
+  .dp-inner {
+    text-align: center;
+    color: var(--color-subtext);
+    padding: 1.5rem;
+    max-width: 28rem;
+  }
+  .dp-icon {
+    color: var(--color-clay);
+    display: inline-flex;
+  }
+  .dp-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--color-ink);
+    margin: 0.5rem 0 0.25rem;
+  }
+  .dp-hint {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+</style>

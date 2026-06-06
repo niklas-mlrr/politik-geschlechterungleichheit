@@ -1,0 +1,64 @@
+---
+// Ursachen – gemeinsame Muster der Spitzenländer.
+// Wechsel-Grid aus Info-Box (titel + text) und Bild-Platzhalter nach Sketch S.3.
+import Section from '../ui/Section.astro';
+import MediaGrid from '../ui/MediaGrid.astro';
+import PlaceholderFigure from '../ui/PlaceholderFigure.astro';
+import { ursachen } from '../../data/placeholder';
+---
+
+<Section
+  id="ursachen"
+  eyebrow="Muster"
+  title="Was die Spitzenländer gemeinsam haben"
+  intro={ursachen.intro}
+>
+  <MediaGrid columns={2}>
+    {
+      ursachen.muster.map((m, i) => {
+        const info = (
+          <div class="ursachen-info">
+            <h3 class="ursachen-titel">{m.titel}</h3>
+            <p class="ursachen-text">{m.text}</p>
+          </div>
+        );
+        const bild = <PlaceholderFigure ratio="4/3" label={m.titel} />;
+        // Abwechselnd Info/Bild bzw. Bild/Info -> ruhiger Zickzack-Rhythmus.
+        return i % 2 === 0 ? (
+          <>
+            {info}
+            {bild}
+          </>
+        ) : (
+          <>
+            {bild}
+            {info}
+          </>
+        );
+      })
+    }
+  </MediaGrid>
+</Section>
+
+<style>
+  .ursachen-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+  .ursachen-titel {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+  }
+  .ursachen-text {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--color-subtext);
+  }
+</style>

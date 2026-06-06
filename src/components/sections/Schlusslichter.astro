@@ -1,0 +1,18 @@
+---
+// Schlusslichter – Länder, in denen die Gleichstellung am schwersten vorankommt.
+import Section from '../ui/Section.astro';
+import CountryCard from '../ui/CountryCard.astro';
+import MediaGrid from '../ui/MediaGrid.astro';
+import { schlusslichter } from '../../data/placeholder';
+---
+
+<Section
+  id="schlusslichter"
+  eyebrow="Schlusslichter"
+  title="Wo es am schwersten ist"
+  intro={schlusslichter.intro}
+>
+  <MediaGrid columns={2}>
+    {schlusslichter.laender.map((l) => <CountryCard {...l} />)}
+  </MediaGrid>
+</Section>

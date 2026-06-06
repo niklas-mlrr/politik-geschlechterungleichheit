@@ -1,0 +1,68 @@
+---
+// Stimmen – Menschen hinter den Zahlen (Sketch S.1 / S.2).
+// Großes vollflächiges Zitat, Kurzbiografien als Steckbriefe und weitere Zitate.
+import Section from '../ui/Section.astro';
+import QuoteBlock from '../ui/QuoteBlock.astro';
+import SteckbriefCard from '../ui/SteckbriefCard.astro';
+import { stimmen } from '../../data/placeholder';
+---
+
+<Section
+  id="stimmen"
+  surface="card"
+  eyebrow="Stimmen"
+  title="Menschen hinter den Zahlen"
+  intro={stimmen.intro}
+>
+  <div class="stimmen-hero">
+    <QuoteBlock
+      variant="hero"
+      text={stimmen.grossesZitat.text}
+      author={stimmen.grossesZitat.author}
+      role={stimmen.grossesZitat.role}
+    />
+  </div>
+
+  <h3 class="stimmen-sub">Kurzbiografien</h3>
+  <div class="stimmen-biografien">
+    {stimmen.biografien.map((b) => <SteckbriefCard {...b} />)}
+  </div>
+
+  <h3 class="stimmen-sub">Weitere Stimmen</h3>
+  <div class="stimmen-zitate">
+    {
+      stimmen.weitereZitate.map((z) => (
+        <QuoteBlock text={z.text} author={z.author} role={z.role} />
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .stimmen-hero {
+    margin-block: 1rem 3.5rem;
+  }
+
+  .stimmen-sub {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .stimmen-biografien,
+  .stimmen-zitate {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .stimmen-biografien,
+    .stimmen-zitate {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .stimmen-zitate {
+      gap: 2rem 3rem;
+    }
+  }
+</style>

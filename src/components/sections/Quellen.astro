@@ -1,0 +1,104 @@
+---
+// Quellen & Methodik – woher die Daten stammen.
+// Methodik-Absatz mit einem Beispiel-Inline-Quellverweis und eine nummerierte
+// Quellenliste mit Ankern (#quelle-N), auf die SourceTooltip-Links verweisen.
+import Section from '../ui/Section.astro';
+import SourceTooltip from '../ui/SourceTooltip.astro';
+import { quellenMethodik } from '../../data/placeholder';
+import { sources } from '../../data/sources';
+---
+
+<Section
+  id="quellen"
+  eyebrow="Quellen & Methodik"
+  title="Woher die Daten stammen"
+>
+  <p class="methodik">
+    {quellenMethodik.methodik} Die zentralen Kennzahlen stammen aus dem Global
+    Gender Gap Report<SourceTooltip id={1} />.
+  </p>
+
+  <h3 class="quellen-sub">Quellenverzeichnis</h3>
+  <ol class="quellen-liste">
+    {
+      sources.map((s) => (
+        <li id={`quelle-${s.id}`} class="quellen-item">
+          <span class="q-nr">[{s.id}]</span>
+          <span class="q-text">
+            {s.voll}
+            {s.url && (
+              <>
+                {' '}
+                <a
+                  class="q-link"
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {s.url}
+                </a>
+              </>
+            )}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .methodik {
+    max-width: 46rem;
+    line-height: 1.7;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .quellen-sub {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1.25rem;
+  }
+
+  .quellen-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+    counter-reset: none;
+  }
+
+  .quellen-item {
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-radius: 0.75rem;
+    line-height: 1.6;
+  }
+  /* Sanftes Hervorheben beim Sprung über #quelle-N (aus dem Tooltip-Link). */
+  .quellen-item:target {
+    border-color: var(--color-clay);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-clay) 30%, transparent);
+  }
+
+  .q-nr {
+    font-weight: 700;
+    color: var(--color-clay);
+  }
+  .q-text {
+    color: var(--color-ink);
+  }
+  .q-link {
+    color: var(--color-sage);
+    text-decoration: underline;
+    word-break: break-word;
+  }
+  .q-link:hover {
+    color: var(--color-clay);
+  }
+</style>
