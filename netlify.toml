@@ -6,5 +6,5 @@
   publish = "dist"
 
 [build.environment]
-  # Astro 5 braucht eine aktuelle Node-Version (Netlify-Default ist sonst evtl. zu alt).
-  NODE_VERSION = "22"
+  # Astro 6 verlangt Node >= 22.12.0; fest gepinnt statt nur "22".
+  NODE_VERSION = "22.12.0"

@@ -16,7 +16,7 @@ import { hero } from '../../data/placeholder';
 
     <p class="hero-kernzahl" aria-hidden="true">
       <span class="hero-zahl">{hero.kernzahl}</span>
-      <span class="hero-einheit">{hero.kernzahlEinheit}<span class="hero-punkt">.</span></span>
+      <span class="hero-einheit">{hero.kernzahlEinheit}</span>
     </p>
 
     <p class="hero-unterzeile" aria-hidden="true">{hero.kernzahlUnterzeile}</p>
@@ -85,10 +85,6 @@ import { hero } from '../../data/placeholder';
   /* "Jahre" optisch an die Ziffernhöhe angleichen (Buchstaben wirken sonst größer). */
   .hero-einheit {
     font-size: calc(var(--num-size) * 0.8);
-  }
-  /* Punkt halb so groß wie "Jahre". */
-  .hero-punkt {
-    font-size: 0.5em;
   }
 
   .hero-unterzeile {
