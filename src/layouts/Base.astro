@@ -34,7 +34,10 @@ const nav = [
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body>
     <a href="#hauptinhalt" class="skip-link">Zum Inhalt springen</a>
@@ -59,7 +62,7 @@ const nav = [
     </main>
 
     <footer class="site-footer">
-      <p>Schulprojekt Politik · Datenbasis: WEF Global Gender Gap Report 2025</p>
+      <p>2026 · TRG Osterode · Schulprojekt Politik po72 · Lukas Podleschny, Lucas Stolpe, Moritz Ansorge &amp; Niklas Müller · <a href="https://github.com/niklas-mlrr/politik-geschlechterungleichheit" target="_blank" rel="noopener">GitHub</a></p>
     </footer>
 
     <style>
@@ -127,6 +130,11 @@ const nav = [
         color: var(--color-subtext);
         font-size: 0.9rem;
         border-top: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+      }
+
+      .site-footer a {
+        color: inherit;
+        text-decoration: underline;
       }
     </style>
   </body>
