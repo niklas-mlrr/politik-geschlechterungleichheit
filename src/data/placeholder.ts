@@ -55,7 +55,7 @@ export const hero = {
   claim: 'Internationale Geschlechterungleichheit',
   kernzahl: '132',
   kernzahlEinheit: 'Jahre',
-  kernzahlUnterzeile: 'bis zur globalen Gleichstellung',
+  kernzahlUnterzeile: 'So lange dauert es im aktuellen Tempo noch bis zur globalen Gleichstellung',
   einstieg:
     'Noch 31,5 % des weltweiten Gender Gap sind offen. Kein einziges Land hat ihn ' +
     'vollständig geschlossen. Diese Seite zeigt, wo die Welt steht und warum.',
@@ -70,6 +70,7 @@ export const definition = {
     { titel: 'Bildung', text: LOREM },
     { titel: 'Gesundheit', text: LOREM },
     { titel: 'Politische Teilhabe', text: LOREM },
+    { titel: 'Gesellschaftliche Teilhabe', text: LOREM },
   ],
 };
 

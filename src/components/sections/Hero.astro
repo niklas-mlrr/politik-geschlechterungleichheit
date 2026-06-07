@@ -16,7 +16,7 @@ import { hero } from '../../data/placeholder';
 
     <p class="hero-kernzahl" aria-hidden="true">
       <span class="hero-zahl">{hero.kernzahl}</span>
-      <span class="hero-einheit">{hero.kernzahlEinheit}</span>
+      <span class="hero-einheit">{hero.kernzahlEinheit}<span class="hero-punkt">.</span></span>
     </p>
 
     <p class="hero-unterzeile" aria-hidden="true">{hero.kernzahlUnterzeile}</p>
@@ -63,25 +63,32 @@ import { hero } from '../../data/placeholder';
   }
 
   .hero-kernzahl {
+    --num-size: clamp(6rem, 21vw, 14rem);
     display: flex;
     align-items: baseline;
     justify-content: center;
-    gap: 0.4em;
+    /* gap an die Zahlengröße koppeln -> echtes Wort-Leerzeichen statt winzigem Spalt. */
+    gap: calc(var(--num-size) * 0.22);
     margin: 0;
     line-height: 0.9;
   }
-  .hero-zahl {
+  .hero-zahl,
+  .hero-einheit {
     font-family: var(--font-display);
     font-weight: 900;
     color: var(--color-clay);
-    font-size: clamp(7rem, 26vw, 18rem);
     letter-spacing: -0.02em;
   }
+  .hero-zahl {
+    font-size: var(--num-size);
+  }
+  /* "Jahre" optisch an die Ziffernhöhe angleichen (Buchstaben wirken sonst größer). */
   .hero-einheit {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--color-ink);
-    font-size: clamp(1.8rem, 6vw, 3.4rem);
+    font-size: calc(var(--num-size) * 0.8);
+  }
+  /* Punkt halb so groß wie "Jahre". */
+  .hero-punkt {
+    font-size: 0.5em;
   }
 
   .hero-unterzeile {
@@ -90,7 +97,7 @@ import { hero } from '../../data/placeholder';
     color: var(--color-ink);
     font-size: clamp(1.6rem, 5vw, 3rem);
     line-height: 1.15;
-    margin: 0.6rem 0 0;
+    margin: 1.6rem 0 0;
     text-wrap: balance;
   }
 

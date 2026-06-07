@@ -59,6 +59,9 @@ import { zeitstrahl } from '../../data/placeholder';
 <style>
   /* Horizontaler Zeitstrahl ab Tablet-Breite. */
   .timeline {
+    /* Positionierungskontext für .timeline::before – sonst landet die Linie
+       relativ zum Viewport (bei 50vh quer durch den Hero). */
+    position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
