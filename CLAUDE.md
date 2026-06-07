@@ -52,7 +52,9 @@ Diverging, niedriger Gender Gap -> hoher Gender Gap:
 ## Geplanter Tech-Stack
 
 - Framework: Astro (statisch, JS nur per Island wo nötig — "0 KB JS" gilt nur für statische Sektionen)
-- Karte: Leaflet (Zoom, Marker-Infoboxen, Länder einfärben)
+- Karte: KEINE Leaflet/Choropleth mehr. Grobe stilisierte Weltkarte (1 SVG-Landpfad) +
+  ~11 antippbare Pins (Vorbilder/Schlusslichter) -> geteilte Infokarte via kleiner Vanilla-JS-Insel.
+  Siehe Abschnitt "Karten-/Daten-Hinweise".
 - Charts: Chart.js (anklickbare Balken/Punkte)
 - Scroll-Animationen: GSAP ScrollTrigger; `prefers-reduced-motion` respektieren
 - Styling: Tailwind CSS
@@ -91,14 +93,28 @@ Quellen jeweils als Hover-/Klick-Tooltip am Verweis (Lesefluss erhalten).
   - `design_04_warm_CHOSEN.png` = gewählte Richtung (gedämpfte Palette)
   - weitere: 01 Liquid Glass, 02 Editorial, 03 Dark Data, 05 Nordic Minimal (verworfen, via Skript reproduzierbar)
 - `scripts/gen_designs.py` -> erzeugt die 5 Design-Boards (Pillow). Schreibt aktuell nach `/tmp/`.
-- `scripts/gen_map_mockup.py` -> erzeugt das große Karten-Mockup -> `mockup_warm_map.png`
+- `scripts/gen_map_mockup.py` -> altes Karten-Mockup -> `mockup_warm_map.png` (nur Design-Referenz)
+- `scripts/gen_map_svg.py` -> erzeugt `src/data/worldMap.ts` (Live-Karte: Landpfad + Pin-Coords)
 - `data/world.geo.json` -> Welt-GeoJSON, 180 Länder, ISO3-IDs (Quelle: johan/world.geo.json)
+- `src/components/sections/WorldMap.astro` -> umgesetzte interaktive Karte (Pins + Infokarte)
 
 ## Karten-/Daten-Hinweise (wichtig)
 
-- Im Mockup sind nur ~50 Länder mit realen/gerundeten WEF-Werten hinterlegt (`EXACT` in `gen_map_mockup.py`), der Rest über Regionsdurchschnitte (`REGION`) geschätzt.
-- Für die finale Seite: vollständigen WEF-Datensatz (148 Länder) einspielen statt Schätzungen.
-- Projektion im Mockup ist vereinfacht equirektangular, Antarktis ausgeblendet. Final übernimmt Leaflet die echte Projektion.
+Umgesetzte Karte (statt Choropleth): grobe Land-Silhouette + Pins.
+
+- `scripts/gen_map_svg.py` -> `src/data/world.geo.json`-Quelle wird equirektangular projiziert
+  (Bounds wie Mockup: `LAT_T=83, LAT_B=-56, LON_L=-169, LON_R=190`, Antarktis aus) und als
+  `src/data/worldMap.ts` ausgegeben: `viewBox`, `landPath` (alle Länder als EIN Pfad, eine
+  Füllung, keine Grenzen), `project(lon,lat)`, `coords` (projizierte Centroids der Pin-Länder).
+  Neu erzeugen: `python3 scripts/gen_map_svg.py`. `worldMap.ts` ist generiert -> nicht von Hand editieren.
+- Pin-Inhalte stehen in `src/data/placeholder.ts` (`karte.punkte: MapPunkt[]`, 11 Länder = 7 Vorbilder
+  + 4 Schlusslichter, Werte WEF 2025, Texte aus Craft). Join Pin<->Position über `iso3` ⇄ `coords`.
+- `WorldMap.astro`: Inline-SVG + server-gerenderte `.pin`-Buttons (Position in %); kleine JS-Insel
+  am `data-island="map"`-Hook befüllt/positioniert eine geteilte `.ci-card`. `gapColor()` färbt den
+  Balken. Ohne JS / unter 48rem bleibt die `CountryCard`-Liste sichtbar (a11y-Fallback, `<noscript>`).
+- Kein voller 148-Länder-Datensatz nötig (keine Flächeneinfärbung mehr). Weitere Pins: ISO3 in
+  `gen_map_svg.py` (`PIN_ISO`) + Eintrag in `karte.punkte` ergänzen, Skript neu laufen lassen.
+- `gen_map_mockup.py` (altes Choropleth-Mockup) bleibt nur als Design-Referenz, ist nicht mehr die Quelle.
 
 ## Umgebung / Rendering
 

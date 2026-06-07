@@ -1,11 +1,20 @@
 ---
-// WorldMap – Herzstück: globaler Überblick als interaktive Weltkarte (Sketch S.0).
-// Statisches Gerüst: die echte Leaflet-Choropleth folgt später und dockt an den
-// DataPlaceholder (data-island="map") an. Hier nur Platzhalter + statische Legende
-// + ein ruhiges Info-Box-Mockup, das einen späteren Land-Klick andeutet.
+// WorldMap – Herzstück: globaler Überblick als grobe, stilisierte Weltkarte.
+// Keine echte Choropleth, sondern eine ruhige Land-Silhouette (1 Pfad) mit
+// markierten Punkten (Pins) für ausgewählte Vorbild-/Schlusslicht-Länder.
+// Pin antippen -> eine geteilte Infokarte fährt am Punkt aus (kleine JS-Insel).
+// Ohne JS / auf schmalen Screens bleibt die Länderliste unten lesbar.
 import Section from '../ui/Section.astro';
-import DataPlaceholder from '../ui/DataPlaceholder.astro';
+import CountryCard from '../ui/CountryCard.astro';
 import { karte } from '../../data/placeholder';
+import { gapColor } from '../../data/tokens';
+import { viewBox, landPath, coords } from '../../data/worldMap';
+
+// viewBox -> Dimensionen für Pin-Position (%) und Bühnen-Seitenverhältnis.
+const [, , VBW, VBH] = viewBox.split(' ').map(Number);
+
+// Nur Pins rendern, für die eine Position vorliegt (Sicherheit).
+const punkte = karte.punkte.filter((p) => coords[p.iso3]);
 ---
 
 <Section
@@ -15,118 +24,248 @@ import { karte } from '../../data/placeholder';
   title="Die Welt im Vergleich"
   intro={karte.intro}
 >
-  <div class="map-stage">
-    <DataPlaceholder
-      island="map"
-      label="Interaktive Weltkarte"
-      ratio="2/1"
-      hint={karte.islandHinweis}
-    >
-      {/* Andeutung eines Land-Klicks: Pin -> Infobox (statisch, ruhig). */}
-      <figure class="info-box" aria-label="Beispiel einer Land-Infobox (Platzhalter)">
-        <span class="info-pin" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" />
-            <circle cx="12" cy="10" r="2.5" />
-          </svg>
-        </span>
-        <figcaption class="info-body">
-          <span class="info-land">Land</span>
-          <span class="info-meta">
-            <span class="info-platz">Platz&nbsp;–</span>
-            <span class="info-prozent">–&nbsp;%</span>
-          </span>
-          <span class="info-hint">Beispiel-Infobox</span>
-        </figcaption>
-      </figure>
-    </DataPlaceholder>
+  <div class="map-wrap" data-island="map">
+    <div class="map-stage" style={`aspect-ratio:${VBW} / ${VBH};`}>
+      <svg
+        class="map-svg"
+        viewBox={viewBox}
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d={landPath} />
+      </svg>
 
-    {/* Statische Choropleth-Legende: Rot = wenig, Grün = viel Gleichstellung. */}
-    <div class="legend" aria-hidden="true">
-      <div class="legend-bar"></div>
-      <ul class="legend-labels">
-        <li class="legend-low">{karte.legende.low}</li>
-        <li class="legend-mid">{karte.legende.mid}</li>
-        <li class="legend-high">{karte.legende.high}</li>
-      </ul>
+      <div class="pins">
+        {
+          punkte.map((p) => {
+            const c = coords[p.iso3]!;
+            const left = ((c.x / VBW) * 100).toFixed(2);
+            const top = ((c.y / VBH) * 100).toFixed(2);
+            return (
+              <button
+                type="button"
+                class="pin"
+                data-kat={p.kategorie}
+                data-land={p.land}
+                data-platz={p.platz}
+                data-closed={p.closed}
+                data-kurz={p.kurz}
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-label={`${p.land}, Platz ${p.platz} – Infokarte öffnen`}
+                style={`left:${left}%; top:${top}%; color:${gapColor(p.closed)};`}
+              >
+                <span class="pin-dot" aria-hidden="true" />
+              </button>
+            );
+          })
+        }
+      </div>
+
+      {/* Geteilte Infokarte – wird per JS befüllt & positioniert. */}
+      <div class="ci-card" role="dialog" aria-label="Länder-Info" hidden>
+        <button type="button" class="ci-close" aria-label="Infokarte schließen">×</button>
+        <p class="ci-land"></p>
+        <p class="ci-meta">
+          <span class="ci-platz"></span>
+          <span class="ci-prozent"></span>
+        </p>
+        <div class="ci-bar"><span class="ci-bar-fill"></span></div>
+        <p class="ci-kurz"></p>
+      </div>
     </div>
+
+    {/* Legende: Farbskala (rot = wenig, grün = viel geschlossen) */}
+    <div class="legend">
+      <div class="legend-scale" aria-hidden="true">
+        <span class="legend-cap">{karte.legende.low}</span>
+        <span class="legend-bar"></span>
+        <span class="legend-cap">{karte.legende.high}</span>
+      </div>
+      <p class="legend-title">{karte.legende.titel}</p>
+      <p class="legend-hint">{karte.hinweis}</p>
+    </div>
+
+    {/* Fallback / a11y: lesbar ohne JS und auf schmalen Screens. */}
+    <ul class="country-list">
+      {
+        punkte.map((p) => (
+          <li>
+            <CountryCard land={p.land} platz={p.platz} closed={p.closed} kurz={p.kurz} />
+          </li>
+        ))
+      }
+    </ul>
+    <noscript>
+      <style>.country-list { display: grid !important; }</style>
+    </noscript>
   </div>
 </Section>
 
 <style>
-  .map-stage {
+  .map-wrap {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
-  /* ---------- Info-Box-Mockup (Pin -> Infobox) ---------- */
-  .info-box {
+  /* ---------- Karten-Bühne ---------- */
+  .map-stage {
+    position: relative;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 30% 25%,
+        color-mix(in srgb, var(--color-ocean) 60%, var(--color-card)),
+        var(--color-ocean)
+      );
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+  .map-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .map-svg path {
+    /* warme Landfläche, deutlich abgesetzt vom Ozean, keine Grenzlinien */
+    fill: color-mix(in srgb, var(--color-ocker) 30%, var(--color-card));
+    stroke: color-mix(in srgb, var(--color-ink) 7%, transparent);
+    stroke-width: 0.4;
+  }
+
+  /* ---------- Pins ---------- */
+  .pins {
     position: absolute;
-    top: 12%;
-    left: 8%;
-    max-width: min(16rem, 60%);
-    margin: 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    padding: 0.75rem 0.9rem;
-    border-radius: 0.85rem;
-    background: color-mix(in srgb, var(--color-card) 88%, var(--color-sand));
-    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
-    box-shadow: 0 6px 20px color-mix(in srgb, var(--color-ink) 12%, transparent);
+    inset: 0;
   }
-  .info-pin {
-    flex: none;
-    display: inline-flex;
+  .pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
     color: var(--color-clay);
-    margin-top: 0.1rem;
   }
-  .info-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    min-width: 0;
+  .pin-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 999px;
+    background: currentColor;
+    border: 2px solid var(--color-sand);
+    box-shadow: 0 1px 4px color-mix(in srgb, var(--color-ink) 35%, transparent);
+    transition: transform 0.15s ease;
   }
-  .info-land {
+  /* Pin-Farbe kommt per Inline-Style aus gapColor(closed) -> currentColor. */
+  .pin:hover .pin-dot,
+  .pin:focus-visible .pin-dot,
+  .pin[aria-expanded='true'] .pin-dot {
+    transform: scale(1.3);
+  }
+  .pin[aria-expanded='true'] .pin-dot {
+    box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 30%, transparent);
+  }
+
+  /* ---------- Infokarte (per JS positioniert) ---------- */
+  .ci-card {
+    position: absolute;
+    z-index: 5;
+    width: min(17rem, 78%);
+    margin: 0;
+    padding: 0.85rem 0.95rem 1rem;
+    border-radius: 0.85rem;
+    background: color-mix(in srgb, var(--color-card) 92%, var(--color-sand));
+    border: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+    box-shadow: 0 8px 28px color-mix(in srgb, var(--color-ink) 22%, transparent);
+  }
+  .ci-card[hidden] { display: none; }
+  .ci-close {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.45rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 0;
+    background: none;
+    color: var(--color-subtext);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 0.4rem;
+  }
+  .ci-close:hover { color: var(--color-ink); }
+  .ci-land {
+    margin: 0;
+    padding-right: 1.4rem;
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.05rem;
+    font-weight: 700;
+    font-size: 1.2rem;
     color: var(--color-ink);
   }
-  .info-meta {
+  .ci-meta {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin: 0.15rem 0 0.55rem;
     font-size: 0.85rem;
     color: var(--color-subtext);
   }
-  .info-prozent {
-    color: var(--color-sage);
-    font-weight: 600;
+  .ci-prozent {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--color-clay);
   }
-  .info-hint {
-    margin-top: 0.15rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+  .ci-bar {
+    height: 0.45rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-ink) 8%, var(--color-sand));
+    overflow: hidden;
+  }
+  .ci-bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .ci-kurz {
+    margin: 0.7rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+
+  /* ---------- Legende (Farbskala) ---------- */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1.25rem;
+    font-size: 0.9rem;
     color: var(--color-subtext);
   }
-
-  @media (max-width: 36rem) {
-    .info-box {
-      display: none; /* auf sehr schmalen Screens dezent ausblenden */
-    }
+  .legend-scale {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1 1 18rem;
   }
-
-  /* ---------- Choropleth-Legende ---------- */
-  .legend {
-    max-width: 46rem;
+  .legend-cap {
+    white-space: nowrap;
+    font-size: 0.82rem;
   }
   .legend-bar {
-    height: 0.85rem;
+    flex: 1 1 auto;
+    min-width: 6rem;
+    height: 0.6rem;
     border-radius: 999px;
     background: linear-gradient(
       to right,
@@ -136,27 +275,111 @@ import { karte } from '../../data/placeholder';
     );
     border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
   }
-  .legend-labels {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin: 0.6rem 0 0;
+  .legend-title {
+    margin: 0;
+    font-size: 0.82rem;
+  }
+  .legend-hint {
+    margin: 0 0 0 auto;
+    font-style: italic;
+  }
+
+  /* ---------- Fallback-Liste ---------- */
+  .country-list {
+    display: none; /* Desktop+JS: nur Karte. Mobil/Noscript: eingeblendet. */
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin: 0.5rem 0 0;
     padding: 0;
     list-style: none;
-    font-size: 0.85rem;
-    color: var(--color-subtext);
   }
-  .legend-low {
-    text-align: left;
-    color: var(--color-gap-low);
-    font-weight: 600;
-  }
-  .legend-mid {
-    text-align: center;
-  }
-  .legend-high {
-    text-align: right;
-    color: var(--color-gap-high);
-    font-weight: 600;
+  @media (max-width: 48rem) {
+    .country-list { display: grid; }
+    .legend-hint { display: none; }
   }
 </style>
+
+<script>
+  // Kleine JS-Insel: Pin-Klick -> geteilte Infokarte befüllen & am Pin positionieren.
+  import { gapColor } from '../../data/tokens';
+
+  function initMap(wrap: HTMLElement) {
+    const stage = wrap.querySelector<HTMLElement>('.map-stage');
+    const card = wrap.querySelector<HTMLElement>('.ci-card');
+    if (!stage || !card) return;
+
+    const el = {
+      land: card.querySelector<HTMLElement>('.ci-land')!,
+      platz: card.querySelector<HTMLElement>('.ci-platz')!,
+      prozent: card.querySelector<HTMLElement>('.ci-prozent')!,
+      fill: card.querySelector<HTMLElement>('.ci-bar-fill')!,
+      kurz: card.querySelector<HTMLElement>('.ci-kurz')!,
+    };
+    const closeBtn = card.querySelector<HTMLElement>('.ci-close');
+    let active: HTMLElement | null = null;
+
+    function close() {
+      card!.hidden = true;
+      active?.setAttribute('aria-expanded', 'false');
+      active = null;
+    }
+
+    function place(pin: HTMLElement) {
+      const sr = stage!.getBoundingClientRect();
+      const pr = pin.getBoundingClientRect();
+      const cw = card!.offsetWidth;
+      const ch = card!.offsetHeight;
+      const pinX = pr.left - sr.left + pr.width / 2;
+      const pinTop = pr.top - sr.top;
+      let x = pinX - cw / 2;
+      let y = pinTop - ch - 10; // bevorzugt oberhalb des Pins
+      if (y < 6) y = pinTop + pr.height + 10; // sonst darunter
+      x = Math.max(6, Math.min(x, sr.width - cw - 6));
+      y = Math.max(6, Math.min(y, sr.height - ch - 6));
+      card!.style.left = x + 'px';
+      card!.style.top = y + 'px';
+    }
+
+    function open(pin: HTMLElement) {
+      const d = pin.dataset;
+      const closed = parseFloat(d.closed || '0');
+      el.land.textContent = d.land || '';
+      el.platz.textContent = 'Platz ' + d.platz + ' / 148';
+      el.prozent.textContent = (closed * 100).toFixed(1).replace('.', ',') + ' %';
+      el.fill.style.width = (closed * 100).toFixed(1) + '%';
+      el.fill.style.background = gapColor(closed);
+      el.kurz.textContent = d.kurz || '';
+
+      active?.setAttribute('aria-expanded', 'false');
+      active = pin;
+      card!.hidden = false; // sichtbar -> messbar
+      place(pin);
+      pin.setAttribute('aria-expanded', 'true');
+    }
+
+    wrap.querySelectorAll<HTMLElement>('.pin').forEach((pin) => {
+      pin.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (active === pin) close();
+        else open(pin);
+      });
+    });
+
+    closeBtn?.addEventListener('click', close);
+    document.addEventListener('click', (e) => {
+      if (!card!.hidden && !card!.contains(e.target as Node)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !card!.hidden) {
+        const last = active;
+        close();
+        last?.focus();
+      }
+    });
+    window.addEventListener('resize', close);
+  }
+
+  document
+    .querySelectorAll<HTMLElement>('[data-island="map"]')
+    .forEach((wrap) => initMap(wrap));
+</script>
