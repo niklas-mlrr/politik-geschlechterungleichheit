@@ -64,10 +64,10 @@
 
   /* Anker-Sprünge: scroll-padding-top auf dem Scrollport (html) wirkt für
      JEDEN Anker-Klick, unabhängig davon, welches Element :target ist.
-     Großzügig dimensioniert, damit die Zielsektion deutlich unter dem
-     oberen Rand landet. */
+     Knapp bemessen, damit die Überschrift der Zielsektion direkt unter
+     dem oberen Rand sitzt (kleiner Atem-Abstand statt großer Lücke). */
   html {
-    scroll-padding-top: 20rem;
+    scroll-padding-top: 0;
   }
 
   /* Sichtbarer Fokus für Tastatur-Navigation (a11y) */
