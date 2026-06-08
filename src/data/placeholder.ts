@@ -155,14 +155,6 @@ export const karte = {
   ] satisfies MapPunkt[],
 };
 
-// ---------- Daten / Charts ----------
-export const charts = {
-  intro: LOREM,
-  balkenTitel: 'Top & Bottom 10 – Anteil geschlossener Gender Gap',
-  linieTitel: 'Islands Entwicklung über die Jahre',
-  projektionTitel: 'Der verbleibende Weg bis zur globalen Schließung',
-};
-
 // ---------- Vorbilder ----------
 export const vorbilder = {
   intro: LOREM,
@@ -204,15 +196,6 @@ export const zeitstrahl = {
     { jahr: '20XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM },
     { jahr: '20XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM },
   ] satisfies TimelineEvent[],
-};
-
-// ---------- Rückschritte ----------
-export const rueckschritte = {
-  intro: LOREM,
-  punkte: [
-    { titel: 'Rückschritt-Platzhalter', text: LOREM },
-    { titel: 'Rückschritt-Platzhalter', text: LOREM },
-  ],
 };
 
 // ---------- Stimmen ----------

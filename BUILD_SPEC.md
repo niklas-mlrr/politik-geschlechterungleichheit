@@ -62,8 +62,8 @@ Importpfad-Beispiel aus `sections/`: `import Section from '../ui/Section.astro';
 ## Daten (`src/data/`)
 
 - **placeholder.ts** – alle Texte/Objekte je Sektion (named exports: `hero`, `definition`,
-  `karte`, `charts`, `vorbilder`, `schlusslichter`, `ursachen`, `zeitstrahl`,
-  `rueckschritte`, `stimmen`, `quellenMethodik`, `kernzahlen`). Typen: `Quote`, `Steckbrief`,
+  `karte`, `vorbilder`, `schlusslichter`, `ursachen`, `zeitstrahl`,
+  `stimmen`, `quellenMethodik`, `kernzahlen`). Typen: `Quote`, `Steckbrief`,
   `TimelineEvent`, `CountryStat`. **Immer von hier importieren**, keine Texte hartkodieren.
 - **sources.ts** – `sources[]`, `getSource(id)`. Für Quellen-Sektion + SourceTooltip.
 - **tokens.ts** – `palette`, `choropleth`, `gapColor(closed)` (für farbige Balken/Inline-Styles).
@@ -71,7 +71,7 @@ Importpfad-Beispiel aus `sections/`: `import Section from '../ui/Section.astro';
 ## Sektions-IDs (für die Anker-Navigation – exakt so verwenden)
 
 `hero`, `definition`, `karte`, `vorbilder`, `schlusslichter`, `ursachen`,
-`daten`, `zeitstrahl`, `rueckschritte`, `stimmen`, `quellen`
+`zeitstrahl`, `stimmen`, `quellen`
 
 ## Stil-Regeln
 

@@ -70,9 +70,8 @@ Diverging, niedriger Gender Gap -> hoher Gender Gap:
 5. Schlusslichter -> Pakistan, Sudan, Tschad, Iran mit Ursachen
 6. Ursachenmuster -> Gemeinsamkeiten der Spitzenländer
 7. Zeitstrahl -> Schlüsselereignisse
-8. Rückschritte -> aktuelle negative Entwicklungen
-9. Stimmen -> Zitate + kurze Biografien
-10. Quellen + Methodik
+8. Stimmen -> Zitate + kurze Biografien
+9. Quellen + Methodik
 
 Quellen jeweils als Hover-/Klick-Tooltip am Verweis (Lesefluss erhalten).
 
