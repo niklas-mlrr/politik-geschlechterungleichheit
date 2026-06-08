@@ -267,12 +267,19 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
     min-width: 6rem;
     height: 0.6rem;
     border-radius: 999px;
+    overflow: hidden; /* erzwingt die Rundung unabhängig von Hintergrund-Properties (WebKit-Quirk) */
     background: linear-gradient(
       to right,
-      var(--color-gap-low),
-      var(--color-gap-mid),
-      var(--color-gap-high)
+      var(--color-gap-low) 0%,
+      var(--color-gap-mid) 50%,
+      var(--color-gap-high) 100%
     );
+    /* Ohne no-repeat kachelt der Verlauf: bei Sub-Pixel-Rundung der Flex-Breite
+       erscheint an den Enden ein 1px-Streifen der nächsten Kachel (rot am grünen
+       Ende und umgekehrt -> "Loop"). no-repeat allein genügt; die Standard-Größe
+       deckt schon 100% ab. (Kein background-size: 100% 100% -> sonst ignoriert
+       WebKit/iPad die border-radius-Rundung an den Ecken.) */
+    background-repeat: no-repeat;
     border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
   }
   .legend-title {
