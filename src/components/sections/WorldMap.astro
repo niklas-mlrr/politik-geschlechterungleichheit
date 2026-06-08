@@ -263,24 +263,33 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
     font-size: 0.82rem;
   }
   .legend-bar {
+    position: relative;
     flex: 1 1 auto;
     min-width: 6rem;
     height: 0.6rem;
-    border-radius: 999px;
-    overflow: hidden; /* erzwingt die Rundung unabhängig von Hintergrund-Properties (WebKit-Quirk) */
+    border-radius: 0.35rem;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    /* Container erzwingt nur die Rundung + Clipping. */
+  }
+  /* Verlauf auf eigenes ::before, damit WebKit/iPad die border-radius-Rundung
+     zuverlässig umsetzt (Bug: lineare Verläufe direkt auf .legend-bar werden
+     bei nicht-100%-Hintergrundgröße nicht vom radius des Containers geclippt,
+     und background-size:100% 100% bricht die Rundung in einem anderen WebKit-Pfad).
+     Eigener Layer mit 100% Größe + radius:inherit -> konsistent in allen Browsern. */
+  .legend-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
     background: linear-gradient(
       to right,
       var(--color-gap-low) 0%,
       var(--color-gap-mid) 50%,
       var(--color-gap-high) 100%
     );
-    /* Ohne no-repeat kachelt der Verlauf: bei Sub-Pixel-Rundung der Flex-Breite
-       erscheint an den Enden ein 1px-Streifen der nächsten Kachel (rot am grünen
-       Ende und umgekehrt -> "Loop"). no-repeat allein genügt; die Standard-Größe
-       deckt schon 100% ab. (Kein background-size: 100% 100% -> sonst ignoriert
-       WebKit/iPad die border-radius-Rundung an den Ecken.) */
     background-repeat: no-repeat;
-    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    pointer-events: none;
   }
   .legend-title {
     margin: 0;
