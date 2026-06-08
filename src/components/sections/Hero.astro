@@ -42,15 +42,31 @@ import { hero } from '../../data/placeholder';
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     position: relative;
-    padding: 6rem 1.25rem 4rem;
+    padding: 3rem 1.25rem 2rem;
     text-align: center;
   }
 
   .hero-inner {
     max-width: 52rem;
-    margin: 0 auto;
+    margin: 11vh auto 0;
+  }
+
+  /* iPad-Anpassung: 11" hat im Landscape ~1190px Breite, im Portrait ~834px.
+     Hier drücken wir den Text ganz nach oben (kein margin-top mehr, kein
+     hero-padding) und ziehen den Scroll-Hinweis eng an den Textblock. */
+  @media (max-width: 1100px) {
+    .hero {
+      padding-top: 0 !important;
+      justify-content: flex-start !important;
+    }
+    .hero-inner {
+      margin-top: 0 !important;
+    }
+    .hero-scroll {
+      padding-top: 0.5rem !important;
+      margin-top: auto !important;
+    }
   }
 
   .hero-kopfzeile {
@@ -107,14 +123,16 @@ import { hero } from '../../data/placeholder';
   }
 
   .hero-scroll {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    /* Flex-Item statt absolut -> kann den Hero-Text niemals überlagern.
+       margin-top: auto drückt es an den unteren Rand der Sektion,
+       ohne dass es aus dem Flow herausgenommen wird. */
+    margin-top: auto;
+    align-self: center;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    padding-top: 2rem;
     text-decoration: none;
     color: var(--color-subtext);
   }

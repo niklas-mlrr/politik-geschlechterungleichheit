@@ -62,9 +62,12 @@
     text-wrap: balance;
   }
 
-  /* Anker-Sprünge unter dem fixierten Header abfangen */
-  :target {
-    scroll-margin-top: 6rem;
+  /* Anker-Sprünge: scroll-padding-top auf dem Scrollport (html) wirkt für
+     JEDEN Anker-Klick, unabhängig davon, welches Element :target ist.
+     Großzügig dimensioniert, damit die Zielsektion deutlich unter dem
+     oberen Rand landet. */
+  html {
+    scroll-padding-top: 20rem;
   }
 
   /* Sichtbarer Fokus für Tastatur-Navigation (a11y) */
