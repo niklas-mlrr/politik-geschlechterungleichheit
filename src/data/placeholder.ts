@@ -63,7 +63,7 @@ export const kernzahlen = {
 export const hero = {
   kopfzeile: 'Soziale Ungleichheit und Geschlecht',
   claim: 'Internationale Geschlechterungleichheit',
-  kernzahl: '132',
+  kernzahl: String(kernzahlen.jahreBisGleichstellung),
   kernzahlEinheit: 'Jahre',
   kernzahlUnterzeile: 'So lange dauert es im aktuellen Tempo noch bis zur globalen Gleichstellung.',
   einstieg:

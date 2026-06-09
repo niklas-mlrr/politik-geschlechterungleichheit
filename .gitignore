@@ -11,3 +11,5 @@ npm-debug.log*
 .env.production
 # macOS-generated files
 .DS_Store
+# local Claude Code settings
+.claude/settings.local.json
