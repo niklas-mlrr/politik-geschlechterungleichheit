@@ -1,11 +1,8 @@
 @import "tailwindcss";
 
-/* Self-hosted Web-Fonts (Phase 0 Entscheidung) */
-@import "@fontsource/playfair-display/400.css";
-@import "@fontsource/playfair-display/600.css";
-@import "@fontsource/playfair-display/700.css";
-@import "@fontsource/playfair-display/900.css";
-@import "@fontsource-variable/source-sans-3";
+/* Web-Fonts werden über die Astro Fonts API geladen (astro.config.mjs + <Font>
+   in Base.astro). Die @font-face-Regeln + metrisch angepassten Fallbacks
+   erzeugt Astro selbst; die Familien hängen an --font-playfair / --font-source-sans. */
 
 /*
   Warm Humanist – gedämpfte Palette (siehe CLAUDE.md)
@@ -31,9 +28,11 @@
   --color-gap-mid: #cd9a63; /* Ocker: Mitte */
   --color-gap-high: #4f7a66; /* Grün: viel Gleichstellung */
 
-  /* Typografie */
-  --font-display: "Playfair Display", ui-serif, Georgia, serif;
-  --font-sans: "Source Sans 3 Variable", "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  /* Typografie – Werte kommen aus der Astro Fonts API (inkl. optimierter
+     Fallbacks); ui-serif/ui-sans-serif als letzte Absicherung, falls die
+     Astro-Variable mal nicht gesetzt ist. */
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Sektions-Rhythmus */
   --spacing-section: 7rem;

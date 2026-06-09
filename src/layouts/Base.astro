@@ -1,4 +1,5 @@
 ---
+import { Font } from 'astro:assets';
 import '../styles/global.css';
 
 interface Props {
@@ -34,6 +35,16 @@ const nav = [
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    {/* Schriften via Astro Fonts API. Playfair (Display, v.a. die fette
+        Hero-Zahl 900) wird vorgeladen, damit die echte Schrift vor dem ersten
+        Paint da ist -> kein sichtbarer Swap. Der Metrik-Fallback allein reicht
+        bei der riesigen 900er-Zahl nicht (er ist auf Normalgewicht kalibriert).
+        Source Sans (Fließtext) ohne Preload – dort fängt der Metrik-Fallback
+        den Swap unsichtbar ab. */}
+    <Font cssVariable="--font-playfair" preload />
+    <Font cssVariable="--font-source-sans" />
+
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
