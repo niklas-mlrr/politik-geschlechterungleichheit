@@ -1,11 +1,12 @@
 ---
 // Zeitstrahl – zeitliche Entwicklung der Gleichstellung (Sketch S.4).
 // Statischer, gestalteter horizontaler Zeitstrahl mit Knoten je Ereignis.
-// Auf Mobil bricht der Strahl vertikal um. Die spätere Klick-Interaktivität
-// (Filtern, Detailansicht) wird mit einem DataPlaceholder angedeutet.
+// Auf Mobil bricht der Strahl vertikal um.
+// Progressive Enhancement (wie WorldMap): Ohne JS sind alle Karten voll lesbar.
+// Mit JS (data-ready) werden die Karten kompakt (Jahr + Titel) und ein geteiltes
+// Detail-Panel zeigt bei Klick Ort/Jahr/Text/optional Zitat+Bild des Ereignisses.
 import Section from '../ui/Section.astro';
-import DataPlaceholder from '../ui/DataPlaceholder.astro';
-import { zeitstrahl } from '../../data/placeholder';
+import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
 ---
 
 <Section
@@ -14,15 +15,26 @@ import { zeitstrahl } from '../../data/placeholder';
   title="Wichtige Schritte"
   intro={zeitstrahl.intro}
 >
-  <ol class="timeline" role="list">
+  <ol class="timeline" role="list" data-island="timeline">
     {
-      zeitstrahl.ereignisse.map((e, i) => (
+      zeitstrahl.ereignisse.map((e: TimelineEvent, i) => (
         <li class:list={['tl-item', i % 2 === 0 ? 'is-above' : 'is-below']}>
           <span class="tl-node" aria-hidden="true" />
-          <div class="tl-card">
-            <p class="tl-jahr">{e.jahr}</p>
-            <h3 class="tl-titel">{e.titel}</h3>
-            <p class="tl-ort">
+          <button
+            type="button"
+            class="tl-card tl-trigger"
+            aria-expanded="false"
+            aria-controls="tl-detail"
+            data-jahr={e.jahr}
+            data-ort={e.ort}
+            data-titel={e.titel}
+            data-text={e.text}
+            data-zitat={e.zitat ?? ''}
+            data-bild={e.bild ?? ''}
+          >
+            <span class="tl-jahr">{e.jahr}</span>
+            <span class="tl-titel">{e.titel}</span>
+            <span class="tl-ort">
               <svg
                 class="tl-pin"
                 viewBox="0 0 24 24"
@@ -37,21 +49,35 @@ import { zeitstrahl } from '../../data/placeholder';
                 <circle cx="12" cy="9" r="2.5" fill="var(--color-card)" />
               </svg>
               <span>{e.ort}</span>
-            </p>
-            <p class="tl-text">{e.text}</p>
-          </div>
+            </span>
+            {/* Volltext: ohne JS sichtbar (Fallback), im kompakten JS-Modus ausgeblendet. */}
+            <span class="tl-text">{e.text}</span>
+          </button>
         </li>
       ))
     }
   </ol>
 
-  <div class="timeline-island">
-    <DataPlaceholder
-      island="timeline"
-      label="Interaktiver Zeitstrahl folgt"
-      ratio="4/1"
-      hint="Später anklickbar: Ereignisse auswählen und Details einblenden."
-    />
+  {/* Geteiltes Detail-Panel – wird per JS befüllt. Ohne JS ungenutzt (hidden). */}
+  <div
+    class="tl-detail"
+    id="tl-detail"
+    role="region"
+    aria-label="Ereignis-Details"
+    aria-live="polite"
+    hidden
+  >
+    <button type="button" class="tl-detail-close" aria-label="Details schließen">×</button>
+    <p class="tl-detail-meta">
+      <span class="tl-detail-jahr"></span>
+      <span class="tl-detail-ort"></span>
+    </p>
+    <h3 class="tl-detail-titel"></h3>
+    <p class="tl-detail-text"></p>
+    <blockquote class="tl-detail-zitat" hidden></blockquote>
+    <figure class="tl-detail-bild" hidden>
+      <img alt="" />
+    </figure>
   </div>
 </Section>
 
@@ -94,33 +120,47 @@ import { zeitstrahl } from '../../data/placeholder';
     background: var(--color-clay);
     border: 2px solid var(--color-sand);
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-clay) 35%, transparent);
+    z-index: 1;
   }
 
+  /* Karte = Button (Trigger). Reset auf neutrales Erscheinungsbild. */
   .tl-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    appearance: none;
+    cursor: default;
     background: var(--color-card);
     border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
     border-radius: 0.9rem;
     padding: 1rem 1.1rem;
     box-shadow: 0 1px 3px color-mix(in srgb, var(--color-ink) 8%, transparent);
+    transition:
+      border-color 0.18s ease,
+      box-shadow 0.18s ease,
+      transform 0.18s ease;
   }
 
   .tl-jahr {
+    display: block;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.15rem;
     color: var(--color-clay);
-    margin: 0;
   }
   .tl-titel {
+    display: block;
     font-size: 1.05rem;
     font-weight: 700;
-    margin: 0.2rem 0 0;
+    margin-top: 0.2rem;
   }
   .tl-ort {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    margin: 0.35rem 0 0;
+    margin-top: 0.35rem;
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--color-sage);
@@ -129,14 +169,126 @@ import { zeitstrahl } from '../../data/placeholder';
     color: var(--color-clay);
   }
   .tl-text {
-    margin: 0.6rem 0 0;
+    display: block;
+    margin-top: 0.6rem;
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--color-subtext);
   }
 
-  .timeline-island {
+  /* ---------- Interaktiver Modus (JS aktiv) ---------- */
+  .timeline[data-ready] .tl-card {
+    cursor: pointer;
+  }
+  /* Kompakt: Volltext wandert ins geteilte Detail-Panel. */
+  .timeline[data-ready] .tl-text {
+    display: none;
+  }
+  .timeline[data-ready] .tl-card:hover,
+  .timeline[data-ready] .tl-card:focus-visible {
+    border-color: color-mix(in srgb, var(--color-clay) 50%, transparent);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--color-ink) 14%, transparent);
+    transform: translateY(-2px);
+  }
+  .timeline[data-ready] .tl-card[aria-expanded='true'] {
+    border-color: var(--color-clay);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-clay) 30%, transparent);
+  }
+
+  /* ---------- Geteiltes Detail-Panel ---------- */
+  .tl-detail {
+    position: relative;
     margin-top: 2.5rem;
+    padding: 1.4rem 1.6rem 1.6rem;
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--color-card) 70%, var(--color-sand));
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    box-shadow: 0 6px 22px color-mix(in srgb, var(--color-ink) 12%, transparent);
+  }
+  .tl-detail[hidden] {
+    display: none;
+  }
+  .tl-detail-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.7rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 0;
+    background: none;
+    color: var(--color-subtext);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 0.4rem;
+  }
+  .tl-detail-close:hover {
+    color: var(--color-ink);
+  }
+  .tl-detail-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-subtext);
+  }
+  .tl-detail-jahr {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-clay);
+  }
+  .tl-detail-ort {
+    font-weight: 600;
+    color: var(--color-sage);
+  }
+  .tl-detail-titel {
+    margin: 0.3rem 0 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .tl-detail-text {
+    margin: 0.7rem 0 0;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+    max-width: 46rem;
+  }
+  .tl-detail-zitat {
+    margin: 1rem 0 0;
+    padding-left: 1rem;
+    border-left: 3px solid color-mix(in srgb, var(--color-clay) 60%, transparent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-ink);
+    max-width: 46rem;
+  }
+  .tl-detail-zitat[hidden] {
+    display: none;
+  }
+  .tl-detail-bild {
+    margin: 1.1rem 0 0;
+  }
+  .tl-detail-bild[hidden] {
+    display: none;
+  }
+  .tl-detail-bild img {
+    display: block;
+    max-width: min(100%, 30rem);
+    border-radius: 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-card {
+      transition: none;
+    }
+    .timeline[data-ready] .tl-card:hover,
+    .timeline[data-ready] .tl-card:focus-visible {
+      transform: none;
+    }
   }
 
   /* Ab Tablet: horizontaler Strahl mit abwechselnd oben/unten platzierten Karten. */
@@ -186,3 +338,87 @@ import { zeitstrahl } from '../../data/placeholder';
     }
   }
 </style>
+
+<script>
+  // JS-Insel: Karten-Klick -> geteiltes Detail-Panel befüllen & einblenden.
+  // Progressive Enhancement: ohne JS bleiben die Volltexte in den Karten sichtbar.
+  function initTimeline(list: HTMLElement) {
+    const detail = document.getElementById('tl-detail');
+    if (!detail) return;
+
+    const el = {
+      jahr: detail.querySelector<HTMLElement>('.tl-detail-jahr')!,
+      ort: detail.querySelector<HTMLElement>('.tl-detail-ort')!,
+      titel: detail.querySelector<HTMLElement>('.tl-detail-titel')!,
+      text: detail.querySelector<HTMLElement>('.tl-detail-text')!,
+      zitat: detail.querySelector<HTMLElement>('.tl-detail-zitat')!,
+      bildFig: detail.querySelector<HTMLElement>('.tl-detail-bild')!,
+      bildImg: detail.querySelector<HTMLImageElement>('.tl-detail-bild img')!,
+    };
+    const closeBtn = detail.querySelector<HTMLElement>('.tl-detail-close');
+    const triggers = Array.from(list.querySelectorAll<HTMLElement>('.tl-trigger'));
+    let active: HTMLElement | null = null;
+
+    // Erst jetzt auf kompakt schalten (CSS sieht data-ready) – ohne JS bleibt Volltext.
+    list.setAttribute('data-ready', '');
+
+    function close() {
+      detail!.hidden = true;
+      active?.setAttribute('aria-expanded', 'false');
+      active = null;
+    }
+
+    function open(trigger: HTMLElement) {
+      const d = trigger.dataset;
+      el.jahr.textContent = d.jahr || '';
+      el.ort.textContent = d.ort || '';
+      el.titel.textContent = d.titel || '';
+      el.text.textContent = d.text || '';
+
+      const zitat = (d.zitat || '').trim();
+      el.zitat.hidden = zitat === '';
+      el.zitat.textContent = zitat;
+
+      const bild = (d.bild || '').trim();
+      el.bildFig.hidden = bild === '';
+      if (bild) el.bildImg.src = bild;
+
+      active?.setAttribute('aria-expanded', 'false');
+      active = trigger;
+      trigger.setAttribute('aria-expanded', 'true');
+      detail!.hidden = false;
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        if (active === trigger) close();
+        else open(trigger);
+      });
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      const last = active;
+      close();
+      last?.focus();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !detail!.hidden) {
+        const last = active;
+        close();
+        last?.focus();
+      }
+    });
+    // Klick außerhalb des Panels (und nicht auf eine Karte) schließt es.
+    document.addEventListener('click', (e) => {
+      if (detail!.hidden) return;
+      const target = e.target as Node;
+      if (detail!.contains(target)) return; // Klick im Panel selbst
+      if (triggers.some((t) => t.contains(target))) return; // Karten togglen selbst
+      close();
+    });
+  }
+
+  document
+    .querySelectorAll<HTMLElement>('[data-island="timeline"]')
+    .forEach((list) => initTimeline(list));
+</script>

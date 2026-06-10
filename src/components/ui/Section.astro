@@ -29,7 +29,7 @@ const {
   class:list={['section', `surface-${surface}`, className]}
   aria-labelledby={title ? `${id}-title` : undefined}
 >
-  <div class:list={['section-inner', { wide }]}>
+  <div class:list={['section-inner', { wide }]} data-reveal>
     {
       (eyebrow || title || intro) && (
         <header class="section-head">

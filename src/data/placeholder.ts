@@ -31,6 +31,10 @@ export interface TimelineEvent {
   ort: string;
   titel: string;
   text: string;
+  /** Optionales Zitat für das Detail-Panel (interaktiver Zeitstrahl). */
+  zitat?: string;
+  /** Optionaler Bildpfad (public/…) für das Detail-Panel. */
+  bild?: string;
 }
 
 export interface CountryStat {
@@ -191,9 +195,9 @@ export const ursachen = {
 export const zeitstrahl = {
   intro: LOREM,
   ereignisse: [
+    { jahr: '19XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM, zitat: LOREM_SHORT },
     { jahr: '19XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM },
-    { jahr: '19XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM },
-    { jahr: '20XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM },
+    { jahr: '20XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM, zitat: LOREM_SHORT },
     { jahr: '20XX', ort: 'Ort', titel: 'Ereignis-Platzhalter', text: LOREM },
   ] satisfies TimelineEvent[],
 };
