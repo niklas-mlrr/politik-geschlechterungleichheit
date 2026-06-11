@@ -104,6 +104,9 @@ import { sources } from '../../data/sources';
     border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
     border-radius: 0.75rem;
     line-height: 1.6;
+    /* Sprung aus dem Tooltip-Link (#quelle-N) hält unter dem Sticky-Header an,
+       statt dahinter zu verschwinden. Betrifft nur Quellen-Anker, nicht die Nav. */
+    scroll-margin-top: 4rem;
   }
   /* Sanftes Hervorheben beim Sprung über #quelle-N (aus dem Tooltip-Link). */
   .quellen-item:target {

@@ -129,7 +129,7 @@ export const definition = {
     {
       titel: 'Lohnunterschiede',
       text:
-        'Frauen verdienen im Schnitt oft weniger als Männer – auch bei vergleichbarer ' +
+        'Frauen verdienen im Schnitt oft weniger als Männer, auch bei vergleichbarer ' +
         'Arbeit oder ähnlicher Qualifikation. In Deutschland liegt der unbereinigte Gender ' +
         'Pay Gap seit Jahren bei rund 18 Prozent. Ein Teil davon erklärt sich durch Branche, ' +
         'Teilzeit und seltenere Führungspositionen; doch selbst bei gleicher Tätigkeit bleibt ' +
@@ -150,11 +150,11 @@ export const definition = {
     {
       titel: 'Karrierechancen',
       text:
-        'In vielen Branchen sind Führungspositionen stärker mit Männern besetzt – je höher ' +
+        'In vielen Branchen sind Führungspositionen stärker mit Männern besetzt, je höher ' +
         'die Ebene, desto seltener Frauen. Der Arbeitsmarkt ist zudem stark nach Geschlecht ' +
         'aufgeteilt: Frauen und Männer arbeiten oft in verschiedenen Berufen, wobei „typisch ' +
-        'weibliche“ Tätigkeiten häufig schlechter bezahlt sind. Diese Aufteilung – horizontal ' +
-        'zwischen den Berufen, vertikal entlang der Hierarchie – hält Unterschiede bei ' +
+        'weibliche“ Tätigkeiten häufig schlechter bezahlt sind. Diese Aufteilung, horizontal ' +
+        'zwischen den Berufen, vertikal entlang der Hierarchie, hält Unterschiede bei ' +
         'Einkommen und Einfluss dauerhaft aufrecht.',
       quellen: [17],
     },
@@ -164,7 +164,7 @@ export const definition = {
         'Geschlechtsspezifische Gewalt bleibt in vielen Ländern ein zentrales Problem und ' +
         'schränkt die Sicherheit im Alltag ein. Sie reicht von häuslicher und sexualisierter ' +
         'Gewalt über Belästigung im öffentlichen Raum bis zu Anfeindungen im Netz. Schon die ' +
-        'Angst davor verändert das Verhalten Betroffener – welche Wege sie meiden oder welche ' +
+        'Angst davor verändert das Verhalten Betroffener, welche Wege sie meiden oder welche ' +
         'Chancen sie nicht wahrnehmen. Damit ist Gewalt nicht nur ein individuelles, sondern ' +
         'ein gesellschaftliches Gleichstellungsproblem.',
       quellen: [19],
@@ -176,7 +176,7 @@ export const definition = {
         'sei, bremsen Gleichstellung oft aus. Sie prägen schon früh, welche Spielzeuge, ' +
         'Schulfächer und Berufe als passend gelten. Im Erwachsenenleben beeinflussen sie, wer ' +
         'Sorgearbeit übernimmt und wer Karriere macht. Weil solche Bilder als „normal“ ' +
-        'erscheinen, wirken sie besonders hartnäckig – und werden unbewusst weitergegeben.',
+        'erscheinen, wirken sie besonders hartnäckig und werden unbewusst weitergegeben.',
       quellen: [18],
     },
     {
@@ -198,8 +198,8 @@ export const definition = {
         'kürzer, nehmen seltener Gesundheitsangebote wahr und haben eine deutlich höhere ' +
         'Suizidrate. Jungen schneiden in der Schule im Mittel schlechter ab, und bei ' +
         'Sorgerechtsfragen werden Väter seltener als Hauptbezugsperson anerkannt. Hinzu ' +
-        'kommen die vielerorts einseitige Wehrpflicht, gefährlichere Berufe und – gerade in ' +
-        'gleichberechtigteren Ländern – ein hoher Leistungsdruck. Gleichstellung bedeutet ' +
+        'kommen die vielerorts einseitige Wehrpflicht, gefährlichere Berufe und, gerade in ' +
+        'gleichberechtigteren Ländern, ein hoher Leistungsdruck. Gleichstellung bedeutet ' +
         'daher nicht, Nachteile bloß umzuverteilen, sondern starre Rollenerwartungen für alle ' +
         'Geschlechter zu lockern.',
       quellen: [27, 28, 29],
@@ -211,7 +211,7 @@ export const definition = {
 export const karte = {
   intro:
     'Die Weltkarte ist das Herzstück: Vorbilder und Schlusslichter im direkten Vergleich. ' +
-    'Die Farbe eines Punktes zeigt, wie weit der Gender Gap geschlossen ist – von Rot ' +
+    'Die Farbe eines Punktes zeigt, wie weit der Gender Gap geschlossen ist, von Rot ' +
     '(wenig) bis Grün (viel). Tippe einen Punkt an, um Platzierung und Hintergrund eines ' +
     'Landes zu sehen.',
   hinweis: 'Punkt antippen für Details',
@@ -219,7 +219,7 @@ export const karte = {
   fakten: [
     { text: 'Kein Land hat bisher vollständige Gleichstellung erreicht.', quellen: [1] },
     {
-      text: 'Weltweit sind im Schnitt erst 68,5 % des Gender Gap geschlossen – ein Drittel bleibt offen.',
+      text: 'Weltweit sind im Schnitt erst 68,5 % des Gender Gap geschlossen, ein Drittel bleibt offen.',
       quellen: [1],
     },
     {
@@ -270,7 +270,7 @@ export const karte = {
     },
     {
       iso3: 'NAM', land: 'Namibia', platz: 8, closed: 0.811, kategorie: 'vorbild',
-      kurz: 'Einziges Land außerhalb Europas unter den Top 10 – mit hoher politischer ' +
+      kurz: 'Einziges Land außerhalb Europas unter den Top 10, mit hoher politischer ' +
         'Teilhabe von Frauen.',
       quellen: [1, 3],
     },
@@ -347,7 +347,7 @@ export const karte = {
 export const vorbilder = {
   intro:
     'An der Spitze steht eine Gruppe von Ländern, die den Gender Gap am weitesten ' +
-    'geschlossen haben – angeführt von Island und den nordischen Staaten. Der Großteil der ' +
+    'geschlossen haben, angeführt von Island und den nordischen Staaten. Der Großteil der ' +
     'Spitzengruppe liegt in Europa, doch vollständig geschlossen hat die Lücke bislang kein ' +
     'Land. Was die Vorreiter verbindet, zeigt der nächste Abschnitt.',
   laender: [
@@ -394,7 +394,7 @@ export const vorbilder = {
     {
       titel: 'Bildung',
       text:
-        'Frauen sind im Hochschulbereich klar in der Mehrheit – auf 101 studierende Frauen ' +
+        'Frauen sind im Hochschulbereich klar in der Mehrheit, auf 101 studierende Frauen ' +
         'kommen nur 57 Männer, also rund 64 % Frauen. Diese hohe Bildungsbeteiligung ' +
         'verschafft Frauen gute Startchancen im Beruf. Inzwischen sorgt sie sogar für ' +
         'Debatten, wie man mehr junge Männer für ein Studium gewinnt.',
@@ -414,7 +414,7 @@ export const vorbilder = {
       text:
         'Gleichberechtigung ist vom Kindergarten bis zur Universität Teil des Lehrplans. So ' +
         'wächst sie als Selbstverständlichkeit heran und ist gesellschaftlich breit ' +
-        'akzeptiert – nicht nur auf dem Papier. Dazu kommt eine lange Tradition der ' +
+        'akzeptiert, nicht nur auf dem Papier. Dazu kommt eine lange Tradition der ' +
         'Frauenerwerbstätigkeit, an die jede Generation anknüpft.',
       quellen: [6, 7],
     },
@@ -433,7 +433,7 @@ export const vorbilder = {
     },
     {
       land: 'Republik Moldau', platz: 7, closed: 0.813,
-      kurz: 'Neu unter den Top 10 – nach oben geklettert.',
+      kurz: 'Neu unter den Top 10, nach oben geklettert.',
       quellen: [1, 3],
     },
     {
@@ -494,8 +494,8 @@ export const schlusslichter = {
   // Bottom-10-Kontext + gemeinsame Muster (Craft).
   bottom10: {
     text:
-      'Auch die übrigen Länder am Tabellenende – darunter Guinea, die DR Kongo, Niger, ' +
-      'Algerien, Mali und Ägypten – eint ein ähnliches Bild. Meist treffen mehrere ' +
+      'Auch die übrigen Länder am Tabellenende, darunter Guinea, die DR Kongo, Niger, ' +
+      'Algerien, Mali und Ägypten, eint ein ähnliches Bild. Meist treffen mehrere ' +
       'Belastungen zusammen, die sich gegenseitig verstärken.',
     quellen: [1, 3],
   } satisfies Faktum,
@@ -512,15 +512,15 @@ export const ursachen = {
   intro:
     'Die Spitzenländer sind nicht zufällig vorn. Hinter ihren Ergebnissen stehen ähnliche, ' +
     'über Jahrzehnte verfolgte politische Entscheidungen. Vier Muster tauchen bei den ' +
-    'Vorreitern immer wieder auf – und greifen ineinander.',
+    'Vorreitern immer wieder auf und greifen ineinander.',
   muster: [
     {
       titel: 'Gleichstellungspolitik seit den 1960ern',
       text:
         'In den nordischen Ländern war Gleichberechtigung früher als anderswo ein ' +
         'politisches Ziel und Teil der Staatsräson. Getragen wurde sie von starken ' +
-        'Sozialstaaten, die für Forderungen aus der Zivilgesellschaft – etwa Arbeiter-, ' +
-        'Bäuerinnen- und Frauenbewegungen – empfänglich waren. So wurde Gleichstellung nicht ' +
+        'Sozialstaaten, die für Forderungen aus der Zivilgesellschaft, etwa Arbeiter-, ' +
+        'Bäuerinnen- und Frauenbewegungen, empfänglich waren. So wurde Gleichstellung nicht ' +
         'als kurzlebiges Einzelthema, sondern als dauerhafte Aufgabe der Politik verankert.',
       bild: '/images/muster/gleichstellungspolitik.jpg',
       bildAlt: 'Frauen demonstrieren beim Frauenstreik im Zentrum von Reykjavík',
@@ -572,7 +572,7 @@ export const ursachen = {
 // ---------- Zeitstrahl ----------
 export const zeitstrahl = {
   intro:
-    'Frauenrechte sind über fast zwei Jahrhunderte erkämpft worden – mit großen ' +
+    'Frauenrechte sind über fast zwei Jahrhunderte erkämpft worden, mit großen ' +
     'Meilensteinen, aber auch mit Rückschlägen bis in die Gegenwart. Die Stationen reichen ' +
     'von den ersten Forderungen nach Wahlrecht bis zu aktuellen Debatten. Tippe einen Knoten ' +
     'an, um mehr zu erfahren.',
@@ -593,7 +593,7 @@ export const zeitstrahl = {
       jahr: '1893', ort: 'Neuseeland', titel: 'Erstes nationales Frauenwahlrecht',
       text:
         'Neuseeland war der erste selbstverwaltete Staat, in dem Frauen bei nationalen ' +
-        'Wahlen abstimmen durften – ein Meilenstein zuerst im pazifischen Raum, nicht in ' +
+        'Wahlen abstimmen durften, ein Meilenstein zuerst im pazifischen Raum, nicht in ' +
         'Europa. Er zeigte, dass politische Gleichberechtigung machbar ist, und wurde zum ' +
         'Vorbild für Bewegungen in anderen Ländern.',
       bild: '/images/menschen/sheppard.jpg',
@@ -612,7 +612,7 @@ export const zeitstrahl = {
       jahr: '1945', ort: 'weltweit', titel: 'UN-Charta: Gleichheit der Geschlechter',
       text:
         'Mit der UN-Charta wurde die Gleichberechtigung von Frauen und Männern als ' +
-        'internationales Prinzip festgeschrieben – die Frage wurde endgültig ein weltweites ' +
+        'internationales Prinzip festgeschrieben, die Frage wurde endgültig ein weltweites ' +
         'Thema. Damit lag erstmals eine völkerrechtliche Grundlage vor, auf die sich spätere ' +
         'Abkommen und Frauenrechtsbewegungen berufen konnten.',
       quellen: [30],
@@ -628,7 +628,7 @@ export const zeitstrahl = {
       jahr: '2015', ort: 'Vereinte Nationen', titel: 'Agenda 2030 und SDG 5',
       text:
         'Mit den UN-Nachhaltigkeitszielen wurde Geschlechtergleichheit (SDG 5) ein eigenes ' +
-        'globales Entwicklungsziel – Gleichstellung gehört seitdem offiziell zur Politik aller ' +
+        'globales Entwicklungsziel, Gleichstellung gehört seitdem offiziell zur Politik aller ' +
         'Staaten, nicht nur zu einzelnen nationalen Reformen. Bis 2030 sollen alle Länder ' +
         'messbare Fortschritte erzielen; der jährliche Gender Gap Report macht sie vergleichbar.',
       quellen: [32],
@@ -638,7 +638,7 @@ export const zeitstrahl = {
       text:
         'Der bereits 2006 von Tarana Burke geprägte Slogan „Me too“ verbreitete sich 2017 ' +
         'massiv und wurde zum Meilenstein für die Sichtbarkeit sexueller Gewalt und von ' +
-        'Alltagssexismus – vor allem für Frauen, aber auch Männer ansprechend.',
+        'Alltagssexismus, vor allem für Frauen, aber auch Männer ansprechend.',
       bild: '/images/menschen/burke.jpg',
       bildAlt: 'Tarana Burke, Begründerin der „Me too“-Bewegung',
       bildCredit: 'B.Monét Fennell, CC BY-SA 3.0',
@@ -649,7 +649,7 @@ export const zeitstrahl = {
       text:
         'Nach dem Tod von Jina Mahsa Amini in Polizeigewahrsam begann eine landesweite ' +
         'Protestwelle gegen Zwangsverschleierung und Diskriminierung. Das Regime reagierte ' +
-        'mit massiver Gewalt – doch die Bewegung schuf weltweit Aufmerksamkeit.',
+        'mit massiver Gewalt, doch die Bewegung schuf weltweit Aufmerksamkeit.',
       zitat: 'Frau, Leben, Freiheit',
       bild: '/images/menschen/iran-2022.jpg',
       bildAlt: 'Solidaritätsprotest „Frau, Leben, Freiheit“ nach dem Tod von Jina Mahsa Amini',
@@ -674,7 +674,7 @@ export const zeitstrahl = {
 // ---------- Stimmen ----------
 export const stimmen = {
   intro:
-    'Hinter den Zahlen stehen Menschen – Schriftstellerinnen, Aktivistinnen und Frauen, ' +
+    'Hinter den Zahlen stehen Menschen: Schriftstellerinnen, Aktivistinnen und Frauen, ' +
     'die Geschichte geschrieben haben. Ihre Worte machen greifbar, was Statistiken nur ' +
     'andeuten: dass es um Würde, Selbstbestimmung und Anerkennung im Alltag geht.',
   grossesZitat: {
@@ -737,7 +737,7 @@ export const quellenMethodik = {
   methodik:
     'Die zentralen Kennzahlen dieser Seite stammen aus dem Global Gender Gap Report 2025 ' +
     'des World Economic Forum. Der Index misst den Abstand zwischen Frauen und Männern in ' +
-    'vier Bereichen – wirtschaftliche Teilhabe, Bildung, Gesundheit und politische Teilhabe – ' +
+    'vier Bereichen, wirtschaftliche Teilhabe, Bildung, Gesundheit und politische Teilhabe, ' +
     'und drückt ihn als Anteil des geschlossenen Gender Gap von 0 bis 100 % aus (100 % = ' +
     'volle Gleichstellung). 2025 wurden 148 Länder erfasst. Ergänzend werden für einzelne ' +
     'Aussagen weitere, jeweils am Verweis genannte Quellen herangezogen.',
@@ -796,7 +796,7 @@ export const bildnachweise: Bildnachweis[] = [
   {
     motiv: 'Lilja Ólafsdóttir (Stimmen)',
     autor: 'Art Bicnick / Reykjavík Grapevine',
-    lizenz: 'urheberrechtlich geschützt – Nutzung nur für dieses Schulprojekt',
+    lizenz: 'urheberrechtlich geschützt, Nutzung nur für dieses Schulprojekt',
     quelleUrl:
       'https://grapevine.is/mag/feature/2025/10/10/fifty-years-later-push-for-equality-continues-remembering-the-strike-that-stopped-the-nation/',
   },

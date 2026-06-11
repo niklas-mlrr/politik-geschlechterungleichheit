@@ -71,7 +71,7 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
                 data-quellen={p.quellen.join(',')}
                 aria-haspopup="dialog"
                 aria-expanded="false"
-                aria-label={`${p.land}, Platz ${p.platz} – Infokarte öffnen`}
+                aria-label={`${p.land}, Platz ${p.platz}, Infokarte öffnen`}
                 style={`left:${left}%; top:${top}%; color:${gapColor(p.closed)};`}
               >
                 <span class="pin-dot" aria-hidden="true" />
