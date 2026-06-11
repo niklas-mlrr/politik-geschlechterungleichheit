@@ -688,7 +688,7 @@ export const stimmen = {
       ],
       bild: '/images/menschen/adichie.jpg',
       bildAlt: 'Porträt von Chimamanda Ngozi Adichie',
-      bildCredit: 'Wikimedia Foundation, CC0',
+      bildCredit: 'The Guardian (guim.co.uk)',
       quellen: [21, 22],
     },
     {
@@ -739,9 +739,11 @@ export const quellenMethodik = {
 
 // ---------- Bildnachweise ----------
 // Vollständige Lizenz-/Urheberangaben zu den auf der Seite verwendeten Fotos.
-// Alle Bilder von Wikimedia Commons, frei lizenziert (CC bzw. gemeinfrei). Für die
+// Bilder überwiegend von Wikimedia Commons, frei lizenziert (CC bzw. gemeinfrei). Für die
 // CC-BY/BY-SA-Bilder werden Urheber + Lizenz inline (figcaption) und hier mit Link genannt;
 // die Auflösung wurde verändert (skaliert/zugeschnitten).
+// AUSNAHME: Adichie-Porträt ist ein urheberrechtlich geschütztes Guardian-Foto (keine freie
+// Lizenz) — auf Wunsch eingesetzt; rechtlich für eine Veröffentlichung nicht abgesichert.
 export interface Bildnachweis {
   motiv: string;
   autor: string;
@@ -753,11 +755,11 @@ export interface Bildnachweis {
 export const bildnachweise: Bildnachweis[] = [
   {
     motiv: 'Chimamanda Ngozi Adichie (Stimmen)',
-    autor: 'Wikimedia Foundation',
-    lizenz: 'CC0 (gemeinfrei)',
-    lizenzUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    autor: 'The Guardian',
+    lizenz: 'urheberrechtlich geschützt (keine freie Lizenz)',
+    lizenzUrl: 'https://www.theguardian.com/help/terms-of-service',
     quelleUrl:
-      "https://commons.wikimedia.org/wiki/File:Chimamanda_Ngozi_Adichie_for_Women's_History_Month.jpg",
+      'https://i.guim.co.uk/img/media/f2458d554de13d64f5acf3cff56eba676f15c95a/0_923_5477_3284/master/5477.jpg',
   },
   {
     motiv: 'Elizabeth Cady Stanton (Zeitstrahl 1848)',
