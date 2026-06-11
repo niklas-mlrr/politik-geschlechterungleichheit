@@ -24,18 +24,22 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
   intro={karte.intro}
 >
   <div class="map-wrap" data-island="map">
-    <div class="map-stage" style={`aspect-ratio:${VBW} / ${VBH};`}>
-      <svg
-        class="map-svg"
-        viewBox={viewBox}
-        preserveAspectRatio="xMidYMid meet"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path d={landPath} />
-      </svg>
+    <div class="map-stage" style={`--map-ar:${VBW} / ${VBH};`}>
+      {/* Land-Rahmen: hält das Karten-Seitenverhältnis und zentriert die Karte.
+          So bleiben Pins (in %) deckungsgleich, auch wenn die Stage am Desktop
+          höher ist (mehr Ozean oben/unten, Land bleibt zentriert). */}
+      <div class="map-frame">
+        <svg
+          class="map-svg"
+          viewBox={viewBox}
+          preserveAspectRatio="xMidYMid meet"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d={landPath} />
+        </svg>
 
-      <div class="pins">
+        <div class="pins">
         {
           punkte.map((p) => {
             const c = coords[p.iso3]!;
@@ -60,6 +64,7 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
             );
           })
         }
+        </div>
       </div>
 
       {/* Geteilte Infokarte – wird per JS befüllt & positioniert. */}
@@ -113,6 +118,10 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
   .map-stage {
     position: relative;
     width: 100%;
+    /* Default (Mobil/iPad): Stage == Land-Rahmen -> exakt wie zuvor. */
+    aspect-ratio: var(--map-ar);
+    display: flex;
+    align-items: center; /* Land vertikal zentrieren, falls Stage höher ist */
     border-radius: 1rem;
     overflow: hidden;
     background:
@@ -122,6 +131,20 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
         var(--color-ocean)
       );
     border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+  /* Land-Rahmen: trägt das Karten-Seitenverhältnis; Pins liegen auf diesem Rahmen. */
+  .map-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--map-ar);
+  }
+
+  /* PC/Laptop (Maus, breiter Viewport): Stage höher, Land bleibt zentriert.
+     iPad/Touch ausgeschlossen via hover/pointer -> dort alles unverändert. */
+  @media (hover: hover) and (pointer: fine) and (min-width: 64rem) {
+    .map-stage {
+      aspect-ratio: 1000 / 500; /* flacher Default ~2,58:1 -> ~2:1, mehr Höhe */
+    }
   }
   .map-svg {
     display: block;

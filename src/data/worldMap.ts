@@ -32,4 +32,10 @@ export const coords: Record<string, { x: number; y: number }> = {
   SDN: { x: 553.9, y: 186.7 },
   TCD: { x: 522.5, y: 188.5 },
   PAK: { x: 664.1, y: 147.7 },
+  USA: { x: 194.8, y: 121.2 },
+  CAN: { x: 187.8, y: 70.3 },
+  BRA: { x: 323.0, y: 261.3 },
+  MNG: { x: 757.5, y: 100.8 },
+  JPN: { x: 852.0, y: 130.9 },
+  AUS: { x: 845.1, y: 302.4 },
 };

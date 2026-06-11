@@ -28,7 +28,9 @@ MIN_AREA = 3.0
 
 # Kuratierte Pin-Länder (ISO3) -> Centroid wird projiziert ausgegeben.
 PIN_ISO = ["ISL", "FIN", "NOR", "GBR", "SWE", "NAM", "DEU",
-           "IRN", "SDN", "TCD", "PAK"]
+           "IRN", "SDN", "TCD", "PAK",
+           # Mittelfeld / geografische Streuung (Amerika, Asien, Ozeanien)
+           "USA", "CAN", "BRA", "MNG", "JPN", "AUS"]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)

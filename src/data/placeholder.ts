@@ -50,7 +50,7 @@ export interface MapPunkt {
   land: string;
   platz: number; // Rang von 148
   closed: number; // Anteil geschlossener Gender Gap (0..1)
-  kategorie: 'vorbild' | 'schlusslicht';
+  kategorie: 'vorbild' | 'mittel' | 'schlusslicht';
   kurz: string; // 1–2 Sätze für die Infokarte
 }
 
@@ -135,6 +135,37 @@ export const karte = {
       iso3: 'DEU', land: 'Deutschland', platz: 9, closed: 0.803, kategorie: 'vorbild',
       kurz: 'Gute Bildungschancen, aber noch Nachholbedarf im Berufsleben und bei ' +
         'Führungspositionen.',
+    },
+    {
+      iso3: 'CAN', land: 'Kanada', platz: 32, closed: 0.767, kategorie: 'mittel',
+      kurz: 'Vorderes Mittelfeld: gute Bildungs- und Erwerbsteilhabe, bei der ' +
+        'politischen Repräsentation von Frauen aber noch Luft nach oben.',
+    },
+    {
+      iso3: 'USA', land: 'USA', platz: 42, closed: 0.756, kategorie: 'mittel',
+      kurz: 'Nahezu geschlossene Bildungs- und Gesundheitslücke, aber schwache ' +
+        'politische Teilhabe von Frauen drückt den Gesamtwert.',
+    },
+    {
+      iso3: 'BRA', land: 'Brasilien', platz: 72, closed: 0.720, kategorie: 'mittel',
+      kurz: 'Mittelfeld Südamerikas: Fortschritte bei der politischen Teilhabe, ' +
+        'aber große wirtschaftliche und regionale Unterschiede.',
+    },
+    {
+      iso3: 'MNG', land: 'Mongolei', platz: 65, closed: 0.728, kategorie: 'mittel',
+      kurz: 'In Zentralasien vergleichsweise weit vorn; 2025 um 20 Plätze ' +
+        'verbessert, vor allem bei wirtschaftlicher Teilhabe. (Russland fehlt ' +
+        'im Bericht 2025 mangels Daten.)',
+    },
+    {
+      iso3: 'JPN', land: 'Japan', platz: 118, closed: 0.666, kategorie: 'mittel',
+      kurz: 'Schlusslicht der G7: trotz hoher Bildung sehr wenige Frauen in ' +
+        'Politik und Führungspositionen.',
+    },
+    {
+      iso3: 'AUS', land: 'Australien', platz: 13, closed: 0.792, kategorie: 'mittel',
+      kurz: 'Sprung um 11 Plätze auf Rang 13 – deutliche Fortschritte bei ' +
+        'wirtschaftlicher und politischer Teilhabe von Frauen.',
     },
     {
       iso3: 'IRN', land: 'Iran', platz: 145, closed: 0.583, kategorie: 'schlusslicht',
