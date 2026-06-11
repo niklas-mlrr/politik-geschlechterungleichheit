@@ -122,7 +122,7 @@ export const karte = {
         'in Politik und Wirtschaft.',
     },
     {
-      iso3: 'SWE', land: 'Schweden', platz: 5, closed: 0.817, kategorie: 'vorbild',
+      iso3: 'SWE', land: 'Schweden', platz: 6, closed: 0.817, kategorie: 'vorbild',
       kurz: 'Offiziell feministische Regierungspolitik und geschlechtsneutrale ' +
         'Erziehung in Kitas.',
     },
@@ -197,7 +197,7 @@ export const vorbilder = {
     { land: 'Island', platz: 1, closed: 0.926, kurz: LOREM_SHORT },
     { land: 'Finnland', platz: 2, closed: 0.879, kurz: LOREM_SHORT },
     { land: 'Norwegen', platz: 3, closed: 0.863, kurz: LOREM_SHORT },
-    { land: 'Schweden', platz: 5, closed: 0.817, kurz: LOREM_SHORT },
+    { land: 'Schweden', platz: 6, closed: 0.817, kurz: LOREM_SHORT },
   ] satisfies CountryStat[],
 };
 
