@@ -2,14 +2,16 @@
 // CountryCard – Länder-Ranking-Karte (vgl. Design-Mockup "Island 92,6 % · Platz 1").
 // Zeigt Land, Platzierung, Anteil geschlossener Gender Gap als Balken (Choropleth-Farbe).
 import { gapColor } from '../../data/tokens';
+import SourceTooltip from './SourceTooltip.astro';
 
 interface Props {
   land: string;
   platz: number;
   closed: number; // 0..1
   kurz?: string;
+  quellen?: number[];
 }
-const { land, platz, closed, kurz } = Astro.props;
+const { land, platz, closed, kurz, quellen = [] } = Astro.props;
 const prozent = (closed * 100).toFixed(1).replace('.', ',');
 const barColor = gapColor(closed);
 ---
@@ -31,7 +33,20 @@ const barColor = gapColor(closed);
     <span class="cc-bar-fill" style={`width:${(closed * 100).toFixed(1)}%; background:${barColor};`}
     ></span>
   </div>
-  {kurz && <p class="cc-kurz">{kurz}</p>}
+  {
+    kurz && (
+      <p class="cc-kurz">
+        {kurz}
+        {quellen.length > 0 && (
+          <span class="cc-quellen">
+            {quellen.map((id) => (
+              <SourceTooltip id={id} />
+            ))}
+          </span>
+        )}
+      </p>
+    )
+  }
 </article>
 
 <style>
@@ -78,5 +93,9 @@ const barColor = gapColor(closed);
     margin: 0.9rem 0 0;
     font-size: 0.95rem;
     color: var(--color-ink);
+  }
+  .cc-quellen {
+    margin-left: 0.15rem;
+    white-space: nowrap;
   }
 </style>

@@ -4,7 +4,7 @@
 // Quellenliste mit Ankern (#quelle-N), auf die SourceTooltip-Links verweisen.
 import Section from '../ui/Section.astro';
 import SourceTooltip from '../ui/SourceTooltip.astro';
-import { quellenMethodik } from '../../data/placeholder';
+import { quellenMethodik } from '../../data/content';
 import { sources } from '../../data/sources';
 ---
 
@@ -14,8 +14,8 @@ import { sources } from '../../data/sources';
   title="Woher die Daten stammen"
 >
   <p class="methodik">
-    {quellenMethodik.methodik} Die zentralen Kennzahlen stammen aus dem Global
-    Gender Gap Report<SourceTooltip id={1} />.
+    {quellenMethodik.methodik}
+    {quellenMethodik.quellen.map((id) => <SourceTooltip id={id} />)}
   </p>
 
   <h3 class="quellen-sub">Quellenverzeichnis</h3>

@@ -6,7 +6,8 @@
 // Mit JS (data-ready) werden die Karten kompakt (Jahr + Titel) und ein geteiltes
 // Detail-Panel zeigt bei Klick Ort/Jahr/Text/optional Zitat+Bild des Ereignisses.
 import Section from '../ui/Section.astro';
-import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
+import SourceTooltip from '../ui/SourceTooltip.astro';
+import { zeitstrahl, type TimelineEvent } from '../../data/content';
 ---
 
 <Section
@@ -31,6 +32,7 @@ import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
             data-text={e.text}
             data-zitat={e.zitat ?? ''}
             data-bild={e.bild ?? ''}
+            data-quellen={e.quellen.join(',')}
           >
             <span class="tl-jahr">{e.jahr}</span>
             <span class="tl-titel">{e.titel}</span>
@@ -53,6 +55,13 @@ import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
             {/* Volltext: ohne JS sichtbar (Fallback), im kompakten JS-Modus ausgeblendet. */}
             <span class="tl-text">{e.text}</span>
           </button>
+          {/* Quellen ausserhalb des Buttons (kein <a> in <button>); ohne JS sichtbar,
+              im kompakten JS-Modus wandert die Quellenangabe ins Detail-Panel. */}
+          <p class="tl-quellen">
+            {e.quellen.map((id) => (
+              <SourceTooltip id={id} />
+            ))}
+          </p>
         </li>
       ))
     }
@@ -74,6 +83,7 @@ import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
     </p>
     <h3 class="tl-detail-titel"></h3>
     <p class="tl-detail-text"></p>
+    <p class="tl-detail-quellen"></p>
     <blockquote class="tl-detail-zitat" hidden></blockquote>
     <figure class="tl-detail-bild" hidden>
       <img alt="" />
@@ -180,9 +190,31 @@ import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
   .timeline[data-ready] .tl-card {
     cursor: pointer;
   }
-  /* Kompakt: Volltext wandert ins geteilte Detail-Panel. */
-  .timeline[data-ready] .tl-text {
+  /* Kompakt: Volltext + Fallback-Quellen wandern ins geteilte Detail-Panel. */
+  .timeline[data-ready] .tl-text,
+  .timeline[data-ready] .tl-quellen {
     display: none;
+  }
+
+  /* Fallback-Quellen (ohne JS) unter der Karte. */
+  .tl-quellen {
+    margin: 0.4rem 0 0;
+    padding-left: 2rem;
+    font-size: 0.85rem;
+  }
+
+  .tl-detail-quellen {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+    color: var(--color-subtext);
+  }
+  .tl-detail-quellen :global(.tl-quelle-ref) {
+    color: var(--color-clay);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .tl-detail-quellen :global(.tl-quelle-ref:hover) {
+    text-decoration: underline;
   }
   .timeline[data-ready] .tl-card:hover,
   .timeline[data-ready] .tl-card:focus-visible {
@@ -351,6 +383,7 @@ import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
       ort: detail.querySelector<HTMLElement>('.tl-detail-ort')!,
       titel: detail.querySelector<HTMLElement>('.tl-detail-titel')!,
       text: detail.querySelector<HTMLElement>('.tl-detail-text')!,
+      quellen: detail.querySelector<HTMLElement>('.tl-detail-quellen')!,
       zitat: detail.querySelector<HTMLElement>('.tl-detail-zitat')!,
       bildFig: detail.querySelector<HTMLElement>('.tl-detail-bild')!,
       bildImg: detail.querySelector<HTMLImageElement>('.tl-detail-bild img')!,
@@ -374,6 +407,18 @@ import { zeitstrahl, type TimelineEvent } from '../../data/placeholder';
       el.ort.textContent = d.ort || '';
       el.titel.textContent = d.titel || '';
       el.text.textContent = d.text || '';
+
+      // Quelle(n) als Anker-Links auf die Quellen-Sektion (#quelle-n).
+      const ids = (d.quellen || '').split(',').map((s) => s.trim()).filter(Boolean);
+      el.quellen.textContent = ids.length ? 'Quelle: ' : '';
+      ids.forEach((id, i) => {
+        const a = document.createElement('a');
+        a.href = '#quelle-' + id;
+        a.className = 'tl-quelle-ref';
+        a.textContent = '[' + id + ']';
+        el.quellen.appendChild(a);
+        if (i < ids.length - 1) el.quellen.appendChild(document.createTextNode(' '));
+      });
 
       const zitat = (d.zitat || '').trim();
       el.zitat.hidden = zitat === '';

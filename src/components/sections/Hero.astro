@@ -2,7 +2,8 @@
 // Hero – visuelles Herzstück des Einstiegs (Sketch S.0).
 // Sonder-Sektion: nutzt bewusst NICHT das Section-Primitive, sondern ein eigenes
 // <section id="hero">, ist aber für die Anker-Navigation korrekt ausgezeichnet.
-import { hero } from '../../data/placeholder';
+import { hero, kernzahlen } from '../../data/content';
+import SourceTooltip from '../ui/SourceTooltip.astro';
 ---
 
 <section id="hero" class="hero" aria-labelledby="hero-h1">
@@ -21,7 +22,10 @@ import { hero } from '../../data/placeholder';
 
     <p class="hero-unterzeile" aria-hidden="true">{hero.kernzahlUnterzeile}</p>
 
-    <p class="hero-einstieg">{hero.einstieg}</p>
+    <p class="hero-einstieg">
+      {hero.einstieg}
+      {kernzahlen.quellen.map((id) => <SourceTooltip id={id} />)}
+    </p>
   </div>
 
   <a class="hero-scroll" href="#definition">

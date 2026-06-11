@@ -1,12 +1,15 @@
 ---
 // AccordionBox – aufklappbare Box auf Basis von nativem <details>/<summary>.
 // Braucht KEIN JavaScript (funktioniert auch ohne JS, a11y inklusive).
+import SourceTooltip from './SourceTooltip.astro';
+
 interface Props {
   title: string;
   /** Beim ersten Element optional offen starten. */
   open?: boolean;
+  quellen?: number[];
 }
-const { title, open = false } = Astro.props;
+const { title, open = false, quellen = [] } = Astro.props;
 ---
 
 <details class="accordion" open={open}>
@@ -16,6 +19,15 @@ const { title, open = false } = Astro.props;
   </summary>
   <div class="accordion-body">
     <slot />
+    {
+      quellen.length > 0 && (
+        <p class="accordion-quellen">
+          {quellen.map((id) => (
+            <SourceTooltip id={id} />
+          ))}
+        </p>
+      )
+    }
   </div>
 </details>
 
@@ -80,5 +92,9 @@ const { title, open = false } = Astro.props;
   .accordion-body {
     padding: 0 1.25rem 1.25rem;
     color: var(--color-ink);
+  }
+  .accordion-quellen {
+    margin: 0.6rem 0 0;
+    font-size: 0.9rem;
   }
 </style>

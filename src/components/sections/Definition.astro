@@ -2,19 +2,24 @@
 // Definition – Begriff Geschlechterungleichheit, mit aufklappbaren Themenbereichen.
 import Section from '../ui/Section.astro';
 import AccordionBox from '../ui/AccordionBox.astro';
-import { definition } from '../../data/placeholder';
+import SourceTooltip from '../ui/SourceTooltip.astro';
+import { definition } from '../../data/content';
 ---
 
 <Section
   id="definition"
   eyebrow="Begriff"
   title="Was bedeutet Geschlechterungleichheit?"
-  intro={definition.intro}
 >
+  <p class="definition-intro">
+    {definition.intro}
+    <SourceTooltip id={definition.introQuelle} />
+  </p>
+
   <div class="definition-bereiche">
     {
       definition.bereiche.map((bereich, i) => (
-        <AccordionBox title={bereich.titel} open={i === 0}>
+        <AccordionBox title={bereich.titel} open={i === 0} quellen={bereich.quellen}>
           <p>{bereich.text}</p>
         </AccordionBox>
       ))
@@ -23,6 +28,13 @@ import { definition } from '../../data/placeholder';
 </Section>
 
 <style>
+  .definition-intro {
+    max-width: 46rem;
+    margin: 0 0 2.5rem;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--color-subtext);
+  }
   .definition-bereiche {
     max-width: 52rem;
   }

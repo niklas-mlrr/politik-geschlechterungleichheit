@@ -5,8 +5,10 @@ Schulprojekt, Gymnasium 12. Klasse (Niklas), Fach Politik. Datenbasis: WEF Globa
 
 ## Status
 
-- Phase: Konzept + Design abgeschlossen, Umsetzung noch nicht begonnen.
-- `index.html` ist nur ein Platzhalter-Stub, noch keine echte Implementierung.
+- Phase: Astro-Umsetzung steht; alle 9 Sektionen mit echten Craft-Inhalten + Quellen befüllt.
+- Inhalte leben in `src/data/content.ts` (vormals `placeholder.ts`) mit Quellen-Pflichtfeld
+  `quellen: number[]`; Quellenliste in `src/data/sources.ts`. Keine Platzhalter mehr aktiv.
+- Quellen-Report: `OFFENE_BELEGE.md` (weggelassen / nachrecherchiert / Datenkonflikte / wartet auf Craft).
 - Designrichtung festgelegt: Warm Humanist (siehe unten).
 
 ## Quelle der Wahrheit (Inhalte)
@@ -86,7 +88,10 @@ Quellen jeweils als Hover-/Klick-Tooltip am Verweis (Lesefluss erhalten).
 
 ## Repo-Struktur
 
-- `index.html` -> Platzhalter-Stub (noch zu ersetzen)
+- `src/data/content.ts` -> alle Sektions-Inhalte (echte Craft-Daten) mit `quellen`-Pflichtfeld
+- `src/data/sources.ts` -> konsolidierte Quellenliste (stabile IDs, Craft-Herkunft im Kommentar)
+- `scripts/check-sources.mjs` -> Build-Check der Quellen-Pflicht (`npm run check:sources`)
+- `OFFENE_BELEGE.md` -> Quellen-Report (weggelassen / nachrecherchiert / Konflikte / wartet auf Craft)
 - `mockup_warm_map.png` -> aktives Deliverable: großes Detail-Mockup (1640x2680) mit echter Choropleth-Weltkarte
 - `design/` -> archivierte Designexploration (5 Boards: Mockup + Palette + Typo)
   - `design_04_warm_CHOSEN.png` = gewählte Richtung (gedämpfte Palette)
@@ -106,7 +111,7 @@ Umgesetzte Karte (statt Choropleth): grobe Land-Silhouette + Pins.
   `src/data/worldMap.ts` ausgegeben: `viewBox`, `landPath` (alle Länder als EIN Pfad, eine
   Füllung, keine Grenzen), `project(lon,lat)`, `coords` (projizierte Centroids der Pin-Länder).
   Neu erzeugen: `python3 scripts/gen_map_svg.py`. `worldMap.ts` ist generiert -> nicht von Hand editieren.
-- Pin-Inhalte stehen in `src/data/placeholder.ts` (`karte.punkte: MapPunkt[]`, 11 Länder = 7 Vorbilder
+- Pin-Inhalte stehen in `src/data/content.ts` (`karte.punkte: MapPunkt[]`, 11 Länder = 7 Vorbilder
   + 4 Schlusslichter, Werte WEF 2025, Texte aus Craft). Join Pin<->Position über `iso3` ⇄ `coords`.
 - `WorldMap.astro`: Inline-SVG + server-gerenderte `.pin`-Buttons (Position in %); kleine JS-Insel
   am `data-island="map"`-Hook befüllt/positioniert eine geteilte `.ci-card`. `gapColor()` färbt den
@@ -126,9 +131,23 @@ Umgesetzte Karte (statt Choropleth): grobe Land-Silhouette + Pins.
 - Deutsch, knapp, Stichpunkte, "->" für Konsequenzen/Erläuterungen.
 - Keine Emojis, kein LaTeX im Terminal.
 
+## Content-Sync Craft -> content.ts
+
+Wenn die Craft-Seite „Inhalte“ (`EDF2F61A-1BCB-4201-996A-430495FAD68F`) wächst:
+
+1. Craft-Seite „Inhalte“ vollständig lesen (alle Cursor-Seiten + Bilder/Links beachten).
+2. Neue Inhalte in `src/data/content.ts` einpflegen, jedem Item `quellen` zuordnen
+   (ggf. `src/data/sources.ts` um neue Quelle mit stabiler ID erweitern).
+3. Unbelegte Aussagen per WebSearch/WebFetch nachrecherchieren; `OFFENE_BELEGE.md` aktualisieren.
+   Datenkonflikte gegen WEF GGGR 2025 klären (nur Repo korrigieren, Abweichung an Niklas melden).
+4. `npm run check && npm run check:sources && npm run build`.
+
+Platzhalter-Mechanik: Items für noch leere Craft-Bereiche bekommen `quellen: []` + den
+`PLATZHALTER_MARKER` im Text -> `check:sources` meldet sie als „wartet auf Craft“ statt als Fehler.
+
 ## Nächste Schritte (offen)
 
-- Astro-Projekt aufsetzen, `index.html`-Stub ersetzen.
-- Vollständige WEF-Werte für alle Länder beschaffen.
-- Leere Inhaltsabschnitte in Craft füllen: zeitliche Entwicklung, konkrete Länderentwicklungen, kurze Personengeschichten, weitere Zitate.
-- Echte Web-Fonts (Serif Display + Sans) festlegen.
+- Leere Craft-Bereiche füllen und nachziehen: „Konkrete pos./neg. Entwicklungen“ und
+  „Konkrete Geschichten von Personen“ (siehe `OFFENE_BELEGE.md`, Abschnitt 5).
+- Datenkonflikte aus `OFFENE_BELEGE.md` (Sudan/Tschad, Schweden/NZ, Moldau) in Craft nachtragen.
+- Echte Web-Fonts sind gesetzt (Playfair Display + Source Sans 3) – ggf. Feinschliff.

@@ -4,7 +4,7 @@
 import Section from '../ui/Section.astro';
 import QuoteBlock from '../ui/QuoteBlock.astro';
 import SteckbriefCard from '../ui/SteckbriefCard.astro';
-import { stimmen } from '../../data/placeholder';
+import { stimmen } from '../../data/content';
 ---
 
 <Section
@@ -20,6 +20,7 @@ import { stimmen } from '../../data/placeholder';
       text={stimmen.grossesZitat.text}
       author={stimmen.grossesZitat.author}
       role={stimmen.grossesZitat.role}
+      quellen={stimmen.grossesZitat.quellen}
     />
   </div>
 
@@ -32,7 +33,7 @@ import { stimmen } from '../../data/placeholder';
   <div class="stimmen-zitate">
     {
       stimmen.weitereZitate.map((z) => (
-        <QuoteBlock text={z.text} author={z.author} role={z.role} />
+        <QuoteBlock text={z.text} author={z.author} role={z.role} quellen={z.quellen} />
       ))
     }
   </div>

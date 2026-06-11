@@ -61,10 +61,12 @@ Importpfad-Beispiel aus `sections/`: `import Section from '../ui/Section.astro';
 
 ## Daten (`src/data/`)
 
-- **placeholder.ts** – alle Texte/Objekte je Sektion (named exports: `hero`, `definition`,
+- **content.ts** – alle Texte/Objekte je Sektion (named exports: `hero`, `definition`,
   `karte`, `vorbilder`, `schlusslichter`, `ursachen`, `zeitstrahl`,
   `stimmen`, `quellenMethodik`, `kernzahlen`). Typen: `Quote`, `Steckbrief`,
-  `TimelineEvent`, `CountryStat`. **Immer von hier importieren**, keine Texte hartkodieren.
+  `TimelineEvent`, `CountryStat`, `MapPunkt`, `Aussage`, `Faktum`. **Immer von hier importieren**,
+  keine Texte hartkodieren. Jedes faktentragende Item hat ein Pflichtfeld `quellen: number[]`
+  (IDs aus `sources.ts`); `npm run check:sources` erzwingt die Belegpflicht.
 - **sources.ts** – `sources[]`, `getSource(id)`. Für Quellen-Sektion + SourceTooltip.
 - **tokens.ts** – `palette`, `choropleth`, `gapColor(closed)` (für farbige Balken/Inline-Styles).
 
@@ -81,11 +83,11 @@ Importpfad-Beispiel aus `sections/`: `import Section from '../ui/Section.astro';
 - A11y: sinnvolle Heading-Hierarchie (Section setzt `h2`, darunter `h3`/`h4`),
   `alt`/`aria-label` wo nötig, ausreichend Kontrast.
 - Scoped `<style>` pro Komponente bevorzugt; Tailwind-Utilities für Layout ok.
-- Keine echten Fotos, keine erfundenen Inhalte – nur Platzhalter aus `placeholder.ts`.
+- Keine echten Fotos, keine erfundenen Inhalte – nur belegte Inhalte aus `content.ts`.
 
 ## Definition of Done je Sektion
 
 - In `<Section id="...">` gewrappt, richtige ID.
-- Nutzt Primitives + `placeholder.ts` statt eigener Texte/Karten, wo möglich.
+- Nutzt Primitives + `content.ts` statt eigener Texte/Karten, wo möglich.
 - Responsive, a11y-sauber, nur Tokens (keine Hex-Werte).
 - `npm run check` bleibt fehlerfrei; Komponente rendert eigenständig.

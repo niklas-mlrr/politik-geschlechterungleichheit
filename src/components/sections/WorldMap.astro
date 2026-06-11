@@ -6,7 +6,8 @@
 // Ohne JS / auf schmalen Screens bleibt die Länderliste unten lesbar.
 import Section from '../ui/Section.astro';
 import CountryCard from '../ui/CountryCard.astro';
-import { karte } from '../../data/placeholder';
+import SourceTooltip from '../ui/SourceTooltip.astro';
+import { karte } from '../../data/content';
 import { gapColor } from '../../data/tokens';
 import { viewBox, landPath, coords } from '../../data/worldMap';
 
@@ -23,6 +24,19 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
   title="Die Welt im Vergleich"
   intro={karte.intro}
 >
+  <ul class="globale-fakten">
+    {
+      karte.fakten.map((f) => (
+        <li>
+          {f.text}
+          {f.quellen.map((id) => (
+            <SourceTooltip id={id} />
+          ))}
+        </li>
+      ))
+    }
+  </ul>
+
   <div class="map-wrap" data-island="map">
     <div class="map-stage" style={`--map-ar:${VBW} / ${VBH};`}>
       {/* Land-Rahmen: hält das Karten-Seitenverhältnis und zentriert die Karte.
@@ -54,6 +68,7 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
                 data-platz={p.platz}
                 data-closed={p.closed}
                 data-kurz={p.kurz}
+                data-quellen={p.quellen.join(',')}
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-label={`${p.land}, Platz ${p.platz} – Infokarte öffnen`}
@@ -77,6 +92,7 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
         </p>
         <div class="ci-bar"><span class="ci-bar-fill"></span></div>
         <p class="ci-kurz"></p>
+        <p class="ci-quellen"></p>
       </div>
     </div>
 
@@ -96,7 +112,7 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
       {
         punkte.map((p) => (
           <li>
-            <CountryCard land={p.land} platz={p.platz} closed={p.closed} kurz={p.kurz} />
+            <CountryCard land={p.land} platz={p.platz} closed={p.closed} kurz={p.kurz} quellen={p.quellen} />
           </li>
         ))
       }
@@ -108,6 +124,18 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
 </Section>
 
 <style>
+  .globale-fakten {
+    max-width: 52rem;
+    margin: -1rem 0 2rem;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--color-ink);
+  }
+  .globale-fakten li {
+    line-height: 1.55;
+  }
+
   .map-wrap {
     display: flex;
     flex-direction: column;
@@ -264,6 +292,19 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
     line-height: 1.5;
     color: var(--color-ink);
   }
+  .ci-quellen {
+    margin: 0.5rem 0 0;
+    font-size: 0.78rem;
+    color: var(--color-subtext);
+  }
+  .ci-quellen :global(.ci-quelle-ref) {
+    color: var(--color-clay);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .ci-quellen :global(.ci-quelle-ref:hover) {
+    text-decoration: underline;
+  }
 
   /* ---------- Legende (Farbskala) ---------- */
   .legend {
@@ -352,6 +393,7 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
       prozent: card.querySelector<HTMLElement>('.ci-prozent')!,
       fill: card.querySelector<HTMLElement>('.ci-bar-fill')!,
       kurz: card.querySelector<HTMLElement>('.ci-kurz')!,
+      quellen: card.querySelector<HTMLElement>('.ci-quellen')!,
     };
     const closeBtn = card.querySelector<HTMLElement>('.ci-close');
     let active: HTMLElement | null = null;
@@ -387,6 +429,18 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
       el.fill.style.width = (closed * 100).toFixed(1) + '%';
       el.fill.style.background = gapColor(closed);
       el.kurz.textContent = d.kurz || '';
+
+      // Quelle(n) als Anker-Links auf die Quellen-Sektion (#quelle-n).
+      const ids = (d.quellen || '').split(',').map((s) => s.trim()).filter(Boolean);
+      el.quellen.textContent = ids.length ? 'Quelle: ' : '';
+      ids.forEach((id, i) => {
+        const a = document.createElement('a');
+        a.href = '#quelle-' + id;
+        a.className = 'ci-quelle-ref';
+        a.textContent = '[' + id + ']';
+        el.quellen.appendChild(a);
+        if (i < ids.length - 1) el.quellen.appendChild(document.createTextNode(' '));
+      });
 
       active?.setAttribute('aria-expanded', 'false');
       active = pin;

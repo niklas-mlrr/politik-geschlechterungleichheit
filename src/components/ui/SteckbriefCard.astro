@@ -1,13 +1,16 @@
 ---
 // SteckbriefCard – Personen-/Länder-Karte nach Sketch S.1:
 // Portrait-Platzhalter, Ort mit Pin, Name, Rolle und Stichpunkt-Zeilen.
+import SourceTooltip from './SourceTooltip.astro';
+
 interface Props {
   name: string;
   ort: string;
   rolle?: string;
   zeilen?: string[];
+  quellen?: number[];
 }
-const { name, ort, rolle, zeilen = [] } = Astro.props;
+const { name, ort, rolle, zeilen = [], quellen = [] } = Astro.props;
 ---
 
 <article class="steckbrief">
@@ -41,6 +44,15 @@ const { name, ort, rolle, zeilen = [] } = Astro.props;
           <li>{z}</li>
         ))}
       </ul>
+    )
+  }
+  {
+    quellen.length > 0 && (
+      <p class="sb-quellen">
+        {quellen.map((id) => (
+          <SourceTooltip id={id} />
+        ))}
+      </p>
     )
   }
   <slot />
@@ -98,5 +110,9 @@ const { name, ort, rolle, zeilen = [] } = Astro.props;
   }
   .sb-zeilen li {
     margin-top: 0.4rem;
+  }
+  .sb-quellen {
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
   }
 </style>

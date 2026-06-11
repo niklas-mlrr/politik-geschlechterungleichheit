@@ -3,7 +3,8 @@
 import Section from '../ui/Section.astro';
 import CountryCard from '../ui/CountryCard.astro';
 import MediaGrid from '../ui/MediaGrid.astro';
-import { schlusslichter } from '../../data/placeholder';
+import SourceTooltip from '../ui/SourceTooltip.astro';
+import { schlusslichter } from '../../data/content';
 ---
 
 <Section
@@ -15,4 +16,52 @@ import { schlusslichter } from '../../data/placeholder';
   <MediaGrid columns={2}>
     {schlusslichter.laender.map((l) => <CountryCard {...l} />)}
   </MediaGrid>
+
+  <div class="gemeinsam">
+    <p class="gemeinsam-lead">
+      {schlusslichter.bottom10.text}
+      {schlusslichter.bottom10.quellen.map((id) => <SourceTooltip id={id} />)}
+    </p>
+    <h3 class="gemeinsam-titel">Was sie verbindet</h3>
+    <ul class="gemeinsam-liste">
+      {
+        schlusslichter.gemeinsam.map((g) => (
+          <li>
+            {g.text}
+            {g.quellen.map((id) => (
+              <SourceTooltip id={id} />
+            ))}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </Section>
+
+<style>
+  .gemeinsam {
+    margin-top: 3rem;
+    max-width: 52rem;
+  }
+  .gemeinsam-lead {
+    margin: 0 0 1.5rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+  }
+  .gemeinsam-titel {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.9rem;
+  }
+  .gemeinsam-liste {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--color-subtext);
+  }
+  .gemeinsam-liste li {
+    line-height: 1.55;
+  }
+</style>
