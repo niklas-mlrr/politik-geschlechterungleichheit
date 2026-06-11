@@ -32,6 +32,13 @@ PIN_ISO = ["ISL", "FIN", "NOR", "GBR", "SWE", "NAM", "DEU",
            # Mittelfeld / geografische Streuung (Amerika, Asien, Ozeanien)
            "USA", "CAN", "BRA", "MNG", "JPN", "AUS"]
 
+# Manuelle Pin-Verschiebungen (viewBox-Einheiten) für Länder, deren Centroids
+# geografisch zu dicht beieinander liegen und sich visuell überlappen.
+PIN_NUDGE: dict[str, tuple[float, float]] = {
+    "NOR": (-8.0, -4.0),   # NOR und SWE liegen dicht beieinander -> NOR nach links/oben
+    "SWE": ( 6.0,  4.0),   # SWE nach rechts/unten
+}
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 SRC = os.path.join(ROOT, "data", "world.geo.json")
@@ -137,7 +144,8 @@ def main():
                 if a > best_area:
                     best_area, best = a, pts
             cx, cy = ring_centroid(best)
-            centroids[iso] = (round(cx, 1), round(cy, 1))
+            dx, dy = PIN_NUDGE.get(iso, (0.0, 0.0))
+            centroids[iso] = (round(cx + dx, 1), round(cy + dy, 1))
 
     missing = [i for i in PIN_ISO if i not in centroids]
     if missing:
