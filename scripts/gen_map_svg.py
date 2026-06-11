@@ -35,8 +35,8 @@ PIN_ISO = ["ISL", "FIN", "NOR", "GBR", "SWE", "NAM", "DEU",
 # Manuelle Pin-Verschiebungen (viewBox-Einheiten) für Länder, deren Centroids
 # geografisch zu dicht beieinander liegen und sich visuell überlappen.
 PIN_NUDGE: dict[str, tuple[float, float]] = {
-    "NOR": (-8.0, -4.0),   # NOR und SWE liegen dicht beieinander -> NOR nach links/oben
-    "SWE": ( 6.0,  4.0),   # SWE nach rechts/unten
+    "NOR": (-17.0,  7.0),  # -> ~8°E/62°N (Westnoregn, Bergen-Region); SW vom Centroid
+    "SWE": (  4.0, -1.0),  # -> ~18°E/63°N (Mittelschweden); etwas nördlicher
 }
 
 HERE = os.path.dirname(os.path.abspath(__file__))

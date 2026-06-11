@@ -23,9 +23,9 @@ export const landPath =
 export const coords: Record<string, { x: number; y: number }> = {
   ISL: { x: 418.5, y: 49.9 },
   FIN: { x: 543.8, y: 51.5 },
-  NOR: { x: 502.4, y: 47.4 },
+  NOR: { x: 493.4, y: 58.4 },
   GBR: { x: 463.3, y: 81.1 },
-  SWE: { x: 523.0, y: 60.2 },
+  SWE: { x: 521.0, y: 55.2 },
   NAM: { x: 518.5, y: 292.8 },
   DEU: { x: 499.4, y: 88.8 },
   IRN: { x: 622.0, y: 140.6 },
