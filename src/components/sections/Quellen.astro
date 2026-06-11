@@ -4,7 +4,7 @@
 // Quellenliste mit Ankern (#quelle-N), auf die SourceTooltip-Links verweisen.
 import Section from '../ui/Section.astro';
 import SourceTooltip from '../ui/SourceTooltip.astro';
-import { quellenMethodik } from '../../data/content';
+import { quellenMethodik, bildnachweise } from '../../data/content';
 import { sources } from '../../data/sources';
 ---
 
@@ -44,6 +44,31 @@ import { sources } from '../../data/sources';
       ))
     }
   </ol>
+
+  <h3 class="quellen-sub">Bildnachweise</h3>
+  <ul class="bild-liste">
+    {
+      bildnachweise.map((b) => (
+        <li class="bild-item">
+          <span class="bild-motiv">{b.motiv}</span>
+          <span class="bild-meta">
+            Foto: {b.autor},{' '}
+            {b.lizenzUrl ? (
+              <a class="q-link" href={b.lizenzUrl} target="_blank" rel="noopener noreferrer">
+                {b.lizenz}
+              </a>
+            ) : (
+              <span>{b.lizenz}</span>
+            )}
+            {' · '}
+            <a class="q-link" href={b.quelleUrl} target="_blank" rel="noopener noreferrer">
+              Wikimedia Commons
+            </a>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
 </Section>
 
 <style>
@@ -100,5 +125,30 @@ import { sources } from '../../data/sources';
   }
   .q-link:hover {
     color: var(--color-clay);
+  }
+
+  .bild-liste {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .bild-item {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.7rem 1rem;
+    background: var(--color-card);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-radius: 0.75rem;
+    line-height: 1.5;
+  }
+  .bild-motiv {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .bild-meta {
+    font-size: 0.85rem;
+    color: var(--color-subtext);
   }
 </style>

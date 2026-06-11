@@ -32,6 +32,8 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
             data-text={e.text}
             data-zitat={e.zitat ?? ''}
             data-bild={e.bild ?? ''}
+            data-bildalt={e.bildAlt ?? ''}
+            data-bildcredit={e.bildCredit ?? ''}
             data-quellen={e.quellen.join(',')}
           >
             <span class="tl-jahr">{e.jahr}</span>
@@ -87,6 +89,7 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
     <blockquote class="tl-detail-zitat" hidden></blockquote>
     <figure class="tl-detail-bild" hidden>
       <img alt="" />
+      <figcaption class="tl-detail-credit"></figcaption>
     </figure>
   </div>
 </Section>
@@ -312,6 +315,15 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
     border-radius: 0.7rem;
     border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
   }
+  .tl-detail-credit {
+    margin: 0.4rem 0 0;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--color-subtext);
+  }
+  .tl-detail-credit:empty {
+    display: none;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .tl-card {
@@ -387,6 +399,7 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
       zitat: detail.querySelector<HTMLElement>('.tl-detail-zitat')!,
       bildFig: detail.querySelector<HTMLElement>('.tl-detail-bild')!,
       bildImg: detail.querySelector<HTMLImageElement>('.tl-detail-bild img')!,
+      bildCredit: detail.querySelector<HTMLElement>('.tl-detail-credit')!,
     };
     const closeBtn = detail.querySelector<HTMLElement>('.tl-detail-close');
     const triggers = Array.from(list.querySelectorAll<HTMLElement>('.tl-trigger'));
@@ -426,7 +439,12 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
 
       const bild = (d.bild || '').trim();
       el.bildFig.hidden = bild === '';
-      if (bild) el.bildImg.src = bild;
+      if (bild) {
+        el.bildImg.src = bild;
+        el.bildImg.alt = d.bildalt || d.titel || '';
+        const credit = (d.bildcredit || '').trim();
+        el.bildCredit.textContent = credit ? 'Foto: ' + credit : '';
+      }
 
       active?.setAttribute('aria-expanded', 'false');
       active = trigger;

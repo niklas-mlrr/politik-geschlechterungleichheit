@@ -28,6 +28,11 @@ export interface Steckbrief {
   rolle: string;
   zeilen: string[]; // Stichpunkte / Kurzbiografie
   quellen: number[];
+  /** Optionales Porträt (public/…). */
+  bild?: string;
+  bildAlt?: string;
+  /** Kurz-Bildnachweis (Autor, Lizenz) – Pflicht, sobald bild gesetzt ist. */
+  bildCredit?: string;
 }
 
 export interface TimelineEvent {
@@ -39,6 +44,9 @@ export interface TimelineEvent {
   zitat?: string;
   /** Optionaler Bildpfad (public/…) für das Detail-Panel. */
   bild?: string;
+  bildAlt?: string;
+  /** Kurz-Bildnachweis (Autor, Lizenz) – Pflicht, sobald bild gesetzt ist. */
+  bildCredit?: string;
   quellen: number[];
 }
 
@@ -553,6 +561,9 @@ export const zeitstrahl = {
         'dass Frauen dieselben politischen und gesellschaftlichen Rechte erhalten wie Männer. ' +
         'Die dort verabschiedete Erklärung gilt als Geburtsstunde der organisierten ' +
         'Frauenbewegung und prägte deren Forderungen für Jahrzehnte.',
+      bild: '/images/menschen/stanton.jpg',
+      bildAlt: 'Elizabeth Cady Stanton, Mitorganisatorin der Seneca-Falls-Konvention',
+      bildCredit: 'unbekannt, gemeinfrei',
       quellen: [30],
     },
     {
@@ -562,6 +573,9 @@ export const zeitstrahl = {
         'Wahlen abstimmen durften – ein Meilenstein zuerst im pazifischen Raum, nicht in ' +
         'Europa. Er zeigte, dass politische Gleichberechtigung machbar ist, und wurde zum ' +
         'Vorbild für Bewegungen in anderen Ländern.',
+      bild: '/images/menschen/sheppard.jpg',
+      bildAlt: 'Kate Sheppard, Anführerin der neuseeländischen Frauenwahlrechtsbewegung',
+      bildCredit: 'H. H. Clifford, gemeinfrei',
       quellen: [31],
     },
     {
@@ -602,6 +616,9 @@ export const zeitstrahl = {
         'Der bereits 2006 von Tarana Burke geprägte Slogan „Me too“ verbreitete sich 2017 ' +
         'massiv und wurde zum Meilenstein für die Sichtbarkeit sexueller Gewalt und von ' +
         'Alltagssexismus – vor allem für Frauen, aber auch Männer ansprechend.',
+      bild: '/images/menschen/burke.jpg',
+      bildAlt: 'Tarana Burke, Begründerin der „Me too“-Bewegung',
+      bildCredit: 'B.Monét Fennell, CC BY-SA 3.0',
       quellen: [33],
     },
     {
@@ -611,6 +628,9 @@ export const zeitstrahl = {
         'Protestwelle gegen Zwangsverschleierung und Diskriminierung. Das Regime reagierte ' +
         'mit massiver Gewalt – doch die Bewegung schuf weltweit Aufmerksamkeit.',
       zitat: 'Frau, Leben, Freiheit',
+      bild: '/images/menschen/iran-2022.jpg',
+      bildAlt: 'Solidaritätsprotest „Frau, Leben, Freiheit“ nach dem Tod von Jina Mahsa Amini',
+      bildCredit: 'Matt Hrkac, CC BY 2.0',
       quellen: [34],
     },
     {
@@ -650,6 +670,9 @@ export const stimmen = {
         'Ihr Essay „We Should All Be Feminists“ prägte die Debatte weltweit.',
         '„Kultur macht keine Menschen. Menschen machen Kultur.“',
       ],
+      bild: '/images/menschen/adichie.jpg',
+      bildAlt: 'Porträt von Chimamanda Ngozi Adichie',
+      bildCredit: 'Wikimedia Foundation, CC0',
       quellen: [21, 22],
     },
     {
@@ -694,3 +717,54 @@ export const quellenMethodik = {
     'Aussagen weitere, jeweils am Verweis genannte Quellen herangezogen.',
   quellen: [2] as number[],
 };
+
+// ---------- Bildnachweise ----------
+// Vollständige Lizenz-/Urheberangaben zu den auf der Seite verwendeten Fotos.
+// Alle Bilder von Wikimedia Commons, frei lizenziert (CC bzw. gemeinfrei). Für die
+// CC-BY/BY-SA-Bilder werden Urheber + Lizenz inline (figcaption) und hier mit Link genannt;
+// die Auflösung wurde verändert (skaliert/zugeschnitten).
+export interface Bildnachweis {
+  motiv: string;
+  autor: string;
+  lizenz: string;
+  lizenzUrl?: string;
+  quelleUrl: string; // Commons-Dateiseite
+}
+
+export const bildnachweise: Bildnachweis[] = [
+  {
+    motiv: 'Chimamanda Ngozi Adichie (Stimmen)',
+    autor: 'Wikimedia Foundation',
+    lizenz: 'CC0 (gemeinfrei)',
+    lizenzUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    quelleUrl:
+      "https://commons.wikimedia.org/wiki/File:Chimamanda_Ngozi_Adichie_for_Women's_History_Month.jpg",
+  },
+  {
+    motiv: 'Elizabeth Cady Stanton (Zeitstrahl 1848)',
+    autor: 'unbekannt',
+    lizenz: 'gemeinfrei',
+    quelleUrl: 'https://commons.wikimedia.org/wiki/File:Elizabeth_Stanton.jpg',
+  },
+  {
+    motiv: 'Kate Sheppard (Zeitstrahl 1893)',
+    autor: 'H. H. Clifford',
+    lizenz: 'gemeinfrei',
+    quelleUrl: 'https://commons.wikimedia.org/wiki/File:Mrs._K._W._Sheppard_(cropped).jpg',
+  },
+  {
+    motiv: 'Tarana Burke (Zeitstrahl 2017, #MeToo)',
+    autor: 'Brittany „B.Monét“ Fennell',
+    lizenz: 'CC BY-SA 3.0',
+    lizenzUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    quelleUrl: "https://commons.wikimedia.org/wiki/File:Tarana_Burke_from_She's_Revolutionary.jpg",
+  },
+  {
+    motiv: 'Solidaritätsprotest „Frau, Leben, Freiheit“ (Zeitstrahl 2022)',
+    autor: 'Matt Hrkac',
+    lizenz: 'CC BY 2.0',
+    lizenzUrl: 'https://creativecommons.org/licenses/by/2.0/',
+    quelleUrl:
+      'https://commons.wikimedia.org/wiki/File:Solidarity_with_the_people_of_Iran_(52394248943).jpg',
+  },
+];

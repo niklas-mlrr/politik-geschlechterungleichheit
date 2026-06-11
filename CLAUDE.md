@@ -145,9 +145,22 @@ Wenn die Craft-Seite „Inhalte“ (`EDF2F61A-1BCB-4201-996A-430495FAD68F`) wäc
 Platzhalter-Mechanik: Items für noch leere Craft-Bereiche bekommen `quellen: []` + den
 `PLATZHALTER_MARKER` im Text -> `check:sources` meldet sie als „wartet auf Craft“ statt als Fehler.
 
-## Nächste Schritte (offen)
+## Datenfluss (wichtig)
 
-- Leere Craft-Bereiche füllen und nachziehen: „Konkrete pos./neg. Entwicklungen“ und
-  „Konkrete Geschichten von Personen“ (siehe `OFFENE_BELEGE.md`, Abschnitt 5).
-- Datenkonflikte aus `OFFENE_BELEGE.md` (Sudan/Tschad, Schweden/NZ, Moldau) in Craft nachtragen.
+Craft ist **reine Eingabequelle** (Craft → Repo). **Nichts wird zurück nach Craft geschrieben.**
+Datenkonflikte werden nur im Repo gegen WEF GGGR 2025 korrigiert; `OFFENE_BELEGE.md` ist
+Audit-Trail, keine Craft-Aufgabenliste.
+
+## Bilder/Fotos
+
+Echte Fotos liegen unter `public/images/menschen/` (frei lizenziert, Wikimedia Commons). Modell:
+Felder `bild/bildAlt/bildCredit` auf `Steckbrief`+`TimelineEvent`; Inline-figcaption-Nachweis +
+zentrale Liste `bildnachweise` (content.ts) → „Bildnachweise“-Block in `Quellen.astro` (CC-Pflicht).
+Neue Bilder nur mit klarer Lizenz + Urheber einpflegen und in `bildnachweise` eintragen.
+
+## Nächste Schritte (offen, optional)
+
+- Leere Craft-Bereiche füllen und nachziehen (einseitig Craft → Repo): „Konkrete pos./neg.
+  Entwicklungen“ und „Konkrete Geschichten von Personen“ (siehe `OFFENE_BELEGE.md`, Abschnitt 5).
+- Ursachen-Sektion nutzt weiter `PlaceholderFigure` (abstrakte Konzepte, bewusst kein Stock-Filler).
 - Echte Web-Fonts sind gesetzt (Playfair Display + Source Sans 3) – ggf. Feinschliff.

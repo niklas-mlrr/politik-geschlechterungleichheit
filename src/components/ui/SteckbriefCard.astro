@@ -9,18 +9,27 @@ interface Props {
   rolle?: string;
   zeilen?: string[];
   quellen?: number[];
+  bild?: string;
+  bildAlt?: string;
+  bildCredit?: string;
 }
-const { name, ort, rolle, zeilen = [], quellen = [] } = Astro.props;
+const { name, ort, rolle, zeilen = [], quellen = [], bild, bildAlt, bildCredit } = Astro.props;
 ---
 
 <article class="steckbrief">
   <div class="sb-head">
-    <span class="sb-portrait" aria-hidden="true">
-      <svg viewBox="0 0 48 48" width="34" height="34" fill="none">
-        <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="2.2" />
-        <path d="M10 40c2-8 8-12 14-12s12 4 14 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
-      </svg>
-    </span>
+    {
+      bild ? (
+        <img class="sb-portrait sb-photo" src={bild} alt={bildAlt ?? name} loading="lazy" width="52" height="52" />
+      ) : (
+        <span class="sb-portrait" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="34" height="34" fill="none">
+            <circle cx="24" cy="18" r="8" stroke="currentColor" stroke-width="2.2" />
+            <path d="M10 40c2-8 8-12 14-12s12 4 14 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+        </span>
+      )
+    }
     <div class="sb-meta">
       <h3 class="sb-name">{name}</h3>
       {rolle && <p class="sb-rolle">{rolle}</p>}
@@ -55,6 +64,7 @@ const { name, ort, rolle, zeilen = [], quellen = [] } = Astro.props;
       </p>
     )
   }
+  {bild && bildCredit && <p class="sb-credit">Foto: {bildCredit}</p>}
   <slot />
 </article>
 
@@ -80,6 +90,18 @@ const { name, ort, rolle, zeilen = [], quellen = [] } = Astro.props;
     border-radius: 50%;
     background: color-mix(in srgb, var(--color-ocker) 30%, var(--color-sand));
     color: var(--color-clay);
+  }
+  /* Echtes Porträt: gleicher Kreis, Foto formatfüllend. */
+  .sb-photo {
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid color-mix(in srgb, var(--color-ocker) 45%, var(--color-sand));
+  }
+  .sb-credit {
+    margin: 0.75rem 0 0;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--color-subtext);
   }
   .sb-name {
     font-size: 1.25rem;

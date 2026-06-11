@@ -47,7 +47,8 @@ mit Quelle versehen:
 ## 3. Datenkonflikte + Auflösung
 
 Maßgeblich ist der WEF Global Gender Gap Report 2025 [1][2]; Korrekturen wurden **nur im Repo**
-vorgenommen, die Craft-Seite blieb unverändert (bitte dort nachziehen):
+vorgenommen. Craft ist reine Eingabequelle (kein Rück-Sync), die Craft-Seite bleibt bewusst
+unverändert – dieser Abschnitt ist nur Audit-Trail:
 
 - **Sudan vs. Tschad (Rang):** Craft schreibt „Sudan Platz 146 / Tschad Platz 147“, was den
   eigenen Werten widerspricht (Sudan 57,0 % < Tschad 57,1 % => Sudan ist schlechter platziert).
