@@ -122,7 +122,7 @@ export const karte = {
         'in Politik und Wirtschaft.',
     },
     {
-      iso3: 'SWE', land: 'Schweden', platz: 6, closed: 0.817, kategorie: 'vorbild',
+      iso3: 'SWE', land: 'Schweden', platz: 5, closed: 0.817, kategorie: 'vorbild',
       kurz: 'Offiziell feministische Regierungspolitik und geschlechtsneutrale ' +
         'Erziehung in Kitas.',
     },
@@ -173,12 +173,12 @@ export const karte = {
         'Bewegungsfreiheit, Berufswahl und Bildung sind stark begrenzt.',
     },
     {
-      iso3: 'SDN', land: 'Sudan', platz: 146, closed: 0.570, kategorie: 'schlusslicht',
+      iso3: 'SDN', land: 'Sudan', platz: 147, closed: 0.570, kategorie: 'schlusslicht',
       kurz: 'Bürgerkrieg seit 2023 verschärft die Lage massiv; Frauen sind besonders ' +
         'von sexueller Gewalt und Hunger betroffen.',
     },
     {
-      iso3: 'TCD', land: 'Tschad', platz: 147, closed: 0.571, kategorie: 'schlusslicht',
+      iso3: 'TCD', land: 'Tschad', platz: 146, closed: 0.571, kategorie: 'schlusslicht',
       kurz: 'Armut, Konflikte und Krisen in der Sahelzone; sehr geringe Bildungs- und ' +
         'Teilhabechancen für Mädchen und Frauen.',
     },
