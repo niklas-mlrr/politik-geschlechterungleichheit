@@ -168,6 +168,9 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
     font-size: 1.05rem;
     font-weight: 700;
     margin-top: 0.2rem;
+    /* Schmale, überlappende Karten -> lange Wörter umbrechen, nicht überlaufen. */
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   .tl-ort {
     display: inline-flex;
@@ -335,16 +338,30 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
     }
   }
 
-  /* Ab Tablet: horizontaler Strahl mit abwechselnd oben/unten platzierten Karten. */
+  /* Ab Tablet: horizontaler Strahl mit abwechselnd oben/unten platzierten Karten.
+     Die Karten docken nah an der Mittellinie an und überlappen sie leicht (statt
+     ganz nach oben/unten gedrückt zu werden) -> deutlich kompakteres vertikales
+     Spacing. Sie sind breiter als ihre Spalte und ragen in die Nachbarspalten;
+     da benachbarte Karten auf der jeweils anderen Seite liegen, kollidieren sie
+     nicht. `minmax(0,1fr)` + `min-width:0` verhindern, dass lange Wörter die
+     Spalten (und damit die Seite) horizontal überlaufen lassen. */
   @media (min-width: 48rem) {
-    .timeline {
+    /* Nur im JS-Modus horizontal: Die kompakten Karten (Jahr + Titel) werden
+       absolut zur Mittellinie positioniert. Ohne JS bleibt die vertikale
+       Variante von oben aktiv (Volltext-Karten, kein Overflow, voll lesbar). */
+    .timeline[data-ready] {
       grid-auto-flow: column;
-      grid-auto-columns: 1fr;
+      grid-auto-columns: minmax(0, 1fr);
       gap: 0;
+      /* Innenabstand, damit die Rand-Karten Platz haben, ohne die Seite zu
+         verbreitern. */
+      padding-inline: 1.5rem;
       padding-block: 1rem;
       align-items: center;
+      /* Reserviert vertikalen Platz für die out-of-flow Karten (oben + unten). */
+      min-height: 22rem;
     }
-    .timeline::before {
+    .timeline[data-ready]::before {
       left: 0;
       right: 0;
       top: 50%;
@@ -352,33 +369,49 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
       width: auto;
       height: 2px;
     }
-    .tl-item {
+    .timeline[data-ready] .tl-item {
+      position: relative;
       padding-left: 0;
-      min-height: 16rem;
-      display: grid;
-      grid-template-rows: 1fr auto 1fr;
-      justify-items: center;
-      padding-inline: 0.6rem;
+      padding-inline: 0;
+      min-width: 0;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .tl-node {
+    .timeline[data-ready] .tl-node {
       position: static;
-      grid-row: 2;
       left: auto;
       top: auto;
     }
-    .tl-card {
-      width: 100%;
-      max-width: 15rem;
+    /* Karte absolut zur Mittellinie positioniert, an der Linie angedockt. */
+    .timeline[data-ready] .tl-card {
+      position: absolute;
+      /* Zentrierung über margin (nicht transform) -> transform bleibt frei für
+         den Hover-Lift; -75% = halbe Kartenbreite (50% von 150%). */
+      left: 50%;
+      margin-left: -75%;
+      /* Breiter als die Spalte -> ragt in beide Nachbarn (Gegenseite, kein
+         Konflikt); schmaler als zuvor -> mehr Luft zwischen den Karten. */
+      width: 150%;
+      max-width: 12rem;
     }
-    .is-above .tl-card {
-      grid-row: 1;
-      align-self: end;
-      margin-bottom: 0.9rem;
+    .timeline[data-ready] .is-above .tl-card {
+      bottom: calc(50% + 0.85rem);
     }
-    .is-below .tl-card {
-      grid-row: 3;
-      align-self: start;
-      margin-top: 0.9rem;
+    .timeline[data-ready] .is-below .tl-card {
+      top: calc(50% + 0.85rem);
+    }
+    /* Rand-Karten nach innen ausrichten, damit sie nicht über den Strahl
+       hinausragen und erneut horizontalen Scroll auslösen. */
+    .timeline[data-ready] .tl-item:first-child .tl-card {
+      left: 0;
+      margin-left: 0;
+    }
+    .timeline[data-ready] .tl-item:last-child .tl-card {
+      left: auto;
+      right: 0;
+      margin-left: 0;
     }
   }
 </style>

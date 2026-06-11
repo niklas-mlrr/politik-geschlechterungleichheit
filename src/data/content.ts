@@ -602,13 +602,6 @@ export const zeitstrahl = {
       quellen: [31],
     },
     {
-      jahr: '1906', ort: 'Finnland', titel: 'Volles Frauenwahlrecht in Europa',
-      text:
-        'Finnland war das erste Land Europas mit aktivem und passivem Frauenwahlrecht: ' +
-        'Frauen durften nun nicht nur wählen, sondern auch selbst gewählt werden.',
-      quellen: [12, 31],
-    },
-    {
       jahr: '1945', ort: 'weltweit', titel: 'UN-Charta: Gleichheit der Geschlechter',
       text:
         'Mit der UN-Charta wurde die Gleichberechtigung von Frauen und Männern als ' +
