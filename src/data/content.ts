@@ -76,6 +76,15 @@ export interface Aussage {
   quellen: number[];
 }
 
+// Ursachenmuster mit optionalem Foto (Zickzack-Raster der Spitzenländer).
+export interface MusterPunkt extends Aussage {
+  /** Optionales Foto (public/…); ohne Bild greift der PlaceholderFigure-Fallback. */
+  bild?: string;
+  bildAlt?: string;
+  /** Kurz-Bildnachweis (Autor, Lizenz) – Pflicht, sobald bild gesetzt ist. */
+  bildCredit?: string;
+}
+
 // Belegte Einzelaussage ohne Titel (Faktenlisten).
 export interface Faktum {
   text: string;
@@ -513,6 +522,9 @@ export const ursachen = {
         'Sozialstaaten, die für Forderungen aus der Zivilgesellschaft – etwa Arbeiter-, ' +
         'Bäuerinnen- und Frauenbewegungen – empfänglich waren. So wurde Gleichstellung nicht ' +
         'als kurzlebiges Einzelthema, sondern als dauerhafte Aufgabe der Politik verankert.',
+      bild: '/images/muster/gleichstellungspolitik.jpg',
+      bildAlt: 'Frauen demonstrieren beim Frauenstreik im Zentrum von Reykjavík',
+      bildCredit: 'Magnus Fröderberg/norden.org, CC BY 2.5 dk',
       quellen: [9, 10],
     },
     {
@@ -523,6 +535,9 @@ export const ursachen = {
         'selbstverständlich ist, müssen sich vor allem Mütter seltener zwischen Kind und ' +
         'Karriere entscheiden. Großzügige Elternzeit, die auch Väter nutzen, verteilt die ' +
         'Sorgearbeit zusätzlich gleichmäßiger.',
+      bild: '/images/muster/kitaplaetze.jpg',
+      bildAlt: 'Kindergartenkinder in Norwegen am Nationalfeiertag',
+      bildCredit: 'Ingvar Kjøllesdal, CC BY 2.0',
       quellen: [9, 10],
     },
     {
@@ -532,6 +547,9 @@ export const ursachen = {
         'öffnen Mädchen wie Jungen den Zugang zu Bildung. Gute Bildung ist die Grundlage für ' +
         'eigenes Einkommen, wirtschaftliche Unabhängigkeit und politische Teilhabe. In den ' +
         'Spitzenländern erreichen Frauen deshalb häufig sehr hohe Bildungsabschlüsse.',
+      bild: '/images/muster/bildung.jpg',
+      bildAlt: 'Mathematik-Vorlesung an einer finnischen Universität in Espoo',
+      bildCredit: 'Tungsten, gemeinfrei',
       quellen: [9, 10],
     },
     {
@@ -541,9 +559,14 @@ export const ursachen = {
         'Frauen mitentscheiden, finden Themen wie Vereinbarkeit, Gewaltschutz und gleiche ' +
         'Bezahlung leichter den Weg in die Gesetzgebung. Entscheidend ist dabei systematische ' +
         'Politik über Jahrzehnte statt einzelner Leuchtturm-Maßnahmen.',
+      bild: '/images/muster/frauen-politik.jpg',
+      bildAlt:
+        'Vigdís Finnbogadóttir, Islands Präsidentin und erste demokratisch gewählte ' +
+        'Staatspräsidentin der Welt',
+      bildCredit: 'Rob Croes / Anefo, CC BY-SA 3.0 nl',
       quellen: [6, 10],
     },
-  ] satisfies Aussage[],
+  ] satisfies MusterPunkt[],
 };
 
 // ---------- Zeitstrahl ----------
@@ -685,6 +708,9 @@ export const stimmen = {
         '„Die Hot Dogs waren ausverkauft, weil die Männer nicht wussten, was sie den ' +
           'Kindern sonst servieren sollten.“',
       ],
+      bild: '/images/menschen/lilja.jpg',
+      bildAlt: 'Porträt von Lilja Ólafsdóttir, Mitorganisatorin des isländischen Frauenstreiks 1975',
+      bildCredit: 'Art Bicnick / Reykjavík Grapevine',
       quellen: [23],
     },
   ] satisfies Steckbrief[],
@@ -766,5 +792,40 @@ export const bildnachweise: Bildnachweis[] = [
     lizenzUrl: 'https://creativecommons.org/licenses/by/2.0/',
     quelleUrl:
       'https://commons.wikimedia.org/wiki/File:Solidarity_with_the_people_of_Iran_(52394248943).jpg',
+  },
+  {
+    motiv: 'Lilja Ólafsdóttir (Stimmen)',
+    autor: 'Art Bicnick / Reykjavík Grapevine',
+    lizenz: 'urheberrechtlich geschützt – Nutzung nur für dieses Schulprojekt',
+    quelleUrl:
+      'https://grapevine.is/mag/feature/2025/10/10/fifty-years-later-push-for-equality-continues-remembering-the-strike-that-stopped-the-nation/',
+  },
+  {
+    motiv: 'Frauenstreik in Reykjavík (Muster: Gleichstellungspolitik)',
+    autor: 'Magnus Fröderberg/norden.org',
+    lizenz: 'CC BY 2.5 dk',
+    lizenzUrl: 'https://creativecommons.org/licenses/by/2.5/dk/',
+    quelleUrl: 'https://commons.wikimedia.org/wiki/File:Kvinnostrejk_i_Reykjavik_(2).jpg',
+  },
+  {
+    motiv: 'Kindergartenkinder in Norwegen (Muster: Kitaplätze und Vereinbarkeit)',
+    autor: 'Ingvar Kjøllesdal',
+    lizenz: 'CC BY 2.0',
+    lizenzUrl: 'https://creativecommons.org/licenses/by/2.0/',
+    quelleUrl: 'https://commons.wikimedia.org/wiki/File:Barnehage_p%C3%A5_lasteplanet.jpg',
+  },
+  {
+    motiv: 'Vorlesung an einer finnischen Universität (Muster: Bildung)',
+    autor: 'Tungsten',
+    lizenz: 'gemeinfrei',
+    quelleUrl:
+      'https://commons.wikimedia.org/wiki/File:Mathematics_lecture_at_the_Helsinki_University_of_Technology.jpg',
+  },
+  {
+    motiv: 'Vigdís Finnbogadóttir (Muster: Frauen in Politik und Führung)',
+    autor: 'Rob Croes / Anefo',
+    lizenz: 'CC BY-SA 3.0 nl',
+    lizenzUrl: 'https://creativecommons.org/licenses/by-sa/3.0/nl/',
+    quelleUrl: 'https://commons.wikimedia.org/wiki/File:Vigdis_Finnbogadottir_(1985).jpg',
   },
 ];

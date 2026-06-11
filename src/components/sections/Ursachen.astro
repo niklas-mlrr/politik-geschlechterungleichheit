@@ -28,7 +28,14 @@ import { ursachen } from '../../data/content';
             </p>
           </div>
         );
-        const bild = <PlaceholderFigure ratio="4/3" label={m.titel} />;
+        const bild = m.bild ? (
+          <figure class="ursachen-figure">
+            <img src={m.bild} alt={m.bildAlt ?? m.titel} loading="lazy" />
+            {m.bildCredit && <figcaption class="ursachen-credit">Foto: {m.bildCredit}</figcaption>}
+          </figure>
+        ) : (
+          <PlaceholderFigure ratio="4/3" label={m.titel} />
+        );
         // Abwechselnd Info/Bild bzw. Bild/Info -> ruhiger Zickzack-Rhythmus.
         return i % 2 === 0 ? (
           <>
@@ -66,5 +73,30 @@ import { ursachen } from '../../data/content';
     margin: 0;
     line-height: 1.65;
     color: var(--color-subtext);
+  }
+  .ursachen-figure {
+    margin: 0;
+    position: relative;
+  }
+  .ursachen-figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+  .ursachen-credit {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    margin: 0;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: var(--color-sand);
+    background: color-mix(in srgb, var(--color-ink) 62%, transparent);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(2px);
   }
 </style>
