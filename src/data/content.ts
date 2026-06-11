@@ -93,9 +93,9 @@ export interface Faktum {
 
 // ---------- Kernzahlen (strukturfest, CLAUDE.md) ----------
 export const kernzahlen = {
-  jahreBisGleichstellung: 132,
-  weltdurchschnittClosed: 0.685, // 68,5 %
-  offenAnteil: 0.315, // 31,5 %
+  jahreBisGleichstellung: 123,
+  weltdurchschnittClosed: 0.688, // 68,8 %
+  offenAnteil: 0.312, // 31,2 %
   deutschlandPlatz: 9,
   deutschlandClosed: 0.803,
   quellen: [1] as number[], // WEF GGGR 2025
@@ -109,7 +109,7 @@ export const hero = {
   kernzahlEinheit: 'Jahre',
   kernzahlUnterzeile: 'So lange dauert es im aktuellen Tempo noch bis zur globalen Gleichstellung.',
   einstieg:
-    'Noch 31,5 % des weltweiten Gender Gap sind offen. Kein einziges Land hat ihn ' +
+    'Noch 31,2 % des weltweiten Gender Gap sind offen. Kein einziges Land hat ihn ' +
     'vollständig geschlossen. Diese Seite zeigt, wo die Welt steht und warum.',
   scrollHinweis: 'Weiter scrollen',
 };
@@ -124,18 +124,18 @@ export const definition = {
     'und politischer Repräsentation. Gleichstellung heißt deshalb nicht nur „gleiche Regeln ' +
     'auf dem Papier“, sondern gleiche Chancen im echten Leben. Die folgenden Bereiche zeigen, ' +
     'wo Ungleichheit besonders sichtbar wird.',
-  introQuelle: 19, // bpb: Ungleichheiten zwischen Frauen und Männern
+  introQuelle: 14, // bpb: Ungleichheiten zwischen Frauen und Männern
   bereiche: [
     {
       titel: 'Lohnunterschiede',
       text:
         'Frauen verdienen im Schnitt oft weniger als Männer, auch bei vergleichbarer ' +
         'Arbeit oder ähnlicher Qualifikation. In Deutschland liegt der unbereinigte Gender ' +
-        'Pay Gap seit Jahren bei rund 18 Prozent. Ein Teil davon erklärt sich durch Branche, ' +
-        'Teilzeit und seltenere Führungspositionen; doch selbst bei gleicher Tätigkeit bleibt ' +
-        'eine Lücke. Über ein ganzes Erwerbsleben summiert sie sich zu deutlich geringeren ' +
-        'Einkommen und später zu niedrigeren Renten.',
-      quellen: [15],
+        'Pay Gap aktuell bei rund 18 Prozent. Ein Teil davon erklärt sich durch Branche, ' +
+        'Teilzeit und seltenere Führungspositionen; doch selbst bereinigt bleibt eine Lücke. ' +
+        'Mit dem Alter und nach Erwerbsunterbrechungen wächst der Abstand weiter, sodass ' +
+        'sich über ein Erwerbsleben deutlich geringere Einkommen summieren.',
+      quellen: [12, 13],
     },
     {
       titel: 'Care-Arbeit',
@@ -145,7 +145,7 @@ export const definition = {
         'es einen eigenen Begriff: den Gender Care Gap. Wer viel unbezahlte Sorgearbeit ' +
         'leistet, hat weniger Zeit für bezahlte Arbeit, Weiterbildung oder politisches ' +
         'Engagement. So verstärkt die Care-Lücke die Lohn- und Aufstiegslücke zusätzlich.',
-      quellen: [16],
+      quellen: [14, 15],
     },
     {
       titel: 'Karrierechancen',
@@ -156,7 +156,7 @@ export const definition = {
         'weibliche“ Tätigkeiten häufig schlechter bezahlt sind. Diese Aufteilung, horizontal ' +
         'zwischen den Berufen, vertikal entlang der Hierarchie, hält Unterschiede bei ' +
         'Einkommen und Einfluss dauerhaft aufrecht.',
-      quellen: [17],
+      quellen: [13],
     },
     {
       titel: 'Gewalt und Sicherheit',
@@ -167,7 +167,7 @@ export const definition = {
         'Angst davor verändert das Verhalten Betroffener, welche Wege sie meiden oder welche ' +
         'Chancen sie nicht wahrnehmen. Damit ist Gewalt nicht nur ein individuelles, sondern ' +
         'ein gesellschaftliches Gleichstellungsproblem.',
-      quellen: [19],
+      quellen: [15, 3],
     },
     {
       titel: 'Rollenbilder',
@@ -177,7 +177,7 @@ export const definition = {
         'Schulfächer und Berufe als passend gelten. Im Erwachsenenleben beeinflussen sie, wer ' +
         'Sorgearbeit übernimmt und wer Karriere macht. Weil solche Bilder als „normal“ ' +
         'erscheinen, wirken sie besonders hartnäckig und werden unbewusst weitergegeben.',
-      quellen: [18],
+      quellen: [14, 15],
     },
     {
       titel: 'Ursachen und Folgen',
@@ -189,20 +189,20 @@ export const definition = {
         'über schlechtere Gesundheit bis zu weniger politischer Teilhabe. Das schwächt nicht ' +
         'nur einzelne Menschen, sondern Gesellschaft und Wirtschaft insgesamt, weil Talente ' +
         'ungleich genutzt werden.',
-      quellen: [20, 19],
+      quellen: [15, 14],
     },
     {
       titel: 'Ungleichheit trifft auch Männer',
       text:
         'Ungleichheit betrifft nicht nur Frauen. Männer leben im Schnitt rund fünf Jahre ' +
-        'kürzer, nehmen seltener Gesundheitsangebote wahr und haben eine deutlich höhere ' +
-        'Suizidrate. Jungen schneiden in der Schule im Mittel schlechter ab, und bei ' +
-        'Sorgerechtsfragen werden Väter seltener als Hauptbezugsperson anerkannt. Hinzu ' +
-        'kommen die vielerorts einseitige Wehrpflicht, gefährlichere Berufe und, gerade in ' +
-        'gleichberechtigteren Ländern, ein hoher Leistungsdruck. Gleichstellung bedeutet ' +
+        'kürzer, nehmen seltener Früherkennungs- und Vorsorgeangebote wahr und sterben in ' +
+        'allen Altersgruppen deutlich häufiger durch Suizid. Jungen schneiden in der Schule ' +
+        'im Mittel schlechter ab, und viele Väter fühlen sich bei Sorgerechtsfragen ' +
+        'benachteiligt. Hinzu kommen riskantere Berufe mit mehr Arbeitsunfällen und, gerade ' +
+        'in gleichberechtigteren Ländern, ein hoher Leistungsdruck. Gleichstellung bedeutet ' +
         'daher nicht, Nachteile bloß umzuverteilen, sondern starre Rollenerwartungen für alle ' +
         'Geschlechter zu lockern.',
-      quellen: [27, 28, 29],
+      quellen: [18, 16, 17, 14],
     },
   ] satisfies Aussage[],
 };
@@ -219,11 +219,11 @@ export const karte = {
   fakten: [
     { text: 'Kein Land hat bisher vollständige Gleichstellung erreicht.', quellen: [1] },
     {
-      text: 'Weltweit sind im Schnitt erst 68,5 % des Gender Gap geschlossen, ein Drittel bleibt offen.',
+      text: 'Weltweit sind im Schnitt erst 68,8 % des Gender Gap geschlossen, fast ein Drittel bleibt offen.',
       quellen: [1],
     },
     {
-      text: 'Im aktuellen Tempo dauert es noch rund 132 Jahre, bis die globale Geschlechterkluft geschlossen ist.',
+      text: 'Im aktuellen Tempo dauert es noch rund 123 Jahre, bis die globale Geschlechterkluft geschlossen ist.',
       quellen: [1],
     },
     {
@@ -242,37 +242,37 @@ export const karte = {
       iso3: 'ISL', land: 'Island', platz: 1, closed: 0.926, kategorie: 'vorbild',
       kurz: 'Seit 16 Jahren Platz 1. Gesetzliche Frauenquoten, Gleichstellung ab dem ' +
         'Kindergarten im Lehrplan, sehr hohe politische Teilhabe.',
-      quellen: [1, 6, 7],
+      quellen: [1, 5, 6],
     },
     {
       iso3: 'FIN', land: 'Finnland', platz: 2, closed: 0.879, kategorie: 'vorbild',
       kurz: 'Starke soziale Sicherung und sehr gute Kinderbetreuung ermöglichen eine ' +
         'hohe Frauenerwerbstätigkeit und politische Teilhabe.',
-      quellen: [1, 9],
+      quellen: [1, 7],
     },
     {
       iso3: 'NOR', land: 'Norwegen', platz: 3, closed: 0.863, kategorie: 'vorbild',
       kurz: '40-%-Frauenquote in Aufsichtsräten sowie großzügige Elternzeit- und ' +
         'Kitasysteme verbinden Beruf und Familie.',
-      quellen: [1, 13],
+      quellen: [1, 11, 7],
     },
     {
       iso3: 'GBR', land: 'Großbritannien', platz: 4, closed: 0.838, kategorie: 'vorbild',
       kurz: 'Im Ranking gegenüber dem Vorjahr gestiegen; starke Vertretung von Frauen ' +
         'in Politik und Wirtschaft.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
     {
       iso3: 'SWE', land: 'Schweden', platz: 6, closed: 0.817, kategorie: 'vorbild',
       kurz: 'Offiziell feministische Regierungspolitik und geschlechtsneutrale ' +
         'Erziehung in Kitas.',
-      quellen: [1, 11],
+      quellen: [1, 9],
     },
     {
       iso3: 'NAM', land: 'Namibia', platz: 8, closed: 0.811, kategorie: 'vorbild',
       kurz: 'Einziges Land außerhalb Europas unter den Top 10, mit hoher politischer ' +
         'Teilhabe von Frauen.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
     {
       iso3: 'DEU', land: 'Deutschland', platz: 9, closed: 0.803, kategorie: 'vorbild',
@@ -294,8 +294,8 @@ export const karte = {
     },
     {
       iso3: 'BRA', land: 'Brasilien', platz: 72, closed: 0.720, kategorie: 'mittel',
-      kurz: 'Mittelfeld Südamerikas: Fortschritte bei der politischen Teilhabe, ' +
-        'aber große wirtschaftliche und regionale Unterschiede.',
+      kurz: 'Mittelfeld Südamerikas: nahezu geschlossene Bildungs- und Gesundheitslücken, ' +
+        'aber deutliche Rückstände bei Einkommen und politischer Teilhabe.',
       quellen: [1],
     },
     {
@@ -318,27 +318,27 @@ export const karte = {
     },
     {
       iso3: 'IRN', land: 'Iran', platz: 145, closed: 0.583, kategorie: 'schlusslicht',
-      kurz: 'Gesetzliche und gesellschaftliche Einschränkungen von Frauenrechten: ' +
-        'Bewegungsfreiheit, Berufswahl und Bildung sind stark begrenzt.',
-      quellen: [1],
+      kurz: 'Strenge gesetzliche Vorgaben wie die Verschleierungspflicht schränken ' +
+        'Frauen massiv ein; Proteste werden mit harter Repression beantwortet.',
+      quellen: [1, 26],
     },
     {
       iso3: 'SDN', land: 'Sudan', platz: 147, closed: 0.570, kategorie: 'schlusslicht',
-      kurz: 'Bürgerkrieg seit 2023 verschärft die Lage massiv; Frauen sind besonders ' +
-        'von sexueller Gewalt und Hunger betroffen.',
-      quellen: [1, 4],
+      kurz: 'Krieg und humanitäre Notlage verschärfen die Lage massiv; sexualisierte ' +
+        'Gewalt gegen Frauen und Mädchen hat laut UN drastisch zugenommen.',
+      quellen: [1, 3],
     },
     {
       iso3: 'TCD', land: 'Tschad', platz: 146, closed: 0.571, kategorie: 'schlusslicht',
       kurz: 'Armut, Konflikte und Krisen in der Sahelzone; sehr geringe Bildungs- und ' +
         'Teilhabechancen für Mädchen und Frauen.',
-      quellen: [1, 5],
+      quellen: [1, 4],
     },
     {
       iso3: 'PAK', land: 'Pakistan', platz: 148, closed: 0.567, kategorie: 'schlusslicht',
       kurz: 'Niedrigster Wert weltweit: sehr geringe Frauenerwerbstätigkeit, ' +
         'traditionelle Rollenbilder, eingeschränkte Bildung für Mädchen.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
   ] satisfies MapPunkt[],
 };
@@ -356,28 +356,28 @@ export const vorbilder = {
       kurz: 'Seit 16 Jahren in Folge Platz 1 und einziges Land, das mehr als 90 % seines ' +
         'Gender Gap geschlossen hat. Hohe politische Teilhabe, gesetzliche Quoten und eine ' +
         'breit gelebte Akzeptanz greifen hier ineinander.',
-      quellen: [1, 6],
+      quellen: [1, 5],
     },
     {
       land: 'Finnland', platz: 2, closed: 0.879,
       kurz: 'Hohe politische Teilhabe, starke soziale Sicherung und sehr gute ' +
         'Kinderbetreuung ermöglichen eine hohe Frauenerwerbstätigkeit. Schon 1906 führte ' +
         'Finnland als erstes Land Europas das volle Frauenwahlrecht ein.',
-      quellen: [1, 12],
+      quellen: [1, 7, 10],
     },
     {
       land: 'Norwegen', platz: 3, closed: 0.863,
-      kurz: 'Seit 2003/2008 gesetzliche 40-%-Frauenquote in Aufsichtsräten und ein ' +
-        'großzügiges Elternzeit- und Kitasystem; Integrationskurse vermitteln Zugewanderten ' +
-        'die Gleichberechtigung der Geschlechter.',
-      quellen: [1, 13, 14],
+      kurz: 'Seit 2003 gesetzliche 40-%-Frauenquote in Aufsichtsräten (nach Übergangsfrist ' +
+        'ab 2008 voll wirksam) und ein großzügiges Elternzeit- und Kitasystem, das Beruf ' +
+        'und Familie vereinbar macht.',
+      quellen: [1, 11, 7],
     },
     {
       land: 'Schweden', platz: 6, closed: 0.817,
-      kurz: 'Offiziell feministische Regierungspolitik und geschlechtsneutrale Erziehung ' +
-        'in Kitas. Gleichstellung gilt als Querschnittsaufgabe, die in nahezu alle ' +
-        'Politikfelder hineinwirkt.',
-      quellen: [1, 11],
+      kurz: 'Schweden warb als erstes Land mit einer offiziell feministischen Regierung; ' +
+        'in Vorschulen wird geschlechtsneutrale Erziehung praktiziert, und die Politik ' +
+        'treibt Gleichstellung seit Langem aktiv voran.',
+      quellen: [1, 9],
     },
   ] satisfies CountryStat[],
   // Island als Schwerpunkt-Beispiel (Craft: detaillierte Fakten).
@@ -386,37 +386,36 @@ export const vorbilder = {
       titel: 'Politik',
       text:
         'Rund 40 % der Parlamentssitze und etwa die Hälfte der Ministerposten sind mit ' +
-        'Frauen besetzt. In 20 bis 25 der letzten 50 Jahre stand zudem eine Frau an der ' +
+        'Frauen besetzt. In rund 20 der letzten 50 Jahre stand zudem eine Frau an der ' +
         'Staatsspitze. Dass Frauen mitregieren, ist in Island also kein Ausnahmefall, ' +
         'sondern Normalität.',
-      quellen: [6, 7],
+      quellen: [5],
     },
     {
       titel: 'Bildung',
       text:
-        'Frauen sind im Hochschulbereich klar in der Mehrheit, auf 101 studierende Frauen ' +
-        'kommen nur 57 Männer, also rund 64 % Frauen. Diese hohe Bildungsbeteiligung ' +
-        'verschafft Frauen gute Startchancen im Beruf. Inzwischen sorgt sie sogar für ' +
-        'Debatten, wie man mehr junge Männer für ein Studium gewinnt.',
-      quellen: [7, 8],
+        'Frauen sind im Hochschulbereich klar in der Mehrheit: Auf 101 studierende Frauen ' +
+        'kommen nur 57 Männer, also rund 64 % Frauen, weltweit ein Spitzenwert. Diese hohe ' +
+        'Bildungsbeteiligung verschafft Frauen gute Startchancen im Beruf.',
+      quellen: [5, 6],
     },
     {
       titel: 'Gesetze',
       text:
         'Eine gesetzliche 40-%-Quote schreibt den Frauenanteil in Führungsgremien vor. ' +
-        'Unternehmen ab 25 Mitarbeitenden müssen Gleichstellungsprogramme einführen und ' +
-        'regelmäßig überprüfen lassen. Gleichberechtigung ist damit nicht nur ein Appell, ' +
-        'sondern eine verbindliche Pflicht.',
-      quellen: [6, 8],
+        'Unternehmen ab 25 Mitarbeitenden müssen Gleichstellungsprogramme einführen, die ' +
+        'alle drei Jahre überprüft werden. Gleichberechtigung ist damit nicht nur ein ' +
+        'Appell, sondern eine verbindliche Pflicht.',
+      quellen: [6],
     },
     {
       titel: 'Gesellschaft',
       text:
-        'Gleichberechtigung ist vom Kindergarten bis zur Universität Teil des Lehrplans. So ' +
-        'wächst sie als Selbstverständlichkeit heran und ist gesellschaftlich breit ' +
-        'akzeptiert, nicht nur auf dem Papier. Dazu kommt eine lange Tradition der ' +
-        'Frauenerwerbstätigkeit, an die jede Generation anknüpft.',
-      quellen: [6, 7],
+        'Gleichberechtigung ist per Gesetz vom Kindergarten bis zur Universität Teil des ' +
+        'Lehrplans. So wächst sie als Selbstverständlichkeit heran und ist gesellschaftlich ' +
+        'breit akzeptiert, nicht nur auf dem Papier. Dazu kommt die Erfahrung des großen ' +
+        'Frauenstreiks von 1975, an die spätere Generationen bis heute anknüpfen.',
+      quellen: [6, 20],
     },
   ] satisfies Aussage[],
   // Übrige Top-10-Länder kompakt (Reihenfolge nach Rang).
@@ -424,22 +423,22 @@ export const vorbilder = {
     {
       land: 'Großbritannien', platz: 4, closed: 0.838,
       kurz: 'Im Ranking gegenüber dem Vorjahr gestiegen.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
     {
       land: 'Neuseeland', platz: 5, closed: 0.827,
-      kurz: 'Lange Tradition von Frauen in Führungspositionen.',
-      quellen: [1, 3],
+      kurz: 'Führte 1893 als erstes Land das Frauenwahlrecht ein.',
+      quellen: [1, 10],
     },
     {
       land: 'Republik Moldau', platz: 7, closed: 0.813,
       kurz: 'Neu unter den Top 10, nach oben geklettert.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
     {
       land: 'Namibia', platz: 8, closed: 0.811,
       kurz: 'Einziges Land außerhalb Europas in den Top 10.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
     {
       land: 'Deutschland', platz: 9, closed: 0.803,
@@ -448,7 +447,7 @@ export const vorbilder = {
     },
     {
       land: 'Irland', platz: 10, closed: 0.801,
-      kurz: 'Starkes Engagement für Gleichstellungspolitik.',
+      kurz: 'Komplettiert die Top 10 mit gut 80 % geschlossenem Gap.',
       quellen: [1],
     },
   ] satisfies CountryStat[],
@@ -467,28 +466,28 @@ export const schlusslichter = {
       kurz: 'Niedrigster Wert weltweit: sehr geringe Frauenerwerbstätigkeit, traditionelle ' +
         'Rollenbilder und für viele Mädchen ein eingeschränkter Schulbesuch. Gerade in ' +
         'ländlichen Regionen ist der Zugang zu Bildung und Arbeit besonders begrenzt.',
-      quellen: [1, 3],
+      quellen: [1, 2],
     },
     {
       land: 'Sudan', platz: 147, closed: 0.570,
-      kurz: 'Der Bürgerkrieg seit 2023 verschärft die Lage massiv. Frauen sind besonders ' +
-        'von sexueller Gewalt und akuter Hungergefahr betroffen, während Schutzstrukturen ' +
-        'weitgehend zusammengebrochen sind.',
-      quellen: [1, 4],
+      kurz: 'Krieg und humanitäre Notlage verschärfen die Lage massiv. Sexualisierte ' +
+        'Gewalt gegen Frauen und Mädchen hat laut UN drastisch zugenommen; nirgends ist ' +
+        'die Situation so schlimm wie im Sudan, in Haiti und Afghanistan.',
+      quellen: [1, 3],
     },
     {
       land: 'Tschad', platz: 146, closed: 0.571,
       kurz: 'Armut, Konflikte und Krisen in der Sahelzone treffen Mädchen und Frauen ' +
         'besonders hart. Terror, Dürren und Überschwemmungen verschärfen die ohnehin ' +
         'geringen Bildungs- und Teilhabechancen weiter.',
-      quellen: [1, 5],
+      quellen: [1, 4],
     },
     {
       land: 'Iran', platz: 145, closed: 0.583,
-      kurz: 'Gesetzliche und gesellschaftliche Vorgaben begrenzen Bewegungsfreiheit, ' +
-        'Berufswahl und Bildung von Frauen stark. Verstärkt wird das durch traditionelle ' +
-        'Rollenbilder und strenge politische Kontrolle.',
-      quellen: [1],
+      kurz: 'Strenge gesetzliche Vorgaben wie die Verschleierungspflicht schränken ' +
+        'Frauen massiv ein. Die Proteste von 2022 beantwortete das Regime mit harter ' +
+        'Repression; viele Frauen leisten weiter zivilen Widerstand.',
+      quellen: [1, 26],
     },
   ] satisfies CountryStat[],
   // Bottom-10-Kontext + gemeinsame Muster (Craft).
@@ -497,13 +496,13 @@ export const schlusslichter = {
       'Auch die übrigen Länder am Tabellenende, darunter Guinea, die DR Kongo, Niger, ' +
       'Algerien, Mali und Ägypten, eint ein ähnliches Bild. Meist treffen mehrere ' +
       'Belastungen zusammen, die sich gegenseitig verstärken.',
-    quellen: [1, 3],
+    quellen: [1, 2],
   } satisfies Faktum,
   gemeinsam: [
-    { text: 'Hohe Armut und gewaltsame Konflikte, die Familien und staatliche Strukturen zerstören.', quellen: [1, 3] },
-    { text: 'Schwache Rechtssicherheit und wenig Schutz vor Gewalt gegen Frauen.', quellen: [1, 3] },
-    { text: 'Geringe Bildungsbeteiligung von Mädchen, oft schon ab der Grundschule.', quellen: [1, 3] },
-    { text: 'Sehr geringe politische Teilhabe und kaum Frauen in Entscheidungspositionen.', quellen: [1, 3] },
+    { text: 'Hohe Armut und gewaltsame Konflikte, die Familien und staatliche Strukturen zerstören.', quellen: [1, 4] },
+    { text: 'Schwache Rechtssicherheit und wenig Schutz vor Gewalt gegen Frauen.', quellen: [3, 1] },
+    { text: 'Geringe Bildungsbeteiligung von Mädchen, oft schon ab der Grundschule.', quellen: [1, 4] },
+    { text: 'Sehr geringe politische Teilhabe und kaum Frauen in Entscheidungspositionen.', quellen: [1] },
   ] satisfies Faktum[],
 };
 
@@ -525,7 +524,7 @@ export const ursachen = {
       bild: '/images/muster/gleichstellungspolitik.jpg',
       bildAlt: 'Frauen demonstrieren beim Frauenstreik im Zentrum von Reykjavík',
       bildCredit: 'Magnus Fröderberg/norden.org, CC BY 2.5 dk',
-      quellen: [9, 10],
+      quellen: [7, 8],
     },
     {
       titel: 'Kitaplätze und Vereinbarkeit',
@@ -538,7 +537,7 @@ export const ursachen = {
       bild: '/images/muster/kitaplaetze.jpg',
       bildAlt: 'Kindergartenkinder in Norwegen am Nationalfeiertag',
       bildCredit: 'Ingvar Kjøllesdal, CC BY 2.0',
-      quellen: [9, 10],
+      quellen: [7, 8],
     },
     {
       titel: 'Bildung ohne finanzielle Hürden',
@@ -550,7 +549,7 @@ export const ursachen = {
       bild: '/images/muster/bildung.jpg',
       bildAlt: 'Mathematik-Vorlesung an einer finnischen Universität in Espoo',
       bildCredit: 'Tungsten, gemeinfrei',
-      quellen: [9, 10],
+      quellen: [7, 8],
     },
     {
       titel: 'Frauen in Politik und Führung',
@@ -564,7 +563,7 @@ export const ursachen = {
         'Vigdís Finnbogadóttir, Islands Präsidentin und erste demokratisch gewählte ' +
         'Staatspräsidentin der Welt',
       bildCredit: 'Rob Croes / Anefo, CC BY-SA 3.0 nl',
-      quellen: [6, 10],
+      quellen: [1, 5, 8],
     },
   ] satisfies MusterPunkt[],
 };
@@ -582,12 +581,12 @@ export const zeitstrahl = {
       text:
         'Beim ersten großen Frauenrechts-Treffen wurde erstmals systematisch gefordert, ' +
         'dass Frauen dieselben politischen und gesellschaftlichen Rechte erhalten wie Männer. ' +
-        'Die dort verabschiedete Erklärung gilt als Geburtsstunde der organisierten ' +
-        'Frauenbewegung und prägte deren Forderungen für Jahrzehnte.',
+        'Die dort verabschiedete „Declaration of Sentiments“ gilt als Beginn der organisierten ' +
+        'Frauenbewegung in den USA und prägte deren Forderungen für Jahrzehnte.',
       bild: '/images/menschen/stanton.jpg',
       bildAlt: 'Elizabeth Cady Stanton, Mitorganisatorin der Seneca-Falls-Konvention',
       bildCredit: 'unbekannt, gemeinfrei',
-      quellen: [30],
+      quellen: [22],
     },
     {
       jahr: '1893', ort: 'Neuseeland', titel: 'Erstes nationales Frauenwahlrecht',
@@ -599,7 +598,7 @@ export const zeitstrahl = {
       bild: '/images/menschen/sheppard.jpg',
       bildAlt: 'Kate Sheppard, Anführerin der neuseeländischen Frauenwahlrechtsbewegung',
       bildCredit: 'H. H. Clifford, gemeinfrei',
-      quellen: [31],
+      quellen: [10],
     },
     {
       jahr: '1945', ort: 'weltweit', titel: 'UN-Charta: Gleichheit der Geschlechter',
@@ -608,14 +607,14 @@ export const zeitstrahl = {
         'internationales Prinzip festgeschrieben, die Frage wurde endgültig ein weltweites ' +
         'Thema. Damit lag erstmals eine völkerrechtliche Grundlage vor, auf die sich spätere ' +
         'Abkommen und Frauenrechtsbewegungen berufen konnten.',
-      quellen: [30],
+      quellen: [23],
     },
     {
       jahr: '1995', ort: 'Peking', titel: 'Pekinger Weltfrauenkonferenz',
       text:
         'Die Konferenz gilt als globaler Wendepunkt: Gewalt, Bildung, Gesundheit, politische ' +
         'Teilhabe und wirtschaftliche Gleichstellung wurden als zentrale internationale Aufgaben festgelegt.',
-      quellen: [32],
+      quellen: [23],
     },
     {
       jahr: '2015', ort: 'Vereinte Nationen', titel: 'Agenda 2030 und SDG 5',
@@ -624,18 +623,19 @@ export const zeitstrahl = {
         'globales Entwicklungsziel, Gleichstellung gehört seitdem offiziell zur Politik aller ' +
         'Staaten, nicht nur zu einzelnen nationalen Reformen. Bis 2030 sollen alle Länder ' +
         'messbare Fortschritte erzielen; der jährliche Gender Gap Report macht sie vergleichbar.',
-      quellen: [32],
+      quellen: [24, 1],
     },
     {
       jahr: '2017', ort: 'weltweit', titel: '#MeToo',
       text:
         'Der bereits 2006 von Tarana Burke geprägte Slogan „Me too“ verbreitete sich 2017 ' +
-        'massiv und wurde zum Meilenstein für die Sichtbarkeit sexueller Gewalt und von ' +
-        'Alltagssexismus, vor allem für Frauen, aber auch Männer ansprechend.',
+        'millionenfach als Hashtag und wurde zum Meilenstein für die Sichtbarkeit sexueller ' +
+        'Belästigung, sexualisierter Gewalt und von Alltagssexismus, von denen vor allem ' +
+        'Frauen betroffen sind.',
       bild: '/images/menschen/burke.jpg',
       bildAlt: 'Tarana Burke, Begründerin der „Me too“-Bewegung',
       bildCredit: 'B.Monét Fennell, CC BY-SA 3.0',
-      quellen: [33],
+      quellen: [25],
     },
     {
       jahr: '2022', ort: 'Iran', titel: '„Frau, Leben, Freiheit“',
@@ -647,7 +647,7 @@ export const zeitstrahl = {
       bild: '/images/menschen/iran-2022.jpg',
       bildAlt: 'Solidaritätsprotest „Frau, Leben, Freiheit“ nach dem Tod von Jina Mahsa Amini',
       bildCredit: 'Matt Hrkac, CC BY 2.0',
-      quellen: [34],
+      quellen: [26],
     },
     {
       jahr: 'seit 2020', ort: 'weltweit', titel: 'Rückschritte bei den Frauenrechten',
@@ -659,7 +659,7 @@ export const zeitstrahl = {
       zitat:
         'Kein Land der Welt hat die vollständige rechtliche Gleichstellung von Frauen und ' +
         'Männern erreicht.',
-      quellen: [25, 26],
+      quellen: [3],
     },
   ] satisfies TimelineEvent[],
 };
@@ -674,7 +674,7 @@ export const stimmen = {
     text: 'Geschlecht, wie es heute funktioniert, ist eine schwere Ungerechtigkeit.',
     author: 'Chimamanda Ngozi Adichie',
     role: 'Schriftstellerin, Nigeria (*1977)',
-    quellen: [21, 22],
+    quellen: [19],
   } satisfies Quote,
   biografien: [
     {
@@ -682,14 +682,15 @@ export const stimmen = {
       ort: 'Nigeria',
       rolle: 'Schriftstellerin (*1977)',
       zeilen: [
-        'Eine der einflussreichsten Stimmen der internationalen Frauenbewegung.',
-        'Ihr Essay „We Should All Be Feminists“ prägte die Debatte weltweit.',
+        'Ihr TED-Talk „We Should All Be Feminists“ (2012) machte sie zu einer der ' +
+          'bekanntesten Stimmen des internationalen Feminismus.',
+        'Der Vortrag erschien 2014 als Essay und prägte die Debatte weltweit.',
         '„Kultur macht keine Menschen. Menschen machen Kultur.“',
       ],
       bild: '/images/menschen/adichie.jpg',
       bildAlt: 'Porträt von Chimamanda Ngozi Adichie',
       bildCredit: 'The Guardian (guim.co.uk)',
-      quellen: [21, 22],
+      quellen: [19],
     },
     {
       name: 'Lilja Ólafsdóttir',
@@ -698,13 +699,13 @@ export const stimmen = {
       zeilen: [
         'Bauerntochter und erste Geschäftsführerin der Reykjavíker Verkehrsbetriebe.',
         'Am Streiktag legten rund 90 % der isländischen Frauen die Arbeit nieder.',
-        '„Die Hot Dogs waren ausverkauft, weil die Männer nicht wussten, was sie den ' +
-          'Kindern sonst servieren sollten.“',
+        '„Es heißt, die Hot Dogs seien an diesem Tag ausverkauft gewesen, weil die Männer ' +
+          'nicht wussten, was sie den Kindern sonst servieren konnten.“',
       ],
       bild: '/images/menschen/lilja.jpg',
       bildAlt: 'Porträt von Lilja Ólafsdóttir, Mitorganisatorin des isländischen Frauenstreiks 1975',
       bildCredit: 'Art Bicnick / Reykjavík Grapevine',
-      quellen: [23],
+      quellen: [20],
     },
   ] satisfies Steckbrief[],
   weitereZitate: [
@@ -712,7 +713,7 @@ export const stimmen = {
       text: 'Wir haben nichts gefordert, sondern einfach eine Tatsache bewiesen: Frauen haben Bedeutung.',
       author: 'Hildur Hákonardóttir',
       role: 'Mitorganisatorin des isländischen Frauenstreiks 1975',
-      quellen: [23],
+      quellen: [20],
     },
     {
       text:
@@ -720,7 +721,7 @@ export const stimmen = {
         'der Macht besitzt, aber sie nicht missbraucht.',
       author: 'Astrid Lindgren',
       role: 'Schriftstellerin, Schweden',
-      quellen: [24],
+      quellen: [21],
     },
   ] satisfies Quote[],
 };
@@ -734,7 +735,7 @@ export const quellenMethodik = {
     'und drückt ihn als Anteil des geschlossenen Gender Gap von 0 bis 100 % aus (100 % = ' +
     'volle Gleichstellung). 2025 wurden 148 Länder erfasst. Ergänzend werden für einzelne ' +
     'Aussagen weitere, jeweils am Verweis genannte Quellen herangezogen.',
-  quellen: [2] as number[],
+  quellen: [1] as number[],
 };
 
 // ---------- Bildnachweise ----------

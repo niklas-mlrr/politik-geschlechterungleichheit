@@ -8,7 +8,10 @@ Schulprojekt, Gymnasium 12. Klasse (Niklas), Fach Politik. Datenbasis: WEF Globa
 - Phase: Astro-Umsetzung steht; alle 9 Sektionen mit echten Craft-Inhalten + Quellen befüllt.
 - Inhalte leben in `src/data/content.ts` (vormals `placeholder.ts`) mit Quellen-Pflichtfeld
   `quellen: number[]`; Quellenliste in `src/data/sources.ts`. Keine Platzhalter mehr aktiv.
-- Quellen-Report: `OFFENE_BELEGE.md` (weggelassen / nachrecherchiert / Datenkonflikte / wartet auf Craft).
+- Quellen-Audit 06/2026: alle Aussage-Quelle-Paare im Volltext geprüft, Liste auf **max. 26
+  Quellen** konsolidiert (Vorgabe Niklas; eine Quelle belegt mehrere Aussagen, WEF nur 1 von 26).
+  Schwache Quellen (Blogs/Listicles) durch institutionelle bzw. Primärquellen ersetzt.
+- Quellen-Report: `OFFENE_BELEGE.md` (Datenkorrekturen / Konsolidierung / Textanpassungen / wartet auf Craft).
 - Designrichtung festgelegt: Warm Humanist (siehe unten).
 
 ## Quelle der Wahrheit (Inhalte)
@@ -65,7 +68,7 @@ Diverging, niedriger Gender Gap -> hoher Gender Gap:
 
 ## Seitenstruktur (Scrollytelling, roter Faden)
 
-1. Hero -> Claim + Kernzahl "132 Jahre bis zur globalen Gleichstellung"
+1. Hero -> Claim + Kernzahl "123 Jahre bis zur globalen Gleichstellung"
 2. Definition Geschlechterungleichheit (typische Bereiche als aufklappbare Boxen)
 3. Globaler Überblick -> interaktive Weltkarte (Herzstück)
 4. Vorbilder -> Island + Skandinavien, warum sie vorne liegen
@@ -79,8 +82,10 @@ Quellen jeweils als Hover-/Klick-Tooltip am Verweis (Lesefluss erhalten).
 
 ## Schlüsseldaten (WEF Global Gender Gap Report 2025)
 
-- Weltweiter Durchschnitt: 68,5% geschlossen -> noch ein Drittel offen.
-- Tempo: noch ca. 132 Jahre bis zur globalen Schließung.
+- Weltweiter Durchschnitt: 68,8% geschlossen -> noch knapp ein Drittel offen.
+- Tempo: noch ca. 123 Jahre bis zur globalen Schließung.
+  (Frühere Angaben "68,5% / 132 Jahre" stammten aus älteren Reports und wurden im
+  Quellen-Audit 06/2026 gegen den GGGR 2025 korrigiert.)
 - Kein Land hat den Gap vollständig geschlossen; 8 der Top 10 in Europa.
 - Top 5: Island 92,6 / Finnland 87,9 / Norwegen 86,3 / Großbritannien 83,8 / Schweden 81,7
 - Bottom 5: Pakistan 56,7 / Sudan 57,0 / Tschad 57,1 / Iran 58,3 / (Algerien ~64)
