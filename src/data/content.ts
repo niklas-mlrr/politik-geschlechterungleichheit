@@ -194,7 +194,7 @@ export const definition = {
     {
       titel: 'Ungleichheit trifft auch Männer',
       text:
-        'Gleichstellung betrifft nicht nur Frauen. Männer leben im Schnitt rund fünf Jahre ' +
+        'Ungleichheit betrifft nicht nur Frauen. Männer leben im Schnitt rund fünf Jahre ' +
         'kürzer, nehmen seltener Gesundheitsangebote wahr und haben eine deutlich höhere ' +
         'Suizidrate. Jungen schneiden in der Schule im Mittel schlechter ab, und bei ' +
         'Sorgerechtsfragen werden Väter seltener als Hauptbezugsperson anerkannt. Hinzu ' +
