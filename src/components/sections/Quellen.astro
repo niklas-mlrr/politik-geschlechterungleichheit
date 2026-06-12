@@ -1,9 +1,8 @@
 ---
 // Quellen & Methodik – woher die Daten stammen.
-// Methodik-Absatz mit einem Beispiel-Inline-Quellverweis und eine nummerierte
-// Quellenliste mit Ankern (#quelle-N), auf die SourceTooltip-Links verweisen.
+// Methodik-Absatz und eine nummerierte Quellenliste mit Ankern (#quelle-N),
+// auf die die SourceTooltip-Links der übrigen Sektionen verweisen.
 import Section from '../ui/Section.astro';
-import SourceTooltip from '../ui/SourceTooltip.astro';
 import { quellenMethodik, bildnachweise } from '../../data/content';
 import { sources } from '../../data/sources';
 ---
@@ -15,7 +14,6 @@ import { sources } from '../../data/sources';
 >
   <p class="methodik">
     {quellenMethodik.methodik}
-    {quellenMethodik.quellen.map((id) => <SourceTooltip id={id} />)}
   </p>
 
   <h3 class="quellen-sub">Quellenverzeichnis</h3>

@@ -356,7 +356,7 @@ export const vorbilder = {
       kurz: 'Seit 16 Jahren in Folge Platz 1 und einziges Land, das mehr als 90 % seines ' +
         'Gender Gap geschlossen hat. Hohe politische Teilhabe, gesetzliche Quoten und eine ' +
         'breit gelebte Akzeptanz greifen hier ineinander.',
-      quellen: [1, 5],
+      quellen: [1, 5, 27],
     },
     {
       land: 'Finnland', platz: 2, closed: 0.879,
@@ -638,18 +638,6 @@ export const zeitstrahl = {
       quellen: [25],
     },
     {
-      jahr: '2022', ort: 'Iran', titel: '„Frau, Leben, Freiheit“',
-      text:
-        'Nach dem Tod von Jina Mahsa Amini in Polizeigewahrsam begann eine landesweite ' +
-        'Protestwelle gegen Zwangsverschleierung und Diskriminierung. Das Regime reagierte ' +
-        'mit massiver Gewalt, doch die Bewegung schuf weltweit Aufmerksamkeit.',
-      zitat: 'Frau, Leben, Freiheit',
-      bild: '/images/menschen/iran-2022.jpg',
-      bildAlt: 'Solidaritätsprotest „Frau, Leben, Freiheit“ nach dem Tod von Jina Mahsa Amini',
-      bildCredit: 'Matt Hrkac, CC BY 2.0',
-      quellen: [26],
-    },
-    {
       jahr: 'seit 2020', ort: 'weltweit', titel: 'Rückschritte bei den Frauenrechten',
       text:
         'Nach Jahren des Fortschritts gibt es wieder Rückschritte: Länder schränken per ' +
@@ -660,6 +648,18 @@ export const zeitstrahl = {
         'Kein Land der Welt hat die vollständige rechtliche Gleichstellung von Frauen und ' +
         'Männern erreicht.',
       quellen: [3],
+    },
+    {
+      jahr: '2022', ort: 'Iran', titel: '„Frau, Leben, Freiheit“',
+      text:
+        'Nach dem Tod von Jina Mahsa Amini in Polizeigewahrsam begann eine landesweite ' +
+        'Protestwelle gegen Zwangsverschleierung und Diskriminierung. Das Regime reagierte ' +
+        'mit massiver Gewalt, doch die Bewegung schuf weltweit Aufmerksamkeit.',
+      zitat: 'Frau, Leben, Freiheit',
+      bild: '/images/menschen/iran-2022.jpg',
+      bildAlt: 'Solidaritätsprotest „Frau, Leben, Freiheit“ nach dem Tod von Jina Mahsa Amini',
+      bildCredit: 'Matt Hrkac, CC BY 2.0',
+      quellen: [26],
     },
   ] satisfies TimelineEvent[],
 };
@@ -735,7 +735,6 @@ export const quellenMethodik = {
     'und drückt ihn als Anteil des geschlossenen Gender Gap von 0 bis 100 % aus (100 % = ' +
     'volle Gleichstellung). 2025 wurden 148 Länder erfasst. Ergänzend werden für einzelne ' +
     'Aussagen weitere, jeweils am Verweis genannte Quellen herangezogen.',
-  quellen: [1] as number[],
 };
 
 // ---------- Bildnachweise ----------

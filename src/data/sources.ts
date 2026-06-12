@@ -191,6 +191,12 @@ export const sources: Source[] = [
     voll: 'Amnesty International: Iran, Repression, ziviler Widerstand und „Frau, Leben, Freiheit“.',
     url: 'https://www.amnesty.de/informieren/amnesty-journal/iran-repression-ziviler-widerstand-frauen-leben-freiheit',
   },
+  {
+    id: 27, // Print-Quelle (kein Online-Link); belegt Island-Schwerpunkt
+    kurz: 'fluter (bpb), Nr. 57 „Geschlechter“, Winter 2015/2016',
+    voll:
+      'fluter – Magazin der Bundeszentrale für politische Bildung, Nr. 57 „Geschlechter“, Winter 2015/2016.',
+  },
 ];
 
 export function getSource(id: number): Source | undefined {

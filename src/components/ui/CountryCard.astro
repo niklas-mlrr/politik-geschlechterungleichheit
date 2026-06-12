@@ -19,9 +19,9 @@ const barColor = gapColor(closed);
 <article class="cc">
   <header class="cc-head">
     <h3 class="cc-land">{land}</h3>
-    <span class="cc-prozent">{prozent}&thinsp;%</span>
+    <span class="cc-prozent">{prozent}&thinsp;% <span class="cc-prozent-label">geschlossen</span></span>
   </header>
-  <p class="cc-platz">Platz {platz} · Gender Gap geschlossen</p>
+  <p class="cc-platz">Platz {platz}</p>
   <div
     class="cc-bar"
     role="meter"
@@ -72,6 +72,13 @@ const barColor = gapColor(closed);
     font-weight: 700;
     font-size: 1.35rem;
     color: var(--color-clay);
+    white-space: nowrap;
+  }
+  .cc-prozent-label {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--color-subtext);
   }
   .cc-platz {
     margin: 0.25rem 0 0.9rem;

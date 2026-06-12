@@ -47,13 +47,28 @@ const { name, ort, rolle, zeilen = [], quellen = [], bild, bildAlt, bildCredit }
   </div>
 
   {
-    zeilen.length > 0 && (
-      <ul class="sb-zeilen">
-        {zeilen.map((z) => (
-          <li>{z}</li>
-        ))}
-      </ul>
-    )
+    zeilen.length > 0 &&
+      (() => {
+        // Zitatzeilen (beginnen mit dem deutschen Anführungszeichen „) werden als
+        // hervorgehobenes Blockzitat dargestellt, restliche Zeilen als Stichpunkte.
+        const isZitat = (z: string) => z.trimStart().startsWith('„');
+        const stichpunkte = zeilen.filter((z) => !isZitat(z));
+        const zitate = zeilen.filter(isZitat);
+        return (
+          <>
+            {stichpunkte.length > 0 && (
+              <ul class="sb-zeilen">
+                {stichpunkte.map((z) => (
+                  <li>{z}</li>
+                ))}
+              </ul>
+            )}
+            {zitate.map((z) => (
+              <blockquote class="sb-zitat">{z}</blockquote>
+            ))}
+          </>
+        );
+      })()
   }
   {
     quellen.length > 0 && (
@@ -136,5 +151,19 @@ const { name, ort, rolle, zeilen = [], quellen = [], bild, bildAlt, bildCredit }
   .sb-quellen {
     margin: 0.75rem 0 0;
     font-size: 0.9rem;
+  }
+  /* Hervorgehobenes Zitat innerhalb einer Kurzbiografie. */
+  .sb-zitat {
+    margin: 1rem 0 0;
+    padding: 0.85rem 1rem;
+    border-radius: 0.7rem;
+    background: color-mix(in srgb, var(--color-ocker) 16%, var(--color-card));
+    border-left: 3px solid var(--color-clay);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: var(--color-ink);
+    text-wrap: balance;
   }
 </style>

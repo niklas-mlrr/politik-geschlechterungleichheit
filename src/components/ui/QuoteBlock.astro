@@ -15,7 +15,9 @@ const { text, author, role, variant = 'default', quellen = [] } = Astro.props;
 
 <figure class:list={['quote', `quote-${variant}`]}>
   <blockquote class="quote-text">
-    <span class="quote-mark" aria-hidden="true">&ldquo;</span>{text}
+    <span class="quote-mark quote-mark-open" aria-hidden="true">&bdquo;</span>{text}<span
+      class="quote-mark quote-mark-close"
+      aria-hidden="true">&ldquo;</span>
   </blockquote>
   {
     (author || role || quellen.length > 0) && (
@@ -63,7 +65,12 @@ const { text, author, role, variant = 'default', quellen = [] } = Astro.props;
   }
   .quote-mark {
     color: var(--color-ocker);
-    margin-right: 0.1em;
+  }
+  .quote-mark-open {
+    margin-right: 0.05em;
+  }
+  .quote-mark-close {
+    margin-left: 0.05em;
   }
   .quote-cite {
     margin-top: 1.25rem;
