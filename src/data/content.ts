@@ -270,8 +270,8 @@ export const karte = {
     },
     {
       iso3: 'NAM', land: 'Namibia', platz: 8, closed: 0.811, kategorie: 'vorbild',
-      kurz: 'Einziges Land außerhalb Europas unter den Top 10, mit hoher politischer ' +
-        'Teilhabe von Frauen.',
+      kurz: 'Einziges afrikanisches Land unter den Top 10 (neben Neuseeland eines von nur ' +
+        'zwei außerhalb Europas), mit hoher politischer Teilhabe von Frauen.',
       quellen: [1, 2],
     },
     {
@@ -394,8 +394,8 @@ export const vorbilder = {
     {
       titel: 'Bildung',
       text:
-        'Frauen sind im Hochschulbereich klar in der Mehrheit: Auf 101 studierende Frauen ' +
-        'kommen nur 57 Männer, also rund 64 % Frauen, weltweit ein Spitzenwert. Diese hohe ' +
+        'Frauen sind im Hochschulbereich klar in der Mehrheit: Rund 64 % der Studierenden ' +
+        'sind Frauen.  Dies ist europaweit ein Spitzenwert. Diese hohe ' +
         'Bildungsbeteiligung verschafft Frauen gute Startchancen im Beruf.',
       quellen: [5, 6],
     },
@@ -437,7 +437,7 @@ export const vorbilder = {
     },
     {
       land: 'Namibia', platz: 8, closed: 0.811,
-      kurz: 'Einziges Land außerhalb Europas in den Top 10.',
+      kurz: 'Einziges afrikanisches Land in den Top 10 (mit Neuseeland eines von zwei außerhalb Europas).',
       quellen: [1, 2],
     },
     {
@@ -447,7 +447,7 @@ export const vorbilder = {
     },
     {
       land: 'Irland', platz: 10, closed: 0.801,
-      kurz: 'Komplettiert die Top 10 mit gut 80 % geschlossenem Gap.',
+      kurz: 'Am Ende der Top 10 mit gut 80 % geschlossenem Gap.',
       quellen: [1],
     },
   ] satisfies CountryStat[],
@@ -456,7 +456,7 @@ export const vorbilder = {
 // ---------- Schlusslichter ----------
 export const schlusslichter = {
   intro:
-    'Am anderen Ende der Skala stehen Länder, in denen Gleichstellung kaum vorankommt. ' +
+    'Am einen Ende der Skala stehen Länder, in denen Gleichstellung kaum vorankommt. ' +
     'Oft wirken hier mehrere Belastungen zusammen: Armut, Konflikte und stark ' +
     'eingeschränkte Rechte von Frauen. Wo diese Faktoren zusammentreffen, geraten Mädchen ' +
     'und Frauen besonders unter Druck.',
@@ -517,7 +517,7 @@ export const ursachen = {
       titel: 'Gleichstellungspolitik seit den 1960ern',
       text:
         'In den nordischen Ländern war Gleichberechtigung früher als anderswo ein ' +
-        'politisches Ziel und Teil der Staatsräson. Getragen wurde sie von starken ' +
+        'politisches Ziel. Getragen wurde sie von starken ' +
         'Sozialstaaten, die für Forderungen aus der Zivilgesellschaft, etwa Arbeiter-, ' +
         'Bäuerinnen- und Frauenbewegungen, empfänglich waren. So wurde Gleichstellung nicht ' +
         'als kurzlebiges Einzelthema, sondern als dauerhafte Aufgabe der Politik verankert.',
