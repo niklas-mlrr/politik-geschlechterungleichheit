@@ -438,6 +438,10 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
     const triggers = Array.from(list.querySelectorAll<HTMLElement>('.tl-trigger'));
     let active: HTMLElement | null = null;
 
+    // Desktop (Maus, feiner Zeiger): Hover öffnet die Box. iPad/Touch (kein
+    // Hover / grober Zeiger) -> matched nicht -> es bleibt beim Klick.
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
     // Erst jetzt auf kompakt schalten (CSS sieht data-ready) – ohne JS bleibt Volltext.
     list.setAttribute('data-ready', '');
 
@@ -487,9 +491,22 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
 
     triggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
+        // Desktop: Hover öffnet bereits; Klick öffnet nur (Schließen via
+        // ×-Button, Esc oder Klick außerhalb). Kein Toggle, sonst Konflikt mit Hover.
+        if (canHover) {
+          if (active !== trigger) open(trigger);
+          return;
+        }
         if (active === trigger) close();
         else open(trigger);
       });
+      // Hover wechselt das geteilte Panel; das Panel bleibt zum Lesen offen,
+      // bis eine andere Box gehovert oder geschlossen wird.
+      if (canHover) {
+        trigger.addEventListener('mouseenter', () => {
+          if (active !== trigger) open(trigger);
+        });
+      }
     });
 
     closeBtn?.addEventListener('click', () => {

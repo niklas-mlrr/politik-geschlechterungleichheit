@@ -398,6 +398,20 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
     const closeBtn = card.querySelector<HTMLElement>('.ci-close');
     let active: HTMLElement | null = null;
 
+    // Desktop (Maus, feiner Zeiger): Hover öffnet die Infokarte. iPad/Touch
+    // (kein Hover / grober Zeiger) -> matched nicht -> es bleibt beim Klick.
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let closeTimer = 0;
+    // Kleiner Verzug, damit der Weg vom Pin zur (oberhalb liegenden) Karte
+    // überbrückt werden kann, ohne dass sie zwischendurch schließt.
+    function scheduleClose() {
+      clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(close, 140);
+    }
+    function cancelClose() {
+      clearTimeout(closeTimer);
+    }
+
     function close() {
       card!.hidden = true;
       active?.setAttribute('aria-expanded', 'false');
@@ -452,10 +466,30 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
     wrap.querySelectorAll<HTMLElement>('.pin').forEach((pin) => {
       pin.addEventListener('click', (e) => {
         e.stopPropagation();
+        // Desktop: Hover steuert das Öffnen/Schließen, der Klick öffnet nur
+        // (kein Toggle-Schließen, sonst kollidiert er mit dem Hover-Zustand).
+        if (canHover) {
+          cancelClose();
+          open(pin);
+          return;
+        }
         if (active === pin) close();
         else open(pin);
       });
+      if (canHover) {
+        pin.addEventListener('mouseenter', () => {
+          cancelClose();
+          if (active !== pin) open(pin);
+        });
+        pin.addEventListener('mouseleave', scheduleClose);
+      }
     });
+
+    // Hover über die Karte selbst hält sie offen (Quellen-Links erreichbar).
+    if (canHover) {
+      card.addEventListener('mouseenter', cancelClose);
+      card.addEventListener('mouseleave', scheduleClose);
+    }
 
     closeBtn?.addEventListener('click', close);
     document.addEventListener('click', (e) => {
