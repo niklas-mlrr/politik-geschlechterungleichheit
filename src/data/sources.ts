@@ -26,10 +26,11 @@ export const sources: Source[] = [
     url: 'https://www.weforum.org/publications/global-gender-gap-report-2025/',
   },
   {
-    id: 2, // Craft [2]
-    kurz: 'Indian Express, Top/Bottom 10 (GGGR 2025)',
-    voll: 'The Indian Express: Top and bottom 10 countries in WEF Global Gender Gap Index 2025.',
-    url: 'https://indianexpress.com/article/trending/top-10-listing/top-bottom-10-countries-in-wef-global-gender-gap-index-2025-india-rank-10061927/',
+    id: 2, // Craft [2]; Indian-Express-Listicle (06/2026) durch WEF-Primärquelle ersetzt
+    kurz: 'WEF, Benchmarking gender gaps 2025 (Ranglisten-Kapitel)',
+    voll:
+      'World Economic Forum: Global Gender Gap Report 2025 – Kapitel „Benchmarking gender gaps, 2025“ (vollständige Rangliste aller 148 Länder mit Werten, Top 10 und Bottom 10).',
+    url: 'https://www.weforum.org/publications/global-gender-gap-report-2025/in-full/benchmarking-gender-gaps-2025/',
   },
   {
     id: 3, // Craft (Rückschritte); belegt zusätzlich Sudan/Haiti/Afghanistan + Gewalt-Daten

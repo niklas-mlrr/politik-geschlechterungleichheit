@@ -123,8 +123,11 @@ läuft **ohne Platzhalter**:
 
 Alle 26 Quellen-URLs per `curl` geprüft: **24x `200 OK`, keine toten Links.**
 
-- **WEF [1]** und **Indian Express [2]** liefern automatisierten Anfragen `403` (Bot-Schutz),
+- **WEF [1]** und **WEF Benchmarking [2]** liefern automatisierten Anfragen `403` (Bot-Schutz),
   im Browser normal erreichbar; Inhalte zusätzlich per WebSearch/Drittquellen verifiziert.
+- 06/2026: Quelle [2] war zuletzt ein Indian-Express-Listicle (unserös). Ersetzt durch das
+  WEF-Primärkapitel „Benchmarking gender gaps, 2025“, das dieselbe Top/Bottom-10-Rangliste
+  belegt. Hinweis: [2] und [1] verweisen damit auf dieselbe Publikation (zwei Kapitel/Unterseiten).
 
 ## 7. Bekannte Restpunkte
 
