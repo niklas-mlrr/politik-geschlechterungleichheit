@@ -79,18 +79,22 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
     hidden
   >
     <button type="button" class="tl-detail-close" aria-label="Details schließen">×</button>
-    <p class="tl-detail-meta">
-      <span class="tl-detail-jahr"></span>
-      <span class="tl-detail-ort"></span>
-    </p>
-    <h3 class="tl-detail-titel"></h3>
-    <p class="tl-detail-text"></p>
-    <p class="tl-detail-quellen"></p>
-    <blockquote class="tl-detail-zitat" hidden></blockquote>
-    <figure class="tl-detail-bild" hidden>
-      <img alt="" />
-      <figcaption class="tl-detail-credit"></figcaption>
-    </figure>
+    <div class="tl-detail-layout">
+      <figure class="tl-detail-bild" hidden>
+        <img alt="" />
+        <figcaption class="tl-detail-credit"></figcaption>
+      </figure>
+      <div class="tl-detail-body">
+        <p class="tl-detail-meta">
+          <span class="tl-detail-jahr"></span>
+          <span class="tl-detail-ort"></span>
+        </p>
+        <h3 class="tl-detail-titel"></h3>
+        <p class="tl-detail-text"></p>
+        <p class="tl-detail-quellen"></p>
+        <blockquote class="tl-detail-zitat" hidden></blockquote>
+      </div>
+    </div>
   </div>
 </Section>
 
@@ -263,6 +267,24 @@ import { zeitstrahl, type TimelineEvent } from '../../data/content';
   .tl-detail-close:hover {
     color: var(--color-ink);
   }
+  /* Standard: einspaltig (kein Bild). Mit Bild ab Tablet zweispaltig
+     (Bild links, Text rechts) -> nutzt die freie Breite neben dem Bild. */
+  .tl-detail-layout {
+    display: block;
+  }
+  @media (min-width: 38rem) {
+    .tl-detail-layout:has(.tl-detail-bild:not([hidden])) {
+      display: grid;
+      grid-template-columns: minmax(0, 18rem) 1fr;
+      gap: 1.4rem;
+      align-items: start;
+    }
+    /* Im Seite-an-Seite-Modus den oberen Abstand des Bildes zurücksetzen. */
+    .tl-detail-layout:has(.tl-detail-bild:not([hidden])) .tl-detail-bild {
+      margin-top: 0;
+    }
+  }
+
   .tl-detail-meta {
     display: flex;
     align-items: baseline;
