@@ -125,15 +125,29 @@ const punkte = karte.punkte.filter((p) => coords[p.iso3]);
 
 <style>
   .globale-fakten {
+    list-style: none;
     max-width: 52rem;
     margin: -1rem 0 2rem;
-    padding-left: 1.2rem;
+    padding-left: 0;
     display: grid;
     gap: 0.5rem;
     color: var(--color-ink);
   }
   .globale-fakten li {
+    position: relative;
+    padding-left: 1.4rem;
     line-height: 1.55;
+  }
+  /* Klar sichtbarer Aufzählungspunkt (Clay), wie in Craft. */
+  .globale-fakten li::before {
+    content: '';
+    position: absolute;
+    left: 0.1rem;
+    top: 0.62em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--color-clay);
   }
 
   .map-wrap {
